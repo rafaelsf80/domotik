@@ -1,0 +1,104 @@
+<html>
+<head>
+<title>DomotikAuthenticator.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(204,120,50); }
+.s1 { color: rgb(169,183,198); }
+.s2 { color: rgb(98,151,85); font-style: italic; }
+.s3 { color: rgb(128,128,128); }
+</style>
+</head>
+<BODY BGCOLOR="#2b2b2b">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#C0C0C0" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+DomotikAuthenticator.java</FONT>
+</center></TD></TR></TABLE>
+<pre>
+<span class="s0">package </span><span class="s1">es.rafaelsf80.domotik.app.sync</span><span class="s0">;</span><span class="s1"> 
+ 
+</span><span class="s0">import </span><span class="s1">android.accounts.AbstractAccountAuthenticator</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.accounts.Account</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.accounts.AccountAuthenticatorResponse</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.accounts.NetworkErrorException</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.content.Context</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.os.Bundle</span><span class="s0">;</span><span class="s1"> 
+ 
+</span><span class="s2">/** 
+ * Manages &quot;Authentication&quot; to Weather backend service.  The SyncAdapter framework 
+ * requires an authenticator object, so syncing to a service that doesn't need authentication 
+ * typically means creating a stub authenticator like this one. 
+ * This code is copied directly, in its entirety, from 
+ * http://developer.android.com/training/sync-adapters/creating-authenticator.html. 
+ */</span><span class="s1"> 
+</span><span class="s0">public class </span><span class="s1">DomotikAuthenticator </span><span class="s0">extends </span><span class="s1">AbstractAccountAuthenticator { 
+ 
+    </span><span class="s0">public </span><span class="s1">DomotikAuthenticator(Context context) { 
+        </span><span class="s0">super</span><span class="s1">(context)</span><span class="s0">;</span><span class="s1"> 
+    } 
+ 
+    </span><span class="s3">// No properties to edit.</span><span class="s1"> 
+    @Override 
+    </span><span class="s0">public </span><span class="s1">Bundle editProperties( 
+            AccountAuthenticatorResponse r</span><span class="s0">, </span><span class="s1">String s) { 
+        </span><span class="s0">throw new </span><span class="s1">UnsupportedOperationException()</span><span class="s0">;</span><span class="s1"> 
+    } 
+ 
+    </span><span class="s3">// Because we're not actually adding an account to the device, just return null.</span><span class="s1"> 
+    @Override 
+    </span><span class="s0">public </span><span class="s1">Bundle addAccount( 
+            AccountAuthenticatorResponse r</span><span class="s0">,</span><span class="s1"> 
+            String s</span><span class="s0">,</span><span class="s1"> 
+            String s2</span><span class="s0">,</span><span class="s1"> 
+            String[] strings</span><span class="s0">,</span><span class="s1"> 
+            Bundle bundle) </span><span class="s0">throws </span><span class="s1">NetworkErrorException { 
+        </span><span class="s0">return null;</span><span class="s1"> 
+    } 
+ 
+    </span><span class="s3">// Ignore attempts to confirm credentials</span><span class="s1"> 
+    @Override 
+    </span><span class="s0">public </span><span class="s1">Bundle confirmCredentials( 
+            AccountAuthenticatorResponse r</span><span class="s0">,</span><span class="s1"> 
+            Account account</span><span class="s0">,</span><span class="s1"> 
+            Bundle bundle) </span><span class="s0">throws </span><span class="s1">NetworkErrorException { 
+        </span><span class="s0">return null;</span><span class="s1"> 
+    } 
+ 
+    </span><span class="s3">// Getting an authentication token is not supported</span><span class="s1"> 
+    @Override 
+    </span><span class="s0">public </span><span class="s1">Bundle getAuthToken( 
+            AccountAuthenticatorResponse r</span><span class="s0">,</span><span class="s1"> 
+            Account account</span><span class="s0">,</span><span class="s1"> 
+            String s</span><span class="s0">,</span><span class="s1"> 
+            Bundle bundle) </span><span class="s0">throws </span><span class="s1">NetworkErrorException { 
+        </span><span class="s0">throw new </span><span class="s1">UnsupportedOperationException()</span><span class="s0">;</span><span class="s1"> 
+    } 
+ 
+    </span><span class="s3">// Getting a label for the auth token is not supported</span><span class="s1"> 
+    @Override 
+    </span><span class="s0">public </span><span class="s1">String getAuthTokenLabel(String s) { 
+        </span><span class="s0">throw new </span><span class="s1">UnsupportedOperationException()</span><span class="s0">;</span><span class="s1"> 
+    } 
+ 
+    </span><span class="s3">// Updating user credentials is not supported</span><span class="s1"> 
+    @Override 
+    </span><span class="s0">public </span><span class="s1">Bundle updateCredentials( 
+            AccountAuthenticatorResponse r</span><span class="s0">,</span><span class="s1"> 
+            Account account</span><span class="s0">,</span><span class="s1"> 
+            String s</span><span class="s0">, </span><span class="s1">Bundle bundle) </span><span class="s0">throws </span><span class="s1">NetworkErrorException { 
+        </span><span class="s0">throw new </span><span class="s1">UnsupportedOperationException()</span><span class="s0">;</span><span class="s1"> 
+    } 
+ 
+    </span><span class="s3">// Checking features for the account is not supported</span><span class="s1"> 
+    @Override 
+    </span><span class="s0">public </span><span class="s1">Bundle hasFeatures( 
+            AccountAuthenticatorResponse r</span><span class="s0">,</span><span class="s1"> 
+            Account account</span><span class="s0">, </span><span class="s1">String[] strings) </span><span class="s0">throws </span><span class="s1">NetworkErrorException { 
+        </span><span class="s0">throw new </span><span class="s1">UnsupportedOperationException()</span><span class="s0">;</span><span class="s1"> 
+    } 
+} 
+</span></pre>
+</body>
+</html>

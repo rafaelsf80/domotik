@@ -81,14 +81,13 @@ public class DomotikSyncAdapter extends AbstractThreadedSyncAdapter {
 
         Log.d(TAG, "Starting sync");
 
-        BufferedReader br = null;
-
-        //* We assume that the file has this structure:<br>
+        //* We assume that the ARP answer has this structure:<br>
         //* <br>
         //* IP address       HW type     Flags       HW address            Mask     Device
         //* 192.168.18.11    0x1         0x2         00:04:20:06:55:1a     *        eth0
         //* 192.168.18.36    0x1         0x2         00:22:43:ab:2a:5b     *        eth0
 
+        BufferedReader br = null;
 
         try {
             br = new BufferedReader(new FileReader("/proc/net/arp"));
@@ -116,10 +115,11 @@ public class DomotikSyncAdapter extends AbstractThreadedSyncAdapter {
             }
         }
 
-
-
-
-
+        //* ***********************
+        //*
+        //*     WEATHER SYNC
+        //*
+        //* ************************
 
         String locationQuery = Utility.getPreferredLocation(getContext());
 
@@ -458,8 +458,13 @@ public class DomotikSyncAdapter extends AbstractThreadedSyncAdapter {
         long locationId;
 
         // First, check if the location with this city name exists in the db
+
+        Log.d(TAG, "location: " + locationSetting);
+        if (getContext().getContentResolver() != null)
+            Log.d(TAG, getContext().getContentResolver().getType(Uri.parse("content://rafa")));
         Cursor locationCursor = getContext().getContentResolver().query(
-                WeatherContract.LocationEntry.CONTENT_URI,
+                //WeatherContract.LocationEntry.CONTENT_URI,
+                Uri.parse("content://rafa"),
                 new String[]{WeatherContract.LocationEntry._ID},
                 WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING + " = ?",
                 new String[]{locationSetting},

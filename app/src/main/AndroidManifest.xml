@@ -54,7 +54,7 @@
         </service>
 
         <provider
-            android:name=".app.StubProvider"
+            android:name=".app.weather.WeatherProvider"
             android:authorities="com.rafaelsf80.domotik.app.StubProvider"
             android:exported="false"
             android:syncable="true"/><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
@@ -66,3 +66,4 @@
     </application>
 
 </manifest>
+

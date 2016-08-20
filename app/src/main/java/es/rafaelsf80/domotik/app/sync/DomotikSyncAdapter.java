@@ -184,6 +184,9 @@ public class DomotikSyncAdapter extends AbstractThreadedSyncAdapter {
                 return;
             }
             forecastJsonStr = buffer.toString();
+            Log.d(TAG, forecastJsonStr);
+            Log.d(TAG, locationQuery);
+
             getWeatherDataFromJson(forecastJsonStr, locationQuery);
         } catch (IOException e) {
             Log.e(TAG, "Error ", e);
@@ -381,6 +384,7 @@ public class DomotikSyncAdapter extends AbstractThreadedSyncAdapter {
                 String locationQuery = Utility.getPreferredLocation(context);
 
                 Uri weatherUri = WeatherContract.WeatherEntry.buildWeatherLocationWithDate(locationQuery, System.currentTimeMillis());
+                Log.d(TAG, weatherUri.toString());
 
                 // we'll query our contentProvider, as always
                 Cursor cursor = context.getContentResolver().query(weatherUri, NOTIFY_WEATHER_PROJECTION, null, null, null);
@@ -460,15 +464,17 @@ public class DomotikSyncAdapter extends AbstractThreadedSyncAdapter {
         // First, check if the location with this city name exists in the db
 
         Log.d(TAG, "location: " + locationSetting);
-        if (getContext().getContentResolver() != null)
-            Log.d(TAG, getContext().getContentResolver().getType(Uri.parse("content://rafa")));
-        Cursor locationCursor = getContext().getContentResolver().query(
-                //WeatherContract.LocationEntry.CONTENT_URI,
-                Uri.parse("content://rafa"),
-                new String[]{WeatherContract.LocationEntry._ID},
-                WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING + " = ?",
-                new String[]{locationSetting},
-                null);
+        Cursor locationCursor = null;
+        try {
+             locationCursor = getContext().getContentResolver().query(
+                    WeatherContract.LocationEntry.CONTENT_URI,
+                    new String[]{WeatherContract.LocationEntry._ID},
+                    WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING + " = ?",
+                    new String[]{locationSetting},
+                    null);
+        } catch (Exception e) {
+            Log.d(TAG, e.toString());}
+
 
         if (locationCursor.moveToFirst()) {
             int locationIdIndex = locationCursor.getColumnIndex(WeatherContract.LocationEntry._ID);

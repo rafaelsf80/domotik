@@ -122,7 +122,7 @@ public class Main extends AppCompatActivity {
         // to talk to our sync adapter and receive updates
         mObserver = new ContentObserver(new Handler(Looper.getMainLooper())) {
             public void onChange(boolean selfChange) {
-                Log.d(TAG, "ContentObserver on Change()");
+                Log.d(TAG, "ContentObserver onChange()");
 
                 RecyclerView recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
                 SampleEnumMapAdapter adapter = new SampleEnumMapAdapter();

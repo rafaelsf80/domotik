@@ -108,6 +108,11 @@ public class Main extends AppCompatActivity {
         //        .findFragmentById(R.id.fragment_main));
         //mainFragment.setUseTodayLayout(!mTwoPane);
 
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
+        final SampleEnumMapAdapter adapter = new SampleEnumMapAdapter();
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(Main.this));
+        DomotikSyncAdapter.mAdapter = adapter;
 
         // Init sync adapter: 1) weather updates; 2) router updates
         DomotikSyncAdapter.initializeSyncAdapter(this);
@@ -124,11 +129,8 @@ public class Main extends AppCompatActivity {
             public void onChange(boolean selfChange) {
                 Log.d(TAG, "ContentObserver onChange()");
 
-                RecyclerView recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
-                SampleEnumMapAdapter adapter = new SampleEnumMapAdapter();
-                recyclerView.setAdapter(adapter);
-                recyclerView.setLayoutManager(new LinearLayoutManager(Main.this));
 
+                adapter.notifyDataSetChanged();
 
                 //actionBar.setTitle(config.appName);
                 //actionBar.setSubtitle(config.subTitle);

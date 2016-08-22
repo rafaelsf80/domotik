@@ -81,6 +81,12 @@ public class DomotikSyncAdapter extends AbstractThreadedSyncAdapter {
 
         Log.d(TAG, "Starting sync");
 
+        //* ***********************
+        //*
+        //*     ARP SYNC
+        //*
+        //* ************************
+
         //* We assume that the ARP answer has this structure:<br>
         //* <br>
         //* IP address       HW type     Flags       HW address            Mask     Device
@@ -101,7 +107,6 @@ public class DomotikSyncAdapter extends AbstractThreadedSyncAdapter {
                 tmp.setHwAddress( splitted[3] );
                 tmp.setPort( splitted[5] );
                 mAdapter.add(tmp);
-
                 Log.d(TAG, "Machine added: " + tmp.getIpAddress() + " " + tmp.getFlags() + " " + tmp.getHwAddress() + " " + tmp.getPort());
             }
             //mAdapter.notifyDataSetChanged();

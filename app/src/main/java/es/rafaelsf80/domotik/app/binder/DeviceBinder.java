@@ -69,8 +69,7 @@ public class DeviceBinder extends DataBinder<DeviceBinder.ViewHolder> {
 
         // get the item which has been pressed and store current item data into variables
         if ((machines != null) && (machines.size()>0)) {
-            Log.d(TAG, "position: " + Integer.toString(position));
-            Log.d(TAG, "size: " + Integer.toString(machines.size()));
+            Log.d(TAG, "position: " + Integer.toString(position) + "size: " + Integer.toString(machines.size()));
             Machine i = machines.get(position);
 
             // set list menu content to variables

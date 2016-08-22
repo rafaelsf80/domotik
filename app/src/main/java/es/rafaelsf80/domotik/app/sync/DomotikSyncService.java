@@ -30,7 +30,7 @@ public class DomotikSyncService extends Service {
 
     @Override
     public void onCreate() {
-        Log.d(TAG, "onCreate - DomotikSyncService");
+        Log.d(TAG, "onCreate() - DomotikSyncService");
         synchronized (sSyncAdapterLock) {
             if (sDomotikSyncAdapter == null) {
                 sDomotikSyncAdapter = new DomotikSyncAdapter(getApplicationContext(), true);

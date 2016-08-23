@@ -2,7 +2,7 @@
 <resources xmlns:xliff="http://schemas.android.com/apk/res-auto">
 
     <!--
-         Used in Action Bar, and in AndroidManifest to tell the DeviceBinder the name of this app.
+         Used in Action Bar, and in AndroidManifest to tell the NetworkingBinder the name of this app.
          It's to keep this short, so your launcher estar isn't displayed with "The greatest Wea"
          or something similar.
     -->

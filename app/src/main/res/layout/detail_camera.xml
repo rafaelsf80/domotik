@@ -28,7 +28,7 @@
                     android:layout_height="fill_parent">
 
                     <ImageView
-                        android:id="@+id/im_estar"
+                        android:id="@+id/im_camera1"
                         android:layout_height="fill_parent"
                         android:adjustViewBounds="true"
                         android:scaleType="fitCenter"
@@ -45,7 +45,7 @@
                     android:layout_height="fill_parent">
 
                     <ImageView
-                        android:id="@+id/image2"
+                        android:id="@+id/im_camera2"
                         android:layout_height="fill_parent"
                         android:adjustViewBounds="true"
                         android:scaleType="fitCenter"
@@ -69,7 +69,7 @@
                     android:layout_height="fill_parent">
 
                     <ImageView
-                        android:id="@+id/image3"
+                        android:id="@+id/im_camera3"
                         android:layout_height="fill_parent"
                         android:adjustViewBounds="true"
                         android:scaleType="fitCenter"
@@ -86,7 +86,7 @@
                     android:layout_height="fill_parent">
 
                     <ImageView
-                        android:id="@+id/salir"
+                        android:id="@+id/im_camera4"
                         android:layout_height="fill_parent"
                         android:adjustViewBounds="true"
                         android:scaleType="fitCenter"

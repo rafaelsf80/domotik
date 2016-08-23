@@ -102,16 +102,17 @@ public class DomotikSyncAdapter extends AbstractThreadedSyncAdapter {
                 Machine tmp = new Machine();
 
                 String[] splitted = line.split(" +");
-                tmp.setIpAddress( splitted[0] );
-                tmp.setFlags( splitted[2] );
-                tmp.setHwAddress( splitted[3] );
-                tmp.setPort( splitted[5] );
-                mAdapter.add(tmp);
+                tmp.setIpAddress(splitted[0]);
+                tmp.setFlags(splitted[2]);
+                tmp.setHwAddress(splitted[3]);
+                tmp.setPort(splitted[5]);
+                // First line of ARP answer must not be stored
+                if (!splitted[0].contains("IP"))
+                    mAdapter.add(tmp);  // will call mAdapter.notifyDataSetChanged();
                 Log.d(TAG, "Machine added: " + tmp.getIpAddress() + " " + tmp.getFlags() + " " + tmp.getHwAddress() + " " + tmp.getPort());
             }
-            //mAdapter.notifyDataSetChanged();
         } catch (Exception e) {
-            e.printStackTrace();
+             e.printStackTrace();
         } finally {
             try {
                 br.close();

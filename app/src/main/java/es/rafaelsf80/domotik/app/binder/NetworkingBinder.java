@@ -6,16 +6,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import es.rafaelsf80.domotik.R;
+import es.rafaelsf80.domotik.app.Machine;
 import es.rafaelsf80.domotik.app.multipleviewtypesabstractadapter.DataBindAdapter;
 import es.rafaelsf80.domotik.app.multipleviewtypesabstractadapter.DataBinder;
-import es.rafaelsf80.domotik.app.Machine;
 
 /**
  * Copyright 2016 Rafael Sanchez Fuentes
@@ -35,20 +34,20 @@ import es.rafaelsf80.domotik.app.Machine;
  * Author: Rafael Sanchez Fuentes rafaelsf80 at gmail dot com
  */
 
-public class DeviceBinder extends DataBinder<DeviceBinder.ViewHolder> {
+public class NetworkingBinder extends DataBinder<NetworkingBinder.ViewHolder> {
 
     private final String TAG = getClass().getSimpleName();
     private ArrayList<Machine> machines = new ArrayList<>();
 
 
-    public DeviceBinder(DataBindAdapter dataBindAdapter) {
+    public NetworkingBinder(DataBindAdapter dataBindAdapter) {
         super(dataBindAdapter);
     }
 
     @Override
     public ViewHolder newViewHolder(ViewGroup parent) {
         View view = LayoutInflater.from(parent.getContext()).inflate(
-                R.layout.card_machine, parent, false);
+                R.layout.card_networking, parent, false);
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,38 +66,26 @@ public class DeviceBinder extends DataBinder<DeviceBinder.ViewHolder> {
         //        .load(R.drawable.bird)
         //        .into(holder.mImageView);
 
-        // get the item which has been pressed and store current item data into variables
+        // get the item
         if ((machines != null) && (machines.size()>0)) {
-            Log.d(TAG, "position: " + Integer.toString(position) + "size: " + Integer.toString(machines.size()));
             Machine i = machines.get(position);
 
             // set list menu content to variables
-            rowView.tvTitle.setText(i.getType());
-            rowView.btDetails.setText(i.getIpAddress());
-            rowView.btDemand.setText(i.getHwAddress());
-
-            rowView.tvDescription.setText(i.getName());
-            rowView.btInventory.setText(i.getFlags());
-            rowView.btSize.setText(i.getPort());
-
-            //rowView.btPrice.setText(context.getResources().getString(R.string.card_price_label) + itemPrice);
+            rowView.tvDeviceName.setText(i.getHwAddress());
+            rowView.tvIpAddress.setText(i.getIpAddress());
 
             // download thumbnail
             //Picasso.with(context)
             //        .load(i.getUrlPhoto())
-            //        .into(rowView.imThumbnail);
+            //        .into(rowView.imDevice);
         }
     }
 
     @Override
-    public int getItemCount() {
-        Log.d(TAG, "checking device size: " + Integer.toString(machines.size()));
-        return machines.size();
-    }
+    public int getItemCount() { return machines.size(); }
 
     public void add(Machine machine) {
         machines.add(machine);
-        Log.d(TAG, "size: " + Integer.toString(machines.size()));
         notifyBinderDataSetChanged();
     }
 
@@ -108,28 +95,18 @@ public class DeviceBinder extends DataBinder<DeviceBinder.ViewHolder> {
     static class ViewHolder extends RecyclerView.ViewHolder {
 
         public CardView cardView;
-        public TextView tvTitle;
-        public TextView tvDescription;
-        public ImageView imThumbnail;
-        public Button btDetails;
-        public Button btDemand;
-        public Button btInventory;
-        public Button btSize;
-        public Button btPrice;
+        public TextView tvDeviceName;
+        public TextView tvIpAddress;
+        public ImageView imDevice;
+
 
         public ViewHolder(View rowView) {
             super(rowView);
             // store UI elements in a variable to be dynamically changed
-            cardView = (CardView) rowView.findViewById(R.id.my_card_view);
-            tvTitle = (TextView) rowView.findViewById(R.id.tv_title);
-            tvDescription = (TextView) rowView.findViewById(R.id.tv_description);
-            imThumbnail = (ImageView) rowView.findViewById(R.id.im_thumbnail);
-
-            btDetails = (Button) rowView.findViewById(R.id.bt_card_details);
-            btDemand = (Button) rowView.findViewById(R.id.bt_card_demand);
-            btInventory = (Button) rowView.findViewById(R.id.bt_inventory);
-            btSize = (Button) rowView.findViewById(R.id.bt_size);
-            btPrice = (Button) rowView.findViewById(R.id.bt_price);
+            cardView = (CardView) rowView.findViewById(R.id.cv_networking);
+            tvDeviceName = (TextView) rowView.findViewById(R.id.tv_device_name);
+            tvIpAddress = (TextView) rowView.findViewById(R.id.tv_ip_address);
+            imDevice = (ImageView) rowView.findViewById(R.id.im_device);
         }
     }
 }

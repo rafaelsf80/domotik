@@ -58,11 +58,11 @@ public class MainFragment extends Fragment {
                              Bundle savedInstanceState) {
 
 
-        View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+        View rootView = inflater.inflate(R.layout.detail_camera, container, false);
 
         // Get a reference to the ListView, and attach this adapter to it.
-        imControlar = (ImageView) rootView.findViewById(R.id.im_estar);
-        imSalir = (ImageView) rootView.findViewById(R.id.salir);
+        imControlar = (ImageView) rootView.findViewById(R.id.im_camera1);
+        imSalir = (ImageView) rootView.findViewById(R.id.im_camera2);
 
         String A = "456";
         String B = "123";

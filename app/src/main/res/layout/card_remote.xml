@@ -6,7 +6,7 @@
     android:clickable="true"
     android:onClick="show"
     android:layout_margin="10dp"
-    android:id="@+id/my_card_view"
+    android:id="@+id/cv_remote"
     card_view:cardCornerRadius="8dp"
     card_view:cardElevation="30dp"
     android:layout_width="wrap_content"

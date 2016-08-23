@@ -3,7 +3,8 @@ package es.rafaelsf80.domotik.app;
 import android.util.Log;
 
 import es.rafaelsf80.domotik.app.binder.CameraBinder;
-import es.rafaelsf80.domotik.app.binder.DeviceBinder;
+import es.rafaelsf80.domotik.app.binder.NetworkingBinder;
+import es.rafaelsf80.domotik.app.binder.RemoteBinder;
 import es.rafaelsf80.domotik.app.binder.WeatherBinder;
 import es.rafaelsf80.domotik.app.multipleviewtypesabstractadapter.EnumMapBindAdapter;
 
@@ -31,14 +32,15 @@ public class SampleEnumMapAdapter extends EnumMapBindAdapter<SampleEnumMapAdapte
 
 
     enum SampleViewType {
-        MACHINE, CAMERA, WEATHER
+        MACHINE, CAMERA, WEATHER, REMOTE
     }
 
     public SampleEnumMapAdapter() {
-        putBinder(SampleViewType.MACHINE, new DeviceBinder(this));
+        putBinder(SampleViewType.MACHINE, new NetworkingBinder(this));
         putBinder(SampleViewType.CAMERA, new CameraBinder(this));
 
         putBinder(SampleViewType.WEATHER, new WeatherBinder(this));
+        putBinder(SampleViewType.REMOTE, new RemoteBinder(this));
 
 
         //putBinder(SampleViewType.SAMPLE1, new Sample1Binder(this));
@@ -47,7 +49,7 @@ public class SampleEnumMapAdapter extends EnumMapBindAdapter<SampleEnumMapAdapte
     }
 
     public void add(Machine machine) {
-        ((DeviceBinder) getDataBinder(SampleViewType.MACHINE)).add(machine);
+        ((NetworkingBinder) getDataBinder(SampleViewType.MACHINE)).add(machine);
     }
 
 
@@ -63,9 +65,10 @@ public class SampleEnumMapAdapter extends EnumMapBindAdapter<SampleEnumMapAdapte
         // now position:0 camera; position:1 wether; position > 2: device
 
         int total =
-        ((DeviceBinder) getDataBinder(SampleViewType.MACHINE)).getItemCount() +
+        ((NetworkingBinder) getDataBinder(SampleViewType.MACHINE)).getItemCount() +
                 ((WeatherBinder) getDataBinder(SampleViewType.WEATHER)).getItemCount() +
-                ((CameraBinder) getDataBinder(SampleViewType.CAMERA)).getItemCount();
+                ((CameraBinder) getDataBinder(SampleViewType.CAMERA)).getItemCount() +
+                ((RemoteBinder) getDataBinder(SampleViewType.REMOTE)).getItemCount();
 
 
         Log.d(TAG, "position****: " + Integer.toString(position));

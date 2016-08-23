@@ -105,7 +105,7 @@ public class Main extends AppCompatActivity {
         //comtrend.start();
 
         //MainFragment mainFragment =  ((MainFragment) getSupportFragmentManager()
-        //        .findFragmentById(R.id.fragment_main));
+        //        .findFragmentById(R.id.detail_camera));
         //mainFragment.setUseTodayLayout(!mTwoPane);
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);

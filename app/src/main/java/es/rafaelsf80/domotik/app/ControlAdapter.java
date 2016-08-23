@@ -233,7 +233,7 @@
 //            return new WeatherViewHolder(v);
 //        } else if (viewType == DEVICE) {
 //            v = LayoutInflater.from(viewGroup.getContext())
-//                    .inflate(R.layout.card_machine, viewGroup, false);
+//                    .inflate(R.layout.card_networking, viewGroup, false);
 //            v.setOnClickListener(new View.OnClickListener() {
 //                @Override
 //                public void onClick(View v) {

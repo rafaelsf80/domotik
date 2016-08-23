@@ -45,7 +45,7 @@ public class WeatherBinder extends DataBinder<WeatherBinder.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        Log.d(TAG, "checking weather size: 1");
+        Log.d(TAG, "number of Weather cards: 1 fixed");
         return 1;
     }
 

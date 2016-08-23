@@ -91,18 +91,9 @@ public class RemoteBinder extends DataBinder<RemoteBinder.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        Log.d(TAG, "checking device size: " + Integer.toString(machines.size()));
-        return machines.size();
+        Log.d(TAG, "number of Remote cards -- 1 fixed");
+        return 1;
     }
-
-    public void add(Machine machine) {
-        machines.add(machine);
-        Log.d(TAG, "size: " + Integer.toString(machines.size()));
-        notifyBinderDataSetChanged();
-    }
-
-
-
 
     static class ViewHolder extends RecyclerView.ViewHolder {
 

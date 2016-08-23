@@ -18,6 +18,7 @@ import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -99,17 +100,17 @@ public class DomotikSyncAdapter extends AbstractThreadedSyncAdapter {
             br = new BufferedReader(new FileReader("/proc/net/arp"));
             String line;
             while ((line = br.readLine()) != null) {
-                Machine tmp = new Machine();
-
                 String[] splitted = line.split(" +");
-                tmp.setIpAddress(splitted[0]);
-                tmp.setFlags(splitted[2]);
-                tmp.setHwAddress(splitted[3]);
-                tmp.setPort(splitted[5]);
                 // First line of ARP answer must not be stored
-                if (!splitted[0].contains("IP"))
-                    mAdapter.add(tmp);  // will call mAdapter.notifyDataSetChanged();
-                Log.d(TAG, "Machine added: " + tmp.getIpAddress() + " " + tmp.getFlags() + " " + tmp.getHwAddress() + " " + tmp.getPort());
+                if (!splitted[0].contains("IP")) {
+                    Machine tmp = new Machine();
+                    tmp.setIpAddress(splitted[0]);
+                    tmp.setFlags(splitted[2]);
+                    tmp.setHwAddress(splitted[3]);
+                    tmp.setPort(splitted[5]);
+                    mAdapter.add(tmp);  // will call mAdapter.notifyDataSetChanged()
+                    Log.d(TAG, "Machine added: " + tmp.getIpAddress() + " " + tmp.getFlags() + " " + tmp.getHwAddress() + " " + tmp.getPort());
+                }
             }
         } catch (Exception e) {
              e.printStackTrace();
@@ -361,7 +362,7 @@ public class DomotikSyncAdapter extends AbstractThreadedSyncAdapter {
                         WeatherContract.WeatherEntry.COLUMN_DATE + " <= ?",
                         new String[] {Long.toString(dayTime.setJulianDay(julianStartDay-1))});
 
-                notifyWeather();
+                showNotification();
             }
 
             Log.d(TAG, "Sync Complete. " + cVVector.size() + " Inserted");
@@ -372,7 +373,7 @@ public class DomotikSyncAdapter extends AbstractThreadedSyncAdapter {
         }
     }
 
-    private void notifyWeather() {
+    private void showNotification() {
         Context context = getContext();
         //checking the last update and notify if it' the first of the day
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
@@ -403,15 +404,20 @@ public class DomotikSyncAdapter extends AbstractThreadedSyncAdapter {
 
                     int iconId = Utility.getIconResourceForWeatherCondition(weatherId);
                     Resources resources = context.getResources();
-                    Bitmap largeIcon = BitmapFactory.decodeResource(resources,
-                            Utility.getArtResourceForWeatherCondition(weatherId));
                     String title = context.getString(R.string.app_name);
+                    //Bitmap largeIcon = BitmapFactory.decodeResource(resources,
+                    //        Utility.getArtResourceForWeatherCondition(weatherId));
+                    Bitmap largeIcon = BitmapFactory.decodeResource(resources,
+                            R.drawable.estar);
+                    Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
-                    // Define the text of the forecast.
+                    // Define the text of the notification
                     String contentText = String.format(context.getString(R.string.format_notification),
+                            String.valueOf(mAdapter.getItemCount()),
                             desc,
                             Utility.formatTemperature(context, high),
                             Utility.formatTemperature(context, low));
+
 
                     // NotificationCompatBuilder is a very convenient way to build backward-compatible
                     // notifications.  Just throw in some data.
@@ -421,6 +427,7 @@ public class DomotikSyncAdapter extends AbstractThreadedSyncAdapter {
                                     .setSmallIcon(iconId)
                                     .setLargeIcon(largeIcon)
                                     .setContentTitle(title)
+                                    .setSound(defaultSoundUri)
                                     .setContentText(contentText);
 
                     // Make something interesting happen when the user clicks on the notification.

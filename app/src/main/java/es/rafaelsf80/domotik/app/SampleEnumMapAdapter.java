@@ -36,16 +36,12 @@ public class SampleEnumMapAdapter extends EnumMapBindAdapter<SampleEnumMapAdapte
     }
 
     public SampleEnumMapAdapter() {
-        putBinder(SampleViewType.MACHINE, new NetworkingBinder(this));
-        putBinder(SampleViewType.CAMERA, new CameraBinder(this));
-
-        putBinder(SampleViewType.WEATHER, new WeatherBinder(this));
-        putBinder(SampleViewType.REMOTE, new RemoteBinder(this));
-
 
         //putBinder(SampleViewType.SAMPLE1, new Sample1Binder(this));
-        //putBinder(SampleViewType.SAMPLE2, new Sample2Binder(this));
-        //putBinder(SampleViewType.SAMPLE3, new Sample3Binder(this));
+        putBinder(SampleViewType.MACHINE, new NetworkingBinder(this));
+        putBinder(SampleViewType.CAMERA, new CameraBinder(this));
+        putBinder(SampleViewType.WEATHER, new WeatherBinder(this));
+        putBinder(SampleViewType.REMOTE, new RemoteBinder(this));
     }
 
     public void add(Machine machine) {
@@ -71,16 +67,15 @@ public class SampleEnumMapAdapter extends EnumMapBindAdapter<SampleEnumMapAdapte
                 ((RemoteBinder) getDataBinder(SampleViewType.REMOTE)).getItemCount();
 
 
-        Log.d(TAG, "position****: " + Integer.toString(position));
+        Log.d(TAG, "position****: " + Integer.toString(position) + "total" + Integer.toString(total));
 
-        // First positions for Device
-        if (position == 0) {
-            return SampleViewType.CAMERA;
-        } else if (position == 1) {
-            return SampleViewType.WEATHER;
-        } else {
-            return SampleViewType.MACHINE;
-        }
+        // MANUAL: position IS MANUAL FOR THE TIME BEING
+        if (position == 0) return SampleViewType.CAMERA;
+        if (position == 1) return SampleViewType.WEATHER;
+        if (position == 2) return SampleViewType.REMOTE;
+        if (position == 3) return SampleViewType.MACHINE;
+        if (position == 4) return SampleViewType.MACHINE;
+        return SampleViewType.MACHINE;
     }
 
     @Override

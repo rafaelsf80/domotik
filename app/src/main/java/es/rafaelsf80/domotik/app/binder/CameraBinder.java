@@ -40,7 +40,7 @@ public class CameraBinder extends DataBinder<CameraBinder.ViewHolder> {
     @Override
     public ViewHolder newViewHolder(ViewGroup parent) {
         View view = LayoutInflater.from(parent.getContext()).inflate(
-                R.layout.card_weather, parent, false);
+                R.layout.card_camera, parent, false);
 
         view.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,7 +63,7 @@ public class CameraBinder extends DataBinder<CameraBinder.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        Log.d(TAG, "checking camera size: 1");
+        Log.d(TAG, "number of Camera cards -- 1 fixed");
         return 1;
     }
 

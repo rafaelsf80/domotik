@@ -19,8 +19,6 @@ package es.rafaelsf80.domotik.app;
  */
 public class Machine {
 
-    String TAG = getClass().getSimpleName();
-
     String ipAddress;
     String flags;
     String hwAddress;

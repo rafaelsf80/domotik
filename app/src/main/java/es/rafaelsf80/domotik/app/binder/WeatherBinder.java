@@ -27,7 +27,7 @@ public class WeatherBinder extends DataBinder<WeatherBinder.ViewHolder> {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "onClick itemLayoutView");
+                Log.d(TAG, "onClick Weather card");
             }
         });
 

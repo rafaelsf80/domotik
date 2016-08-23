@@ -51,7 +51,7 @@ public class NetworkingBinder extends DataBinder<NetworkingBinder.ViewHolder> {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "onClick itemLayoutView");
+                Log.d(TAG, "onClick Networking card");
             }
         });
 
@@ -66,6 +66,8 @@ public class NetworkingBinder extends DataBinder<NetworkingBinder.ViewHolder> {
         //        .load(R.drawable.bird)
         //        .into(holder.mImageView);
 
+        final int item_number = position;
+
         // get the item
         if ((machines != null) && (machines.size()>0)) {
             Machine i = machines.get(position);
@@ -75,10 +77,16 @@ public class NetworkingBinder extends DataBinder<NetworkingBinder.ViewHolder> {
             rowView.tvIpAddress.setText(i.getIpAddress());
 
             // download thumbnail
-            //Picasso.with(context)
+            // Picasso.with(context)
             //        .load(i.getUrlPhoto())
             //        .into(rowView.imDevice);
         }
+        rowView.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "onClick Networking card number: " + String.valueOf(item_number));
+            }
+        });
     }
 
     @Override

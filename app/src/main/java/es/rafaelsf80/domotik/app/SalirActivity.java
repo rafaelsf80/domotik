@@ -24,6 +24,7 @@ import es.rafaelsf80.domotik.R;
  * <p/>
  * Author: Rafael Sanchez Fuentes rafaelsf80 at gmail dot com
  */
+
 public class SalirActivity extends AppCompatActivity {
 
     @Override

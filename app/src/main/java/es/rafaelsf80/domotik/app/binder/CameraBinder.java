@@ -1,5 +1,6 @@
 package es.rafaelsf80.domotik.app.binder;
 
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -45,7 +46,7 @@ public class CameraBinder extends DataBinder<CameraBinder.ViewHolder> {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "onClick itemLayoutView");
+                Log.d(TAG, "onClick Camera card");
             }
         });
 
@@ -54,11 +55,20 @@ public class CameraBinder extends DataBinder<CameraBinder.ViewHolder> {
     }
 
     @Override
-    public void bindViewHolder(ViewHolder holder, int position) {
+    public void bindViewHolder(ViewHolder rowViewHolder, int position) {
         //holder.mImageView.setImageResource(R.drawable.bird);
         //Picasso.with(holder.mImageView.getContext())
         //        .load(R.drawable.bird)
         //        .into(holder.mImageView);
+        final int item_number = position;
+
+        rowViewHolder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "onClick Camera card number: " + String.valueOf(item_number));
+            }
+        });
+
     }
 
     @Override
@@ -69,11 +79,12 @@ public class CameraBinder extends DataBinder<CameraBinder.ViewHolder> {
 
     static class ViewHolder extends RecyclerView.ViewHolder {
 
+        public CardView cardView;
 
         public ViewHolder(View rowView) {
             super(rowView);
             // store UI elements in a variable to be dynamically changed
-
+            cardView = (CardView) rowView.findViewById(R.id.cv_camera);
         }
     }
 }

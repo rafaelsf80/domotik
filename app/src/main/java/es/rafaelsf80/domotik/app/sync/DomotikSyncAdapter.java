@@ -412,11 +412,12 @@ public class DomotikSyncAdapter extends AbstractThreadedSyncAdapter {
                     Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
                     // Define the text of the notification
-                    String contentText = String.format(context.getString(R.string.format_notification),
-                            String.valueOf(mAdapter.getItemCount()),
-                            desc,
-                            Utility.formatTemperature(context, high),
-                            Utility.formatTemperature(context, low));
+                        String contentText = String.format(context.getString(R.string.format_notification),
+                                String.valueOf(mAdapter.getItemCount()),
+                                desc,
+                                Utility.formatTemperature(context, high),
+                                Utility.formatTemperature(context, low));
+
 
 
                     // NotificationCompatBuilder is a very convenient way to build backward-compatible

@@ -1,133 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<android.support.v7.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:clickable="true"
     android:onClick="show"
     android:layout_margin="10dp"
     android:id="@+id/cv_remote"
     card_view:cardCornerRadius="8dp"
     card_view:cardElevation="30dp"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    >
+    android:layout_marginTop="16dp"
+    android:elevation="100dp"
+    card_view:cardBackgroundColor="@color/colorPrimaryLight">
 
-
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <android.support.v7.widget.GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/my_layout"
-        android:clickable="true">
-
-
-        <TextView
-            android:id="@+id/tv_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@+id/label"
-            android:fontFamily="sans-serif-condensed"
-            android:textSize="10pt"
-            android:paddingLeft="3pt"
-            android:paddingRight="3pt"
-            android:paddingBottom="1pt"
-            >
-        </TextView>
-
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        app:columnCount="3">
 
         <ImageView
-            android:id="@+id/im_thumbnail"
-            android:layout_below="@id/tv_title"
-            android:paddingLeft="3pt"
-            android:paddingRight="3pt"
-            android:paddingBottom="2pt"
-            android:layout_width="110dp"
-            android:layout_height="110dp"
-            />
+            android:id="@+id/im_device_icon"
+            android:layout_width="20dp"
+            android:adjustViewBounds="true"
+            android:maxHeight="@dimen/today_icon"
+            android:maxWidth="@dimen/today_icon"
+            app:layout_columnWeight="1"
+            app:layout_gravity="fill_horizontal"
+            android:src="@drawable/art_clouds" />
+
+        <ToggleButton
+            android:id="@+id/tb_on_off"
+            android:layout_width="0dp"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="16dp"
+            android:textColor="@color/text_icons"
+            android:background="@color/colorAccent"
+            android:textSize="42sp"
+            app:layout_columnWeight="1"
+            app:layout_gravity="fill_horizontal"
+            android:text="@string/on" />
+
+        <ImageView
+            android:id="@+id/im_card_remote_menu"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="5dp"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/ic_menu_moreoverflow_normal_holo_light" />
 
         <TextView
-            android:id="@+id/tv_description"
-            android:layout_toRightOf="@id/im_thumbnail"
-            android:layout_below="@id/tv_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@+id/label"
-            android:fontFamily="sans-serif-condensed"
-            android:textSize="10pt"
-            android:layout_marginTop="6pt"
-            android:paddingLeft="4pt"
-            android:paddingRight="4pt"
-            android:paddingBottom="5pt"
-            >
-        </TextView>
+            android:id="@+id/tv_provider"
+            android:layout_width="0dp"
+            android:layout_marginBottom="@dimen/abc_list_item_padding_horizontal_material"
+            android:fontFamily="sans-serif"
+            android:gravity="center_horizontal"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:textColor="@color/secondary_text"
+            app:layout_columnWeight="1"
+            android:text="Iberdrola" />
+
+        <TextView
+            android:id="@+id/tv_type"
+            android:layout_width="0dp"
+            android:layout_marginBottom="@dimen/abc_list_item_padding_horizontal_material"
+            android:fontFamily="sans-serif"
+            android:gravity="center_horizontal"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:textColor="@color/secondary_text"
+            app:layout_columnWeight="1"
+            android:text="Electricity" />
 
 
-        <Button android:id="@+id/bt_card_details"
-            android:layout_toRightOf="@id/im_thumbnail"
-            android:layout_below="@id/tv_description"
-            android:layout_width="40pt"
-            android:layout_height="12pt"
-            android:background="#000000"
-            android:textColor="#ffffff"
-            android:textSize="7pt"
-            android:text="BT_DETAILS"
-            android:layout_marginLeft="4pt"
-            android:layout_marginBottom="4pt"
-            />
-
-        <Button android:id="@+id/bt_card_demand"
-            android:layout_toRightOf="@id/bt_card_details"
-            android:layout_below="@id/tv_description"
-            android:layout_width="45pt"
-            android:layout_height="12pt"
-            android:background="#000000"
-            android:textColor="#ffffff"
-            android:textSize="7pt"
-            android:text="BT_DEMAND"
-            android:layout_marginLeft="4pt"
-            android:layout_marginBottom="4pt"
-            />
-
-        <Button android:id="@+id/bt_inventory"
-            android:layout_below="@id/im_thumbnail"
-            android:layout_width="wrap_content"
-            android:layout_height="14pt"
-            android:background="#ffdf6c31"
-            android:textColor="#ff000000"
-            android:textSize="7pt"
-            android:text="BT_INVENTORY"
-            android:padding="3pt"
-            android:layout_marginLeft="4pt"
-            android:layout_marginBottom="4pt"
-            />
-
-        <Button android:id="@+id/bt_size"
-            android:layout_below="@id/im_thumbnail"
-            android:layout_toRightOf="@id/bt_inventory"
-            android:layout_width="wrap_content"
-            android:layout_height="14pt"
-            android:background="#ffdf6c31"
-            android:textColor="#ff000000"
-            android:textSize="7pt"
-            android:text="BT_SIZE"
-            android:padding="3pt"
-            android:layout_marginLeft="12pt"
-            android:layout_marginBottom="4pt"
-            />
-
-        <Button android:id="@+id/bt_price"
-            android:layout_below="@id/im_thumbnail"
-            android:layout_toRightOf="@id/bt_size"
-            android:layout_width="wrap_content"
-            android:layout_height="14pt"
-            android:background="#ffdf6c31"
-            android:textColor="#ff000000"
-            android:textSize="7pt"
-            android:text="BT_PRICE"
-            android:padding="3pt"
-            android:layout_marginLeft="12pt"
-            android:layout_marginBottom="4pt"
-            />
-
-    </RelativeLayout>
-</android.support.v7.widget.CardView>
+    </android.support.v7.widget.GridLayout>
+    </android.support.v7.widget.CardView>

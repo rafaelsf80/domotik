@@ -8,6 +8,17 @@
     -->
     <string name="app_name">Domotik</string>
 
+    <string name="gas_provider">Iberdrola</string>
+    <string name="electricity_provider">Endesa</string>
+    <string name="air_conditioning_provider">Endesa</string>
+    <string name="water_provider">CYII</string>
+    <string name="gas_type">Gas</string>
+    <string name="electrivity_type">Electricity</string>
+    <string name="air_conditioning_type">A.C.</string>
+    <string name="water_type">Water</string>
+    <string name="on">ON</string>
+
+
     <!--
          By convention, "action" denotes that this String will be used as the label for an Action,
          typically from the action bar.  The ActionBar is limited real estate, so shorter is better.

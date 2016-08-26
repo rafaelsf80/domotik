@@ -57,7 +57,7 @@ public class SampleEnumMapAdapter extends EnumMapBindAdapter<SampleEnumMapAdapte
     public SampleViewType getEnumFromPosition(int position) {
 
 
-        // todo: select ordering
+        // todo: select ordering SI NO DA throwIndexOutOfBoundsException
         // now position:0 camera; position:1 wether; position > 2: device
 
         int total =
@@ -75,6 +75,9 @@ public class SampleEnumMapAdapter extends EnumMapBindAdapter<SampleEnumMapAdapte
         if (position == 2) return SampleViewType.REMOTE;
         if (position == 3) return SampleViewType.MACHINE;
         if (position == 4) return SampleViewType.MACHINE;
+        if (position == 5) return SampleViewType.REMOTE;
+        if (position == 6) return SampleViewType.REMOTE;
+        if (position == 7) return SampleViewType.REMOTE;
         return SampleViewType.MACHINE;
     }
 

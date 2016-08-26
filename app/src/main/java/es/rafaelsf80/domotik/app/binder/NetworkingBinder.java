@@ -1,5 +1,6 @@
 package es.rafaelsf80.domotik.app.binder;
 
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 
 import es.rafaelsf80.domotik.R;
 import es.rafaelsf80.domotik.app.Machine;
+import es.rafaelsf80.domotik.app.NetworkingDetailsActivity;
 import es.rafaelsf80.domotik.app.multipleviewtypesabstractadapter.DataBindAdapter;
 import es.rafaelsf80.domotik.app.multipleviewtypesabstractadapter.DataBinder;
 
@@ -39,7 +41,6 @@ public class NetworkingBinder extends DataBinder<NetworkingBinder.ViewHolder> {
     private final String TAG = getClass().getSimpleName();
     private ArrayList<Machine> machines = new ArrayList<>();
 
-
     public NetworkingBinder(DataBindAdapter dataBindAdapter) {
         super(dataBindAdapter);
     }
@@ -54,7 +55,6 @@ public class NetworkingBinder extends DataBinder<NetworkingBinder.ViewHolder> {
                 Log.d(TAG, "onClick Networking card");
             }
         });
-
 
         return new ViewHolder(view);
     }
@@ -76,17 +76,50 @@ public class NetworkingBinder extends DataBinder<NetworkingBinder.ViewHolder> {
             rowView.tvDeviceName.setText(i.getHwAddress());
             rowView.tvIpAddress.setText(i.getIpAddress());
 
+            final String name = i.getName();
+            final String flags = i.getFlags();
+            final String hardDisk = i.getHardDisk();
+            final String urlPhoto = i.getUrlPhoto();
+            final String hwAddress = i.getHwAddress();
+            final String ipAddress = i.getIpAddress();
+            final String port = i.getPort();
+            final String processor = i.getProcessor();
+            final String ram = i.getRam();
+            final String screen = i.getScreen();
+            final String type = i.getType();
+
             // download thumbnail
             // Picasso.with(context)
             //        .load(i.getUrlPhoto())
             //        .into(rowView.imDevice);
+
+            rowView.cardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.d(TAG, "onClick Networking card number: " + String.valueOf(item_number));
+                    Intent intent = new Intent(v.getContext(), NetworkingDetailsActivity.class);
+
+                    // when a list item has been pressed move to the item details screen,  passing the following data
+                    intent.putExtra("name", name);
+                    intent.putExtra("flags", flags);
+                    intent.putExtra("hardDisk", hardDisk);
+                    intent.putExtra("urlPhoto", urlPhoto);
+                    intent.putExtra("hwAddress", hwAddress);
+                    intent.putExtra("ipAddress", ipAddress);
+                    intent.putExtra("port", port);
+                    intent.putExtra("processor", processor);
+                    intent.putExtra("ram", ram);
+                    intent.putExtra("screen", screen);
+                    intent.putExtra("type", type);
+
+                    // move to the details screen
+                    //v.getContext().startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(acti).toBundle());
+                    v.getContext().startActivity(intent);
+
+                }
+            });
+
         }
-        rowView.cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d(TAG, "onClick Networking card number: " + String.valueOf(item_number));
-            }
-        });
     }
 
     @Override

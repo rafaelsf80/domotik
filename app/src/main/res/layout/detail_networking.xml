@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        tools:context="com.google.retailAppWithConfig.itemdetails" >
+
+        <TextView
+            android:id="@+id/tv_details_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="sans-serif-condensed"
+            android:gravity="center"
+            android:textSize="12pt" />
+
+        <ImageView
+            android:id="@+id/mainimage"
+            android:layout_width="500dp"
+            android:layout_height="200dp"
+            android:layout_below="@id/tv_details_title"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="4pt"
+            android:layout_marginTop="3pt" />
+
+        <Button
+            android:id="@+id/bt_details_pdf_guide"
+            android:layout_width="40pt"
+            android:layout_height="12pt"
+            android:layout_below="@id/mainimage"
+            android:layout_marginBottom="4pt"
+            android:layout_marginLeft="4pt"
+            android:background="#000000"
+            android:text="details_pdf"
+            android:textColor="#ffffff"
+            android:textSize="7pt" />
+
+        <Button
+            android:id="@+id/bt_details_video_preview"
+            android:layout_width="53pt"
+            android:layout_height="12pt"
+            android:layout_below="@id/mainimage"
+            android:layout_marginBottom="4pt"
+            android:layout_marginLeft="4pt"
+            android:layout_toRightOf="@id/bt_details_pdf_guide"
+            android:background="#000000"
+            android:text="details_bt_video"
+            android:textColor="#ffffff"
+            android:textSize="7pt" />
+
+        <Button
+            android:id="@+id/bt_details_instock"
+            android:layout_width="wrap_content"
+            android:layout_height="12pt"
+            android:layout_below="@id/mainimage"
+            android:layout_marginBottom="4pt"
+            android:layout_marginLeft="4pt"
+            android:layout_toRightOf="@id/bt_details_video_preview"
+            android:background="#ffdf6c31"
+            android:paddingLeft="2pt"
+            android:paddingRight="2pt"
+            android:text="Stock Count"
+            android:textColor="#000000"
+            android:textSize="7pt" />
+
+        <TextView
+            android:id="@+id/tv_details_by"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/bt_details_pdf_guide"
+            android:layout_marginTop="3pt"
+            android:fontFamily="sans-serif-condensed"
+            android:textSize="10pt" />
+
+        <TextView
+            android:id="@+id/tv_details_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_details_by"
+            android:layout_marginTop="3pt"
+            android:fontFamily="sans-serif-condensed"
+            android:textSize="10pt" />
+
+        <TextView
+            android:id="@+id/tv_details_item_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_details_size"
+            android:layout_marginTop="3pt"
+            android:fontFamily="sans-serif-condensed"
+            android:textSize="10pt" />
+
+        <TextView
+            android:id="@+id/tv_details_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_details_item_price"
+            android:layout_marginTop="3pt"
+            android:fontFamily="sans-serif-condensed"
+            android:textSize="10pt" />
+
+        <TextView
+            android:id="@+id/tv_details_instock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_details_location"
+            android:layout_marginTop="3pt"
+            android:fontFamily="sans-serif-condensed"
+            android:paddingLeft="2pt"
+            android:paddingRight="2pt"
+            android:textSize="10pt" />
+    </RelativeLayout>
+
+</ScrollView>

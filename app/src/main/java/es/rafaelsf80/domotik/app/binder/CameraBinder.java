@@ -1,5 +1,6 @@
 package es.rafaelsf80.domotik.app.binder;
 
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import es.rafaelsf80.domotik.R;
+import es.rafaelsf80.domotik.app.CameraDetailsActivity;
 import es.rafaelsf80.domotik.app.multipleviewtypesabstractadapter.DataBindAdapter;
 import es.rafaelsf80.domotik.app.multipleviewtypesabstractadapter.DataBinder;
 
@@ -61,11 +63,27 @@ public class CameraBinder extends DataBinder<CameraBinder.ViewHolder> {
         //        .load(R.drawable.bird)
         //        .into(holder.mImageView);
         final int item_number = position;
-
         rowViewHolder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "onClick Camera card number: " + String.valueOf(item_number));
+                Intent intent = new Intent(v.getContext(), CameraDetailsActivity.class);
+//
+//                // when a list item has been pressed move to the item details screen,  passing the following data
+//                intent.putExtra("itemName", itemName);
+//                intent.putExtra("mainImage", thumbnailURL);
+//                intent.putExtra("brand", brand);
+//                intent.putExtra("size", size);
+//                intent.putExtra("sizeGuide", sizeGuide);
+//                intent.putExtra("videoPreview", videoPreview);
+//                intent.putExtra("itemPrice", itemPrice);
+//                intent.putExtra("inventoryCount", inventoryCount);
+//                intent.putExtra("stockForecast", stockForecast);
+//
+                // move to the details screen
+                //v.getContext().startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(((Activity) v.getContext())).toBundle());
+                v.getContext().startActivity(intent);
+
             }
         });
 

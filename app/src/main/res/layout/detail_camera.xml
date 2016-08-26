@@ -1,7 +1,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffcc5d00" >
+    android:background="@color/colorPrimaryLight" >
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -27,12 +27,18 @@
                     android:padding="10dip"
                     android:layout_height="fill_parent">
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/primary_text"
+                        android:text="0:00 Now" />
+
                     <ImageView
                         android:id="@+id/im_camera1"
                         android:layout_height="fill_parent"
                         android:adjustViewBounds="true"
                         android:scaleType="fitCenter"
-                        android:src="@drawable/estar"
+                        android:src="@android:drawable/presence_video_away"
                         android:layout_width="fill_parent"
                         android:layout_gravity="center" />
                 </LinearLayout>
@@ -44,12 +50,18 @@
                     android:padding="10dip"
                     android:layout_height="fill_parent">
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/primary_text"
+                        android:text="+30 min" />
+
                     <ImageView
                         android:id="@+id/im_camera2"
                         android:layout_height="fill_parent"
                         android:adjustViewBounds="true"
                         android:scaleType="fitCenter"
-                        android:src="@drawable/stackoverflow"
+                        android:src="@android:drawable/presence_video_away"
                         android:layout_width="fill_parent"
                         android:layout_gravity="center" />
                 </LinearLayout>
@@ -68,12 +80,18 @@
                     android:padding="10dip"
                     android:layout_height="fill_parent">
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/primary_text"
+                        android:text="+60 min" />
+
                     <ImageView
                         android:id="@+id/im_camera3"
                         android:layout_height="fill_parent"
                         android:adjustViewBounds="true"
                         android:scaleType="fitCenter"
-                        android:src="@drawable/stackoverflow"
+                        android:src="@android:drawable/presence_video_away"
                         android:layout_width="fill_parent"
                         android:layout_gravity="center" />
                 </LinearLayout>
@@ -85,12 +103,18 @@
                     android:padding="10dip"
                     android:layout_height="fill_parent">
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/primary_text"
+                        android:text="+90 min" />
+
                     <ImageView
                         android:id="@+id/im_camera4"
                         android:layout_height="fill_parent"
                         android:adjustViewBounds="true"
                         android:scaleType="fitCenter"
-                        android:src="@drawable/gas"
+                        android:src="@android:drawable/presence_video_away"
                         android:layout_width="fill_parent"
                         android:layout_gravity="center" />
                 </LinearLayout>

@@ -2,86 +2,84 @@
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:clickable="true"
+    android:onClick="show"
+    android:layout_margin="10dp"
     android:id="@+id/cv_weather"
+    card_view:cardCornerRadius="8dp"
+    card_view:cardElevation="30dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="16dp"
     android:elevation="100dp"
-    card_view:cardBackgroundColor="#607D8B">
+    card_view:cardBackgroundColor="@color/colorPrimaryLight">
 
-    <android.support.v7.widget.GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@android:color/white"
-        app:columnCount="2">
-
-        <android.support.v7.widget.Space
-            app:layout_columnSpan="2"
-            app:layout_columnWeight="1"
-            app:layout_rowWeight="1" />
-
-        <TextView
-            android:id="@+id/detail_date_textview"
-            android:layout_marginBottom="@dimen/abc_list_item_padding_horizontal_material"
-            android:layout_marginTop="@dimen/abc_list_item_padding_horizontal_material"
-            android:fontFamily="sans-serif"
-            android:gravity="center_horizontal"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title"
-            android:textColor="@color/secondary_text"
-            app:layout_columnSpan="2"
-            app:layout_columnWeight="1"
-            app:layout_gravity="fill_horizontal"
-            android:text="Today, April 03" />
-
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryLight"
+        android:orientation="horizontal"
+        android:padding="5dip" >
+        <!-- ListRow Left side Thumbnail image -->
+        <LinearLayout
+            android:id="@+id/thumbnail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginRight="5dip"
+            android:padding="3dip" >
+            <ImageView
+                android:id="@+id/list_image"
+                android:contentDescription="@string/app_name"
+                android:layout_width="60dip"
+                android:layout_height="60dip"
+                android:src="@drawable/art_clouds" />
+        </LinearLayout>
+        <!-- Rightend Arrow -->
         <ImageView
-            android:id="@+id/detail_icon"
-            android:layout_width="20dp"
-            android:adjustViewBounds="true"
-            android:maxHeight="@dimen/today_icon"
-            android:maxWidth="@dimen/today_icon"
-            app:layout_columnWeight="1"
-            app:layout_gravity="fill_horizontal"
-            android:src="@drawable/art_clouds" />
-
+            android:id="@+id/imageView1"
+            android:contentDescription="@string/app_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@android:drawable/ic_menu_info_details" />
+        <!-- City-->
         <TextView
-            android:id="@+id/detail_high_textview"
-            android:layout_width="0dp"
-            android:fontFamily="sans-serif-light"
-            android:gravity="center_horizontal"
+            android:id="@+id/tvCity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="75dip"
+            android:layout_centerVertical="true"
+            android:paddingBottom ="10dip"
+            android:text="Home"
+            android:textColor="@color/secondary_text"
+            android:textSize="25dip"
+            android:typeface="sans" />
+        <!-- Weather Information-->
+        <TextView
+            android:id="@+id/tvCondition"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvCity"
+            android:layout_alignLeft="@+id/tvCity"
+            android:paddingTop="5dip"
+            android:layout_centerHorizontal="true"
+            android:text="Rainy"
+            android:textColor="@color/secondary_text"
+            android:textSize="15dip" />
+        <!-- Degrees-->
+        <TextView
+            android:id="@+id/tvDegrees"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="200dip"
+            android:layout_centerVertical="true"
+            android:paddingBottom ="10dip"
+            android:text="19 ºC"
             android:textColor="@color/primary_text"
-            android:textSize="72sp"
-            app:layout_columnWeight="1"
-            app:layout_gravity="fill_horizontal"
-            android:text="19" />
-
-        <TextView
-            android:id="@+id/detail_forecast_textview"
-            android:layout_width="0dp"
-            android:fontFamily="sans-serif"
-            android:gravity="center_horizontal"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title"
-            android:textColor="@color/secondary_text"
-            app:layout_columnWeight="1"
-            android:text="Rainy" />
-
-        <TextView
-            android:id="@+id/detail_low_textview"
-            android:layout_width="0dp"
-            android:layout_marginBottom="@dimen/abc_list_item_padding_horizontal_material"
-            android:fontFamily="sans-serif-light"
-            android:gravity="center_horizontal"
-            android:textColor="@color/secondary_text"
-            android:textSize="36sp"
-            app:layout_columnWeight="1"
-            android:text="10" />
-
-        <android.support.v7.widget.Space
-            app:layout_columnSpan="2"
-            app:layout_columnWeight="1"
-            app:layout_rowWeight="1" />
-
-    </android.support.v7.widget.GridLayout>
+            android:textSize="35dip"
+            android:typeface="sans" />
+    </RelativeLayout>
 
 </android.support.v7.widget.CardView>

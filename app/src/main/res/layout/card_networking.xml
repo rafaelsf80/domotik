@@ -11,10 +11,11 @@
     card_view:cardElevation="30dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    >
+    card_view:cardBackgroundColor="@color/colorPrimaryLight">
 
 
-    <LinearLayout
+
+<LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal" >
@@ -34,7 +35,7 @@
             android:layout_marginTop="20dp"
             android:text="Device name"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="#333333" />
+            android:textColor="@color/primary_text" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -57,7 +58,7 @@
                 android:padding="10dp"
                 android:text="IP Address"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="#333333" />
+                android:textColor="@color/secondary_text" />
         </LinearLayout>
     </LinearLayout>
 

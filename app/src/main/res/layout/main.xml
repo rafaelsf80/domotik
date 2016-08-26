@@ -3,13 +3,17 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
+
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+       >
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -25,5 +29,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context="es.rafaelsf80.domotik.app.MainFragment"
-        tools:layout="@android:layout/list_content" />
+        tools:layout="@android:layout/list_content"
+        android:background="@color/colorPrimary"/>
 </LinearLayout>

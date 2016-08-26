@@ -93,8 +93,8 @@ public class MainFragment extends Fragment {
         imSalir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d(TAG, "salir clicked");
-                Intent intent = new Intent(getActivity(), SalirActivity.class);
+                Log.d(TAG, "detail_weather clicked");
+                Intent intent = new Intent(getActivity(), WeatherDetailsActivity.class);
                 startActivity(intent);
 
             }

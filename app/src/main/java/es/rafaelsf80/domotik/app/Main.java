@@ -18,6 +18,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.transition.Explode;
 import android.transition.Transition;
 import android.util.Log;
@@ -25,6 +26,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.widget.TextView;
 
 import es.rafaelsf80.domotik.R;
 import es.rafaelsf80.domotik.app.sync.DomotikSyncAdapter;
@@ -77,6 +79,10 @@ public class Main extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        TextView tvToolbarTitle = (TextView) findViewById(R.id.tv_toolbar_title);
+        String coloredText = "<font color='#B3E5FC'>domo</font><font color='#ffffff '>Click</font>";
+        tvToolbarTitle.setText(Html.fromHtml(coloredText));
 
         //TODO: CREATE LAYOUT FOR TABLETS
 //        if (findViewById(R.id.weather_detail_container) != null) {

@@ -48,7 +48,7 @@
                 android:layout_height="50dp"
                 android:layout_gravity="right"
                 android:clickable="true"
-                android:src="@mipmap/ic_menu_moreoverflow_normal_holo_light"/>
+                android:src="@drawable/ic_more_vert_24dp"/>
 
             <TextView
                 android:id="@+id/tv_ip_address"

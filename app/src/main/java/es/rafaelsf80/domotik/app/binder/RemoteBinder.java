@@ -14,9 +14,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ToggleButton;
 
 import es.rafaelsf80.domotik.R;
 import es.rafaelsf80.domotik.app.multipleviewtypesabstractadapter.DataBindAdapter;
@@ -83,44 +83,63 @@ public class RemoteBinder extends DataBinder<RemoteBinder.ViewHolder> {
         switch (pos) {
             case NATURAL_GAS:
                 icon = BitmapFactory.decodeResource(resources,
-                        R.drawable.heat);
+                        R.drawable.ic_light_clouds);
                 rowView.tvProvider.setText(resources.getString(R.string.gas_provider));
                 rowView.tvType.setText(resources.getString(R.string.gas_type));
-                rowView.tbOnOff.setText(resources.getString(R.string.on));
+                rowView.swOnOff.setText(resources.getString(R.string.off));
                 rowView.imIcon.setImageBitmap(icon);
                 break;
             case ELECTRICITY:
                 icon = BitmapFactory.decodeResource(resources,
-                        R.drawable.estar);
+                        R.drawable.ic_light_on_icon);
                 rowView.tvProvider.setText(resources.getString(R.string.electricity_provider));
                 rowView.tvType.setText(resources.getString(R.string.electrivity_type));
-                rowView.tbOnOff.setText(resources.getString(R.string.on));
+                rowView.swOnOff.setText(resources.getString(R.string.off));
                 rowView.imIcon.setImageBitmap(icon);
                 break;
             case AIR_CONDITIONING:
                 icon = BitmapFactory.decodeResource(resources,
-                        R.drawable.heat);
+                        R.drawable.ic_light_clouds);
                 rowView.tvProvider.setText(resources.getString(R.string.air_conditioning_provider));
                 rowView.tvType.setText(resources.getString(R.string.air_conditioning_type));
-                rowView.tbOnOff.setText(resources.getString(R.string.on));
+                rowView.swOnOff.setText(resources.getString(R.string.off));
                 rowView.imIcon.setImageBitmap(icon);
                 break;
             case WATER:
                 icon = BitmapFactory.decodeResource(resources,
-                        R.drawable.water);
+                        R.drawable.ic_water_tap);
                 rowView.tvProvider.setText(resources.getString(R.string.water_provider));
                 rowView.tvType.setText(resources.getString(R.string.water_type));
-                rowView.tbOnOff.setText(resources.getString(R.string.on));
+                rowView.swOnOff.setText(resources.getString(R.string.off));
                 rowView.imIcon.setImageBitmap(icon);
                 break;
         }
 
-        rowView.imMenu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showPopupMenu(rowView.imMenu);
-            }
-        });
+        if (rowView.swOnOff != null)
+            rowView.imMenu.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    showPopupMenu(rowView.imMenu);
+                }
+            });
+
+        if ( rowView.swOnOff != null)
+            rowView.swOnOff.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    Resources resources = rowView.cardView.getContext().getResources();
+                    String toast_string = (String) rowView.tvProvider.getText();
+                    if (rowView.swOnOff.isChecked()) {
+                        rowView.swOnOff.setText(resources.getString(R.string.on));
+                        Toast.makeText(view.getContext(), toast_string + " is on", Toast.LENGTH_LONG).show();
+                    } else {
+                        rowView.swOnOff.setText(resources.getString(R.string.off));
+                        Toast.makeText(view.getContext(), toast_string + "is Off", Toast.LENGTH_LONG).show();
+                    }
+                }
+
+            });
             //rowView.btPrice.setText(context.getResources().getString(R.string.card_price_label) + itemPrice);
 
             // download thumbnail
@@ -178,7 +197,7 @@ public class RemoteBinder extends DataBinder<RemoteBinder.ViewHolder> {
         CardView cardView;
         ImageView imIcon;
         TextView tvProvider;
-        ToggleButton tbOnOff;
+        Switch swOnOff;
         TextView tvType;
         ImageView imMenu;
 
@@ -188,7 +207,7 @@ public class RemoteBinder extends DataBinder<RemoteBinder.ViewHolder> {
             cardView = (CardView) rowView.findViewById(R.id.cv_remote);
             imIcon = (ImageView) rowView.findViewById(R.id.im_device_icon);
             tvProvider = (TextView) rowView.findViewById(R.id.tv_provider);
-            tbOnOff = (ToggleButton) rowView.findViewById(R.id.tb_on_off);
+            swOnOff = (Switch) rowView.findViewById(R.id.sw_on_off);
             tvType = (TextView) rowView.findViewById(R.id.tv_type);
             imMenu = (ImageView) rowView.findViewById(R.id.im_card_remote_menu);
         }

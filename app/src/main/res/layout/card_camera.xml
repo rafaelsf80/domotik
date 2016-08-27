@@ -35,7 +35,7 @@
                 android:layout_height="30dp"
                 android:layout_marginLeft="110dp"
                 android:clickable="true"
-                android:src="@mipmap/ic_menu_moreoverflow_normal_holo_light"/>
+                android:src="@drawable/ic_more_vert_24dp"/>
         </LinearLayout>
 
         <TextView

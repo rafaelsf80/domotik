@@ -150,13 +150,6 @@ public class Main extends AppCompatActivity {
             }
         });
 
-
-
-
-
-
-
-
         // Get Data
         //Comtrend comtrend = new Comtrend(this, adapter);
         //comtrend.start();

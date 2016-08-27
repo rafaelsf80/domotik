@@ -7,7 +7,6 @@
          or something similar.
     -->
     <string name="app_name">Domotik</string>
-
     <string name="gas_provider">Iberdrola</string>
     <string name="electricity_provider">Endesa</string>
     <string name="air_conditioning_provider">Endesa</string>

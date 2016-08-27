@@ -52,7 +52,6 @@ public class CameraBinder extends DataBinder<CameraBinder.ViewHolder> {
             }
         });
 
-
         return new ViewHolder(view);
     }
 

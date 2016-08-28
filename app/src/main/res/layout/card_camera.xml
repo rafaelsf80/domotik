@@ -27,13 +27,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/primary_text"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                android:textColor="@color/secondary_text"
                 android:text="Camera 1 - Living room" />
             <ImageView
                 android:id="@+id/im_dots"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_marginLeft="110dp"
+                android:layout_marginLeft="80dp"
                 android:clickable="true"
                 android:src="@drawable/ic_more_vert_24dp"/>
         </LinearLayout>

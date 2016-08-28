@@ -2,8 +2,6 @@ package es.rafaelsf80.domotik.app.binder;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
@@ -77,41 +75,28 @@ public class RemoteBinder extends DataBinder<RemoteBinder.ViewHolder> {
         // get the item which has been pressed and store current item data into variables
 
         RemoteType pos = RemoteType.values()[position];
-        Bitmap icon;
         Resources resources = rowView.cardView.getContext().getResources();
 
         switch (pos) {
             case NATURAL_GAS:
-                icon = BitmapFactory.decodeResource(resources,
-                        R.drawable.ic_light_clouds);
-                rowView.tvProvider.setText(resources.getString(R.string.gas_provider));
-                rowView.tvType.setText(resources.getString(R.string.gas_type));
+                rowView.tvTypeProvider.setText(resources.getString(R.string.gas_provider) + " - " + resources.getString(R.string.gas_type));
                 rowView.swOnOff.setText(resources.getString(R.string.off));
-                rowView.imIcon.setImageBitmap(icon);
+                rowView.imIcon.setImageResource(R.drawable.ic_heating_black_24dp);
                 break;
             case ELECTRICITY:
-                icon = BitmapFactory.decodeResource(resources,
-                        R.drawable.ic_light_on_icon);
-                rowView.tvProvider.setText(resources.getString(R.string.electricity_provider));
-                rowView.tvType.setText(resources.getString(R.string.electrivity_type));
+                rowView.tvTypeProvider.setText(resources.getString(R.string.electricity_provider) + " - " + resources.getString(R.string.electrivity_type));
                 rowView.swOnOff.setText(resources.getString(R.string.off));
-                rowView.imIcon.setImageBitmap(icon);
+                rowView.imIcon.setImageResource(R.drawable.ic_light_on_icon);
                 break;
             case AIR_CONDITIONING:
-                icon = BitmapFactory.decodeResource(resources,
-                        R.drawable.ic_light_clouds);
-                rowView.tvProvider.setText(resources.getString(R.string.air_conditioning_provider));
-                rowView.tvType.setText(resources.getString(R.string.air_conditioning_type));
+                rowView.tvTypeProvider.setText(resources.getString(R.string.air_conditioning_provider) + " - " + resources.getString(R.string.air_conditioning_type));
                 rowView.swOnOff.setText(resources.getString(R.string.off));
-                rowView.imIcon.setImageBitmap(icon);
+                rowView.imIcon.setImageResource(R.drawable.ic_air_conditioning_black_24dp);
                 break;
             case WATER:
-                icon = BitmapFactory.decodeResource(resources,
-                        R.drawable.ic_water_tap);
-                rowView.tvProvider.setText(resources.getString(R.string.water_provider));
-                rowView.tvType.setText(resources.getString(R.string.water_type));
+                rowView.tvTypeProvider.setText(resources.getString(R.string.water_provider) + " - " + resources.getString(R.string.water_type));
                 rowView.swOnOff.setText(resources.getString(R.string.off));
-                rowView.imIcon.setImageBitmap(icon);
+                rowView.imIcon.setImageResource(R.drawable.ic_water_tap);
                 break;
         }
 
@@ -129,13 +114,13 @@ public class RemoteBinder extends DataBinder<RemoteBinder.ViewHolder> {
                 public void onClick(View view) {
 
                     Resources resources = rowView.cardView.getContext().getResources();
-                    String toast_string = (String) rowView.tvProvider.getText();
+                    String toast_string = (String) rowView.tvTypeProvider.getText();
                     if (rowView.swOnOff.isChecked()) {
                         rowView.swOnOff.setText(resources.getString(R.string.on));
-                        Toast.makeText(view.getContext(), toast_string + " is on", Toast.LENGTH_LONG).show();
+                        Toast.makeText(view.getContext(), toast_string + " is On", Toast.LENGTH_LONG).show();
                     } else {
                         rowView.swOnOff.setText(resources.getString(R.string.off));
-                        Toast.makeText(view.getContext(), toast_string + "is Off", Toast.LENGTH_LONG).show();
+                        Toast.makeText(view.getContext(), toast_string + " is Off", Toast.LENGTH_LONG).show();
                     }
                 }
 
@@ -196,9 +181,8 @@ public class RemoteBinder extends DataBinder<RemoteBinder.ViewHolder> {
 
         CardView cardView;
         ImageView imIcon;
-        TextView tvProvider;
+        TextView tvTypeProvider;
         Switch swOnOff;
-        TextView tvType;
         ImageView imMenu;
 
         public ViewHolder(View rowView) {
@@ -206,9 +190,8 @@ public class RemoteBinder extends DataBinder<RemoteBinder.ViewHolder> {
             // store UI elements in a variable to be dynamically changed
             cardView = (CardView) rowView.findViewById(R.id.cv_remote);
             imIcon = (ImageView) rowView.findViewById(R.id.im_device_icon);
-            tvProvider = (TextView) rowView.findViewById(R.id.tv_provider);
+            tvTypeProvider = (TextView) rowView.findViewById(R.id.tv_type_provider);
             swOnOff = (Switch) rowView.findViewById(R.id.sw_on_off);
-            tvType = (TextView) rowView.findViewById(R.id.tv_type);
             imMenu = (ImageView) rowView.findViewById(R.id.im_card_remote_menu);
         }
     }

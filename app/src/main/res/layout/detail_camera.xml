@@ -54,7 +54,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/primary_text"
-                        android:text="+30 min" />
+                        android:text="-30 min" />
 
                     <ImageView
                         android:id="@+id/im_camera2"
@@ -84,7 +84,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/primary_text"
-                        android:text="+60 min" />
+                        android:text="-60 min" />
 
                     <ImageView
                         android:id="@+id/im_camera3"
@@ -107,7 +107,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/primary_text"
-                        android:text="+90 min" />
+                        android:text="-90 min" />
 
                     <ImageView
                         android:id="@+id/im_camera4"

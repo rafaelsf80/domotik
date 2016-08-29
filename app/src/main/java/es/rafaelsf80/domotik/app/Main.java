@@ -28,6 +28,8 @@ import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
 
+import com.firebase.client.Firebase;
+
 import es.rafaelsf80.domotik.R;
 import es.rafaelsf80.domotik.app.sync.DomotikSyncAdapter;
 
@@ -42,20 +44,23 @@ public class Main extends AppCompatActivity {
     private boolean mTwoPane;
 
     private DrawerLayout mDrawerLayout;
-
-    public RecyclerView recyclerView;
-    //public ControlAdapter controlAdapter;
-
-    // Instead of Content Providers, we use Singleton classes for storage
-    //public static ArrayList<Item> items = new ArrayList<Item>();
-    //public static Config config = new Config();
-
     public ContentObserver mObserver;
-
+    public static Firebase myFirebaseRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Firebase.setAndroidContext(this);
+        myFirebaseRef = new Firebase("https://domoclick.firebaseio.com/");
+
+        // Init sync adapter: 1) weather updates; 2) router updates
+        DomotikSyncAdapter.initializeSyncAdapter(this);
+        Bundle bundle = new Bundle();
+        bundle.putBoolean(ContentResolver.SYNC_EXTRAS_EXPEDITED, true);
+        bundle.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, true);
+        ContentResolver.requestSync(DomotikSyncAdapter.getSyncAccount(this),
+                getString(R.string.content_authority), bundle);
 
 
         // enable window content transition
@@ -170,13 +175,6 @@ public class Main extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(Main.this));
         DomotikSyncAdapter.mAdapter = adapter;
 
-        // Init sync adapter: 1) weather updates; 2) router updates
-        DomotikSyncAdapter.initializeSyncAdapter(this);
-        Bundle bundle = new Bundle();
-        bundle.putBoolean(ContentResolver.SYNC_EXTRAS_EXPEDITED, true);
-        bundle.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, true);
-        ContentResolver.requestSync(DomotikSyncAdapter.getSyncAccount(this),
-                getString(R.string.content_authority), bundle);
 
 
         // Even if we use a stub (dummy) content provider, we declare an observer
@@ -184,6 +182,8 @@ public class Main extends AppCompatActivity {
         mObserver = new ContentObserver(new Handler(Looper.getMainLooper())) {
             public void onChange(boolean selfChange) {
                 Log.d(TAG, "ContentObserver onChange()");
+
+
 
 
                 adapter.notifyDataSetChanged();

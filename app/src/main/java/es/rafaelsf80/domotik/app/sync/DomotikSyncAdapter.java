@@ -48,6 +48,8 @@ import es.rafaelsf80.domotik.app.SampleEnumMapAdapter;
 import es.rafaelsf80.domotik.app.Utility;
 import es.rafaelsf80.domotik.app.weather.WeatherContract;
 
+import static es.rafaelsf80.domotik.app.Main.myFirebaseRef;
+
 public class DomotikSyncAdapter extends AbstractThreadedSyncAdapter {
     private final String TAG = getClass().getSimpleName();
     // Interval at which to sync with the weather, in seconds.
@@ -108,6 +110,14 @@ public class DomotikSyncAdapter extends AbstractThreadedSyncAdapter {
                     tmp.setFlags(splitted[2]);
                     tmp.setHwAddress(splitted[3]);
                     tmp.setPort(splitted[5]);
+
+                    myFirebaseRef.child("/user1/networking/machines")
+                            .push()
+                            .setValue(tmp);
+
+                    String postId = myFirebaseRef.getKey();
+                    Log.d(TAG, "postId: " + postId);
+
                     mAdapter.add(tmp);  // will call mAdapter.notifyDataSetChanged()
                     Log.d(TAG, "Machine added: " + tmp.getIpAddress() + " " + tmp.getFlags() + " " + tmp.getHwAddress() + " " + tmp.getPort());
                 }

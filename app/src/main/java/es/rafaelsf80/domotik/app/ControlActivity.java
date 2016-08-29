@@ -36,7 +36,7 @@
 //    @Override
 //    protected void onCreate(Bundle savedInstanceState) {
 //        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.control);
+//        setContentView(R.layout.main);
 //
 //        if (savedInstanceState == null) {
 //            // Create the detail fragment and add it to the activity

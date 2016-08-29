@@ -32,7 +32,7 @@ public class FragmentOutdoors extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Add this line in order for this control to handle menu events.
+        // Add this line in order for this main to handle menu events.
         setHasOptionsMenu(true);
     }
 
@@ -55,7 +55,7 @@ public class FragmentOutdoors extends Fragment {
                              Bundle savedInstanceState) {
 
 
-        View rootView = inflater.inflate(R.layout.control, container, false);
+        View rootView = inflater.inflate(R.layout.main, container, false);
 
         return rootView;
     }

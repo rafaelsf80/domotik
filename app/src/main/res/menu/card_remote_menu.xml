@@ -6,10 +6,10 @@
     <item
         android:id="@+id/action_add_favourite"
         android:orderInCategory="100"
-        android:title="ad favorite" />
+        android:title="Provider details" />
 
     <item
         android:id="@+id/action_play_next"
         android:orderInCategory="101"
-        android:title="play next" />
+        android:title="Send to last" />
 </menu>

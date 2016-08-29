@@ -70,7 +70,7 @@ public class Main extends AppCompatActivity {
         getWindow().setExitTransition(ts);
         //setContentView(R.layout.main);
 
-        setContentView(R.layout.control);
+        setContentView(R.layout.main);
 
 
         Toolbar toolBar = (Toolbar) findViewById(R.id.toolbar);
@@ -151,7 +151,7 @@ public class Main extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Snackbar.make(v, "Hello Snackbar!",
+                Snackbar.make(v, "Alarm locked!",
                         Snackbar.LENGTH_LONG).show();
             }
         });

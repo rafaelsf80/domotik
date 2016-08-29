@@ -117,9 +117,11 @@ public class RemoteBinder extends DataBinder<RemoteBinder.ViewHolder> {
                     String toast_string = (String) rowView.tvTypeProvider.getText();
                     if (rowView.swOnOff.isChecked()) {
                         rowView.swOnOff.setText(resources.getString(R.string.on));
+                        rowView.swOnOff.setTextColor(resources.getColor(R.color.colorAccent));
                         Toast.makeText(view.getContext(), toast_string + " is On", Toast.LENGTH_LONG).show();
                     } else {
                         rowView.swOnOff.setText(resources.getString(R.string.off));
+                        rowView.swOnOff.setTextColor(resources.getColor(R.color.secondary_text));
                         Toast.makeText(view.getContext(), toast_string + " is Off", Toast.LENGTH_LONG).show();
                     }
                 }

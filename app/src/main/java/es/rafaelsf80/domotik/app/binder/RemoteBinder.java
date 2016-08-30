@@ -100,7 +100,7 @@ public class RemoteBinder extends DataBinder<RemoteBinder.ViewHolder> {
                 break;
         }
 
-        if (rowView.swOnOff != null)
+        if (rowView.imMenu != null)
             rowView.imMenu.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

@@ -26,7 +26,7 @@
             android:parentActivityName=".app.Main" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="es.rafaelsf80.domotik.app.WeatherDetailsActivity" />
+                android:value=".app.Main" />
         </activity>
 
         <activity android:name=".app.CameraDetailsActivity"
@@ -34,7 +34,7 @@
             android:parentActivityName=".app.Main" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="es.rafaelsf80.domotik.app.CameraDetailsActivity" />
+                android:value=".app.Main" />
         </activity>
 
         <activity android:name=".app.NetworkingDetailsActivity"
@@ -42,7 +42,7 @@
             android:parentActivityName=".app.Main" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="es.rafaelsf80.domotik.app.NetworkingDetailsActivity" />
+                android:value=".app.Main" />
         </activity>
 
         <!-- SyncAdapter's dummy authentication service -->

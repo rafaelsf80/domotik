@@ -2,7 +2,9 @@ package es.rafaelsf80.domotik.app;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -31,24 +33,30 @@ public class NetworkingDetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detail_networking);
+        setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        // Set Collapsing Toolbar layout to the screen
+        CollapsingToolbarLayout collapsingToolbar =
+                (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
 
         if (savedInstanceState == null) {
-            // Create the detail fragment and add it to the activity
-            // using a fragment transaction.
 
             //Bundle fromListItem = new Bundle();
             Intent fromListItem = getIntent();
+            final String name = fromListItem.getStringExtra("name");
+            String mainImage = fromListItem.getStringExtra("flags");
+            final String brand = fromListItem.getStringExtra("hardDisk");
+            String size = fromListItem.getStringExtra("urlPhoto");
+            final String sizeGuide = fromListItem.getStringExtra("hwAddress");
+            final String videoPreview = fromListItem.getStringExtra("ipAddress");
+            final String itemPrice = fromListItem.getStringExtra("port");
+            final String inventoryCount = fromListItem.getStringExtra("processor");
+            final String itemLocation = fromListItem.getStringExtra("ram");
+            String stockForecast = fromListItem.getStringExtra("screen");
+            String type = fromListItem.getStringExtra("type");
 
-            final String itemName = fromListItem.getStringExtra("itemName");
-            String mainImage = fromListItem.getStringExtra("mainImage");
-            final String brand = fromListItem.getStringExtra("brand");
-            String size = fromListItem.getStringExtra("size");
-            final String sizeGuide = fromListItem.getStringExtra("sizeGuide");
-            final String videoPreview = fromListItem.getStringExtra("videoPreview");
-            final String itemPrice = fromListItem.getStringExtra("itemPrice");
-            final String inventoryCount = fromListItem.getStringExtra("inventoryCount");
-            final String itemLocation = fromListItem.getStringExtra("itemLocation");
-            String stockForecast = fromListItem.getStringExtra("stockForecast");
+            collapsingToolbar.setTitle( name );
 
             // set UI information to the data which has been parsed through
             //setTitle(itemName + getResources().getString(R.string.details_title_by_) + brand);

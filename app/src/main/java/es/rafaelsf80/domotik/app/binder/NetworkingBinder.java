@@ -1,14 +1,19 @@
 package es.rafaelsf80.domotik.app.binder;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -60,11 +65,19 @@ public class NetworkingBinder extends DataBinder<NetworkingBinder.ViewHolder> {
     }
 
     @Override
-    public void bindViewHolder(ViewHolder rowView, int position) {
+    public void bindViewHolder(final ViewHolder rowView, int position) {
         //holder.mImageView.setImageResource(R.drawable.bird);
         //Picasso.with(holder.mImageView.getContext())
         //        .load(R.drawable.bird)
         //        .into(holder.mImageView);
+
+        if (rowView.imMenu != null)
+            rowView.imMenu.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    showPopupMenu(rowView.imMenu);
+                }
+            });
 
         final int item_number = position;
 
@@ -115,10 +128,46 @@ public class NetworkingBinder extends DataBinder<NetworkingBinder.ViewHolder> {
                     // move to the details screen
                     //v.getContext().startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(acti).toBundle());
                     v.getContext().startActivity(intent);
-
                 }
             });
+        }
+    }
 
+    /**
+     * Showing popup menu when tapping on 3 dots
+     */
+    private void showPopupMenu(View view) {
+        // inflate menu
+        PopupMenu popup = new PopupMenu(view.getContext(), view);
+        MenuInflater inflater = popup.getMenuInflater();
+        inflater.inflate(R.menu.card_networking_menu, popup.getMenu());
+        popup.setOnMenuItemClickListener(new NetworkingBinder.MyMenuItemClickListener(view.getContext()));
+        popup.show();
+    }
+
+    /**
+     * Click listener for popup menu items
+     */
+    class MyMenuItemClickListener implements PopupMenu.OnMenuItemClickListener {
+
+        Context mContext;
+
+        public MyMenuItemClickListener(Context ctx) {
+            mContext = ctx;
+        }
+
+        @Override
+        public boolean onMenuItemClick(MenuItem menuItem) {
+            switch (menuItem.getItemId()) {
+                case R.id.action_add_favourite:
+                    Toast.makeText(mContext, "Add to favourite", Toast.LENGTH_SHORT).show();
+                    return true;
+                case R.id.action_play_next:
+                    Toast.makeText(mContext, "Play next", Toast.LENGTH_SHORT).show();
+                    return true;
+                default:
+            }
+            return false;
         }
     }
 
@@ -130,15 +179,13 @@ public class NetworkingBinder extends DataBinder<NetworkingBinder.ViewHolder> {
         notifyBinderDataSetChanged();
     }
 
-
-
-
     static class ViewHolder extends RecyclerView.ViewHolder {
 
         public CardView cardView;
         public TextView tvDeviceName;
         public TextView tvIpAddress;
         public ImageView imDevice;
+        public ImageView imMenu;
 
 
         public ViewHolder(View rowView) {
@@ -148,6 +195,7 @@ public class NetworkingBinder extends DataBinder<NetworkingBinder.ViewHolder> {
             tvDeviceName = (TextView) rowView.findViewById(R.id.tv_device_name);
             tvIpAddress = (TextView) rowView.findViewById(R.id.tv_ip_address);
             imDevice = (ImageView) rowView.findViewById(R.id.im_device);
+            imMenu = (ImageView) rowView.findViewById(R.id.im_card_networking_menu);
         }
     }
 }

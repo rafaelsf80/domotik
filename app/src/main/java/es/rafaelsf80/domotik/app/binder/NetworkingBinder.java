@@ -19,6 +19,7 @@ import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -65,11 +66,11 @@ public class NetworkingBinder extends DataBinder<NetworkingBinder.ViewHolder> {
         // Look for all child events. We will then map them to our own internal ArrayList, which backs ListView
         mListener = fRef.addChildEventListener(new ChildEventListener() {
             @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String previousChildName) {
+            public void onChildAdded(DataSnapshot snapshot, String previousChildName) {
 
-                Machine machine = dataSnapshot.getValue(Machine.class);
+                Machine machine = snapshot.getValue(Machine.class);
                 mMachines.add(machine);
-
+                Log.d(TAG, "onChildAdded:" + machine.getIpAddress());
                 notifyBinderDataSetChanged();
             }
 
@@ -251,13 +252,25 @@ public class NetworkingBinder extends DataBinder<NetworkingBinder.ViewHolder> {
     @Override
     public int getItemCount() { return mMachines.size(); }
 
-    public void add(Machine machine) {
-        //mMachines.add(machine);
+    public void add(final Machine machine) {
 
-        // check if Hw address exists
-        if (Main.myFirebaseRef.child("routers").child(machine.getHwAddress()) == null)
-            Main.myFirebaseRef.child("routers").setValue(machine);
-
+        Log.d(TAG, "Checking firebase");
+        final Firebase routersRef = Main.myFirebaseRef.child("machines");
+        routersRef.child(machine.getHwAddress()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                if (snapshot.getValue() != null) {
+                    // check if Hw address exists
+                } else {
+                    // if Hw address does not exist, add machine
+                    Log.d(TAG, "new machine added: " + machine.getHwAddress());
+                    routersRef.child(machine.getHwAddress()).setValue(machine);
+                }
+            }
+            @Override
+            public void onCancelled(FirebaseError arg0) {
+            }
+        });
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {

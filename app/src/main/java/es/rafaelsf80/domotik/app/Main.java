@@ -183,9 +183,6 @@ public class Main extends AppCompatActivity {
             public void onChange(boolean selfChange) {
                 Log.d(TAG, "ContentObserver onChange()");
 
-
-
-
                 adapter.notifyDataSetChanged();
 
                 //actionBar.setTitle(config.appName);

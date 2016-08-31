@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import es.rafaelsf80.domotik.R;
 
@@ -33,6 +34,7 @@ public class NetworkingDetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detail_networking);
+
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -40,29 +42,31 @@ public class NetworkingDetailsActivity extends AppCompatActivity {
         CollapsingToolbarLayout collapsingToolbar =
                 (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
 
-        if (savedInstanceState == null) {
+        TextView tvIpHwAddress = (TextView) findViewById(R.id.tv_ip_hw_address);
+        TextView tvDeviceFeatures = (TextView) findViewById(R.id.tv_device_features);
 
-            //Bundle fromListItem = new Bundle();
+        if (savedInstanceState == null) {
+            // Get info from bundle
             Intent fromListItem = getIntent();
             final String name = fromListItem.getStringExtra("name");
-            String mainImage = fromListItem.getStringExtra("flags");
-            final String brand = fromListItem.getStringExtra("hardDisk");
-            String size = fromListItem.getStringExtra("urlPhoto");
-            final String sizeGuide = fromListItem.getStringExtra("hwAddress");
-            final String videoPreview = fromListItem.getStringExtra("ipAddress");
-            final String itemPrice = fromListItem.getStringExtra("port");
-            final String inventoryCount = fromListItem.getStringExtra("processor");
-            final String itemLocation = fromListItem.getStringExtra("ram");
-            String stockForecast = fromListItem.getStringExtra("screen");
+            String flags = fromListItem.getStringExtra("flags");
+            final String hardDisk = fromListItem.getStringExtra("hardDisk");
+            String urlPhoto = fromListItem.getStringExtra("urlPhoto");
+            final String hwAddress = fromListItem.getStringExtra("hwAddress");
+            final String ipAddress = fromListItem.getStringExtra("ipAddress");
+            final String port = fromListItem.getStringExtra("port");
+            final String processor = fromListItem.getStringExtra("processor");
+            final String ram = fromListItem.getStringExtra("ram");
+            String screen = fromListItem.getStringExtra("screen");
             String type = fromListItem.getStringExtra("type");
 
             collapsingToolbar.setTitle( name );
 
+            tvIpHwAddress.setText(ipAddress + " " + hwAddress);
+            tvDeviceFeatures.setText(flags + " " + port);
+
             // set UI information to the data which has been parsed through
             //setTitle(itemName + getResources().getString(R.string.details_title_by_) + brand);
-
-            //tvBrandView.setText(itemName);
-
         }
 
     }

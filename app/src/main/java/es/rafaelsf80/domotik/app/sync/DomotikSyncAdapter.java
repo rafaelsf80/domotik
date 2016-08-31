@@ -103,21 +103,15 @@ public class DomotikSyncAdapter extends AbstractThreadedSyncAdapter {
                 String[] splitted = line.split(" +");
                 // First line of ARP answer must not be stored
                 if (!splitted[0].contains("IP")) {
-                    Machine tmp = new Machine();
-                    tmp.setIpAddress(splitted[0]);
-                    tmp.setFlags(splitted[2]);
-                    tmp.setHwAddress(splitted[3]);
-                    tmp.setPort(splitted[5]);
+                    Machine machine = new Machine();
+                    machine.setIpAddress(splitted[0]);
+                    machine.setFlags(splitted[2]);
+                    machine.setHwAddress(splitted[3]);
+                    machine.setPort(splitted[5]);
+                    machine.setType("samsung_s5");
 
-                    //myFirebaseRef.child("/user1/networking/machines")
-                    //        .push()
-                    //        .setValue(tmp);
-
-                    //String postId = myFirebaseRef.getKey();
-                    //Log.d(TAG, "postId: " + postId);
-
-                    mAdapter.add(tmp);  // will call mAdapter.notifyDataSetChanged()
-                    Log.d(TAG, "Machine added: " + tmp.getIpAddress() + " " + tmp.getFlags() + " " + tmp.getHwAddress() + " " + tmp.getPort());
+                    mAdapter.add(machine);  // will call mAdapter.notifyDataSetChanged()
+                    Log.d(TAG, "Machine added: " + machine.getIpAddress() + " " + machine.getFlags() + " " + machine.getHwAddress() + " " + machine.getPort());
                 }
             }
         } catch (Exception e) {
@@ -222,7 +216,12 @@ public class DomotikSyncAdapter extends AbstractThreadedSyncAdapter {
                 }
             }
         }
+        //myFirebaseRef.child("/user1/networking/machines")
+        //        .push()
+        //        .setValue(tmp);
 
+        //String postId = myFirebaseRef.getKey();
+        //Log.d(TAG, "postId: " + postId);
 
         getContext().getContentResolver().notifyChange(Uri.parse("content://rafa"), null, false);
 

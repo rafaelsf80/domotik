@@ -44,7 +44,7 @@
                 android:id="@+id/image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:background="@drawable/a"
+                tools:background="@drawable/common_google_signin_btn_icon_dark_normal"
                 android:fitsSystemWindows="true"
                 android:scaleType="centerCrop"
                 app:layout_collapseMode="parallax" />
@@ -76,27 +76,27 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="?attr/colorAccent"
-                android:text="Description"
+                android:text="IP/HWAddress"
                 android:textSize="@dimen/article_titles"
                 android:layout_marginBottom="@dimen/md_keylines" />
 
             <TextView
-                android:id="@+id/place_detail"
+                android:id="@+id/tv_ip_hw_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="@string/detail_desc" />
+                tools:text="IP address do not contain xxx" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="?attr/colorAccent"
-                android:text="Location"
+                android:text="Features"
                 android:textSize="@dimen/article_titles"
                 android:layout_marginBottom="@dimen/md_keylines"
                 android:layout_marginTop="@dimen/md_keylines" />
 
             <TextView
-                android:id="@+id/place_location"
+                android:id="@+id/tv_device_features"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="@string/detail_location" />

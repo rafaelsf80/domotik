@@ -15,10 +15,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.client.ChildEventListener;
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+
 import java.util.ArrayList;
 
 import es.rafaelsf80.domotik.R;
 import es.rafaelsf80.domotik.app.Machine;
+import es.rafaelsf80.domotik.app.Main;
 import es.rafaelsf80.domotik.app.NetworkingDetailsActivity;
 import es.rafaelsf80.domotik.app.multipleviewtypesabstractadapter.DataBindAdapter;
 import es.rafaelsf80.domotik.app.multipleviewtypesabstractadapter.DataBinder;
@@ -44,10 +50,90 @@ import es.rafaelsf80.domotik.app.multipleviewtypesabstractadapter.DataBinder;
 public class NetworkingBinder extends DataBinder<NetworkingBinder.ViewHolder> {
 
     private final String TAG = getClass().getSimpleName();
-    private ArrayList<Machine> machines = new ArrayList<>();
+    private ArrayList<Machine> mMachines = new ArrayList<>();
+    private ChildEventListener mListener;
+
+
 
     public NetworkingBinder(DataBindAdapter dataBindAdapter) {
+
         super(dataBindAdapter);
+
+        Firebase fRef = new Firebase("https://domoclick.firebaseio.com/machines");
+
+
+        // Look for all child events. We will then map them to our own internal ArrayList, which backs ListView
+        mListener = fRef.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String previousChildName) {
+
+                Machine machine = dataSnapshot.getValue(Machine.class);
+                mMachines.add(machine);
+
+                notifyBinderDataSetChanged();
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                // One of the mModels changed. Replace it in our list and name mapping
+                String key = dataSnapshot.getKey();
+//                T newModel = dataSnapshot.getValue(FirebaseListAdapter.this.mModelClass);
+//                int index = mKeys.indexOf(key);
+//
+//                mModels.set(index, newModel);
+
+                notifyBinderDataSetChanged();
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+                // A model was removed from the list. Remove it from our list and the name mapping
+                String key = dataSnapshot.getKey();
+//                int index = mKeys.indexOf(key);
+//
+//                mKeys.remove(index);
+//                mModels.remove(index);
+
+                notifyBinderDataSetChanged();
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String previousChildName) {
+
+                // A model changed position in the list. Update our list accordingly
+                String key = dataSnapshot.getKey();
+//                T newModel = dataSnapshot.getValue(FirebaseListAdapter.this.mModelClass);
+//                int index = mKeys.indexOf(key);
+//                mModels.remove(index);
+//                mKeys.remove(index);
+//                if (previousChildName == null) {
+//                    mModels.add(0, newModel);
+//                    mKeys.add(0, key);
+//                } else {
+//                    int previousIndex = mKeys.indexOf(previousChildName);
+//                    int nextIndex = previousIndex + 1;
+//                    if (nextIndex == mModels.size()) {
+//                        mModels.add(newModel);
+//                        mKeys.add(key);
+//                    } else {
+//                        mModels.add(nextIndex, newModel);
+//                        mKeys.add(nextIndex, key);
+//                    }
+//                }
+                notifyBinderDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+                Log.e(TAG, "Listen was cancelled, no more updates will occur");
+            }
+
+        });
+
+
+
+
     }
 
     @Override
@@ -82,8 +168,8 @@ public class NetworkingBinder extends DataBinder<NetworkingBinder.ViewHolder> {
         final int item_number = position;
 
         // get the item
-        if ((machines != null) && (machines.size()>0)) {
-            Machine i = machines.get(position);
+        if ((mMachines != null) && (mMachines.size()>0)) {
+            Machine i = mMachines.get(position);
 
             // set list menu content to variables
             rowView.tvDeviceName.setText(i.getHwAddress());
@@ -91,14 +177,10 @@ public class NetworkingBinder extends DataBinder<NetworkingBinder.ViewHolder> {
 
             final String name = i.getName();
             final String flags = i.getFlags();
-            final String hardDisk = i.getHardDisk();
-            final String urlPhoto = i.getUrlPhoto();
+
             final String hwAddress = i.getHwAddress();
             final String ipAddress = i.getIpAddress();
             final String port = i.getPort();
-            final String processor = i.getProcessor();
-            final String ram = i.getRam();
-            final String screen = i.getScreen();
             final String type = i.getType();
 
             // download thumbnail
@@ -115,14 +197,9 @@ public class NetworkingBinder extends DataBinder<NetworkingBinder.ViewHolder> {
                     // when a list item has been pressed move to the item details screen,  passing the following data
                     intent.putExtra("name", name);
                     intent.putExtra("flags", flags);
-                    intent.putExtra("hardDisk", hardDisk);
-                    intent.putExtra("urlPhoto", urlPhoto);
                     intent.putExtra("hwAddress", hwAddress);
                     intent.putExtra("ipAddress", ipAddress);
                     intent.putExtra("port", port);
-                    intent.putExtra("processor", processor);
-                    intent.putExtra("ram", ram);
-                    intent.putExtra("screen", screen);
                     intent.putExtra("type", type);
 
                     // move to the details screen
@@ -172,11 +249,15 @@ public class NetworkingBinder extends DataBinder<NetworkingBinder.ViewHolder> {
     }
 
     @Override
-    public int getItemCount() { return machines.size(); }
+    public int getItemCount() { return mMachines.size(); }
 
     public void add(Machine machine) {
-        machines.add(machine);
-        notifyBinderDataSetChanged();
+        //mMachines.add(machine);
+
+        // check if Hw address exists
+        if (Main.myFirebaseRef.child("routers").child(machine.getHwAddress()) == null)
+            Main.myFirebaseRef.child("routers").setValue(machine);
+
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {

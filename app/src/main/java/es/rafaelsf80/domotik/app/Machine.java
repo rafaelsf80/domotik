@@ -23,21 +23,8 @@ public class Machine {
     String flags;
     String hwAddress;
     String port;
-    String urlPhoto;
-    String processor;
-    String screen;
     String name;
     String type;
-    String ram;
-    String hardDisk;
-
-    public String getProcessor() {
-        return processor;
-    }
-
-    public String getScreen() {
-        return screen;
-    }
 
     public String getIpAddress() {
         return ipAddress;
@@ -55,23 +42,9 @@ public class Machine {
         return port;
     }
 
-    public String getUrlPhoto() { return urlPhoto; }
-
     public String getName() { return name; }
 
-    public String getRam() { return ram; }
-
     public String getType() { return type; }
-
-    public String getHardDisk() { return hardDisk; }
-
-    public void setProcessor(String processor) {
-        this.processor = processor;
-    }
-
-    public void setScreen(String screen) {
-        this.screen = screen;
-    }
 
     public void setIpAddress(String ipAddress) {
         this.ipAddress = ipAddress;
@@ -89,23 +62,11 @@ public class Machine {
         this.port = port;
     }
 
-    public void setUrlPhoto(String urlPhoto) {
-        this.urlPhoto = urlPhoto;
-    }
-
     public void setName(String name) {
         this.name = name;
     }
 
     public void setType(String type) {
         this.type = type;
-    }
-
-    public void setRam(String ram) {
-        this.ram = ram;
-    }
-
-    public void setHardDisk(String hardDisk) {
-        this.hardDisk = hardDisk;
     }
 }

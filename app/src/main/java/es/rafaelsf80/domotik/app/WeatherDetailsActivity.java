@@ -32,8 +32,9 @@ public class WeatherDetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detail_weather);
-        setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
+        setSupportActionBar((Toolbar) findViewById(R.id.tb_weather));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        setTitle("Weather details");
 
         if (savedInstanceState == null) {
             // Create the detail fragment and add it to the activity

@@ -71,13 +71,13 @@ public class SampleEnumMapAdapter extends EnumMapBindAdapter<SampleEnumMapAdapte
 
         // MANUAL: position IS MANUAL FOR THE TIME BEING
         if (position == 0) return SampleViewType.MACHINE;
-        if (position == 1) return SampleViewType.WEATHER;
+        if (position == 1) return SampleViewType.REMOTE;
         if (position == 2) return SampleViewType.REMOTE;
         if (position == 3) return SampleViewType.CAMERA;
         if (position == 4) return SampleViewType.MACHINE;
         if (position == 5) return SampleViewType.REMOTE;
         if (position == 6) return SampleViewType.REMOTE;
-        if (position == 7) return SampleViewType.REMOTE;
+        if (position == 7) return SampleViewType.WEATHER;
         return SampleViewType.MACHINE;
     }
 

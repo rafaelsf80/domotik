@@ -79,7 +79,7 @@ public class WeatherBinder extends DataBinder<WeatherBinder.ViewHolder> {
 
         public ViewHolder(View rowView) {
             super(rowView);
-            // store UI elements in a variable to be dynamically changed
+            // store UI elements
             cardView = (CardView) rowView.findViewById(R.id.cv_weather);
         }
     }

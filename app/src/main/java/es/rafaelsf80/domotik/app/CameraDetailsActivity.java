@@ -32,8 +32,11 @@ public class CameraDetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detail_camera);
-        setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
+
+        setSupportActionBar((Toolbar) findViewById(R.id.tb_camera));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        setTitle("Camera details");
+
 
         if (savedInstanceState == null) {
             // Create the detail fragment and add it to the activity

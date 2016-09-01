@@ -111,7 +111,7 @@ public class DomotikSyncAdapter extends AbstractThreadedSyncAdapter {
                     machine.setType("samsung_s5");
 
                     mAdapter.add(machine);  // will call mAdapter.notifyDataSetChanged()
-                    Log.d(TAG, "Machine added: " + machine.getIpAddress() + " " + machine.getFlags() + " " + machine.getHwAddress() + " " + machine.getPort());
+                    Log.d(TAG, "Seen in ARP response: " + machine.getIpAddress() + " " + machine.getFlags() + " " + machine.getHwAddress() + " " + machine.getPort());
                 }
             }
         } catch (Exception e) {

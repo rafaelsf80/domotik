@@ -7,7 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import es.rafaelsf80.domotik.R;
 
@@ -35,40 +38,54 @@ public class NetworkingDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detail_networking);
 
-        setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
+        setSupportActionBar((Toolbar) findViewById(R.id.tb_networking));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        setTitle("Networking Details");
 
         // Set Collapsing Toolbar layout to the screen
         CollapsingToolbarLayout collapsingToolbar =
                 (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
 
+        ImageView imDevicePhoto = (ImageView) findViewById(R.id.im_details_networking_device_photo);
         TextView tvIpHwAddress = (TextView) findViewById(R.id.tv_ip_hw_address);
-        TextView tvDeviceFeatures = (TextView) findViewById(R.id.tv_device_features);
+        TextView tvDeviceFeatures = (TextView) findViewById(R.id.tv_device_details);
 
         if (savedInstanceState == null) {
             // Get info from bundle
             Intent fromListItem = getIntent();
             final String name = fromListItem.getStringExtra("name");
             String flags = fromListItem.getStringExtra("flags");
-            final String hardDisk = fromListItem.getStringExtra("hardDisk");
-            String urlPhoto = fromListItem.getStringExtra("urlPhoto");
             final String hwAddress = fromListItem.getStringExtra("hwAddress");
             final String ipAddress = fromListItem.getStringExtra("ipAddress");
             final String port = fromListItem.getStringExtra("port");
-            final String processor = fromListItem.getStringExtra("processor");
-            final String ram = fromListItem.getStringExtra("ram");
-            String screen = fromListItem.getStringExtra("screen");
-            String type = fromListItem.getStringExtra("type");
 
-            collapsingToolbar.setTitle( name );
+            // TODO: PROVISIONAL DATABASE, CHECK WHERE TO PUT THIS EFFICIENTLY
+            // Get device details
+            Database deviceDetails = new Database(hwAddress);
+            String model = deviceDetails.getModel();
+            final String processor = deviceDetails.getProcessor();
+            final String ram = deviceDetails.getRam();
+            String screen = deviceDetails.getScreen();
+            String type = deviceDetails.getType();
+            final String hardDisk = deviceDetails.getHardDisk();
+            String urlPhoto = deviceDetails.getUrlPhoto();
 
+            collapsingToolbar.setTitle(name);
             tvIpHwAddress.setText(ipAddress + " " + hwAddress);
             tvDeviceFeatures.setText(flags + " " + port);
 
+            if (urlPhoto != null) {
+                String composed = processor + " " + ram + " " + screen + " " + hardDisk;
+                // download device image
+                Picasso.with(getApplicationContext())
+                        .load(urlPhoto)
+                        .into(imDevicePhoto);
+
+                tvDeviceFeatures.setText(composed);
+            }
             // set UI information to the data which has been parsed through
             //setTitle(itemName + getResources().getString(R.string.details_title_by_) + brand);
         }
-
     }
 
     @Override

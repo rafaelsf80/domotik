@@ -1,9 +1,7 @@
 <resources>
     <!-- Default screen margins, per the Android Design guidelines. -->
-
     <dimen name="notification_large_icon_default">48dp</dimen>
     <dimen name="forecast_detail_horizontal_padding">32dp</dimen>
-
     <dimen name="detail_view_padding_vertical">4dp</dimen>
 
     <!-- Icon Sizes -->
@@ -27,7 +25,7 @@
     <dimen name="appbar_elevation">4dp</dimen>
 
     <!-- The amount we want the details view to overlap the app bar -->
-    <dimen name="details_app_bar_overlap">24dp</dimen>
+    <dimen name="details_app_bar_overlap">36dp</dimen>
 
     <!-- Help to make us tablet beautiful -->
     <dimen name="list_item_extra_padding">0dp</dimen>
@@ -35,24 +33,23 @@
     <dimen name="forecast_detail_padding_wide">16dp</dimen>
     <dimen name="detail_container_bottom_margin">@dimen/detail_view_padding</dimen>
 
-
-        <!-- Default screen margins, per the Android Design guidelines. -->
-        <dimen name="activity_horizontal_margin">16dp</dimen>
-        <dimen name="activity_vertical_margin">16dp</dimen>
-        <dimen name="card_height">304dp</dimen>
-        <dimen name="md_keylines">16dp</dimen>
-        <dimen name="tile_padding">8dp</dimen>
-        <dimen name="tile_height">160dp</dimen>
-        <dimen name="app_bar_height">256dp</dimen>
-        <dimen name="article_keylines">72dp</dimen>
-        <dimen name="avator_size">40dp</dimen>
-        <dimen name="card_title_height">40dp</dimen>
-        <dimen name="article_titles">20sp</dimen>
-        <dimen name="cards_button_width">48dp</dimen>
-        <dimen name="cards_button_height">48dp</dimen>
-        <dimen name="article_subheading">16sp</dimen>
-        <dimen name="card_image_height">200dp</dimen>
-        <dimen name="list_body">14sp</dimen>
-        <dimen name="navheader_height">222dp</dimen>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="card_height">304dp</dimen>
+    <dimen name="md_keylines">16dp</dimen>
+    <dimen name="tile_padding">8dp</dimen>
+    <dimen name="tile_height">160dp</dimen>
+    <dimen name="app_bar_height">256dp</dimen>
+    <dimen name="article_keylines">72dp</dimen>
+    <dimen name="avator_size">40dp</dimen>
+    <dimen name="card_title_height">40dp</dimen>
+    <dimen name="article_titles">20sp</dimen>
+    <dimen name="cards_button_width">48dp</dimen>
+    <dimen name="cards_button_height">48dp</dimen>
+    <dimen name="article_subheading">16sp</dimen>
+    <dimen name="card_image_height">200dp</dimen>
+    <dimen name="list_body">14sp</dimen>
+    <dimen name="navheader_height">222dp</dimen>
 
 </resources>

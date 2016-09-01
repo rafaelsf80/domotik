@@ -35,7 +35,6 @@ public class CameraBinder extends DataBinder<CameraBinder.ViewHolder> {
 
     private final String TAG = getClass().getSimpleName();
 
-
     public CameraBinder(DataBindAdapter dataBindAdapter) {
         super(dataBindAdapter);
     }
@@ -100,7 +99,7 @@ public class CameraBinder extends DataBinder<CameraBinder.ViewHolder> {
 
         public ViewHolder(View rowView) {
             super(rowView);
-            // store UI elements in a variable to be dynamically changed
+            // store UI elements
             cardView = (CardView) rowView.findViewById(R.id.cv_camera);
         }
     }

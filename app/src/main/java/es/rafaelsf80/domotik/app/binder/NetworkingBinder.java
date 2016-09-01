@@ -54,14 +54,11 @@ public class NetworkingBinder extends DataBinder<NetworkingBinder.ViewHolder> {
     private ArrayList<Machine> mMachines = new ArrayList<>();
     private ChildEventListener mListener;
 
-
-
     public NetworkingBinder(DataBindAdapter dataBindAdapter) {
 
         super(dataBindAdapter);
 
         Firebase fRef = new Firebase("https://domoclick.firebaseio.com/machines");
-
 
         // Look for all child events. We will then map them to our own internal ArrayList, which backs ListView
         mListener = fRef.addChildEventListener(new ChildEventListener() {
@@ -131,10 +128,6 @@ public class NetworkingBinder extends DataBinder<NetworkingBinder.ViewHolder> {
             }
 
         });
-
-
-
-
     }
 
     @Override
@@ -204,7 +197,7 @@ public class NetworkingBinder extends DataBinder<NetworkingBinder.ViewHolder> {
                     intent.putExtra("type", type);
 
                     // move to the details screen
-                    //v.getContext().startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(acti).toBundle());
+                    //v.getContext().startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(((Activity) v.getContext())).toBundle());
                     v.getContext().startActivity(intent);
                 }
             });
@@ -254,37 +247,38 @@ public class NetworkingBinder extends DataBinder<NetworkingBinder.ViewHolder> {
 
     public void add(final Machine machine) {
 
-        Log.d(TAG, "Checking firebase");
-        final Firebase routersRef = Main.myFirebaseRef.child("machines");
-        routersRef.child(machine.getHwAddress()).addListenerForSingleValueEvent(new ValueEventListener() {
+        final Firebase machinesRef = Main.myFirebaseRef.child("machines");
+        machinesRef.child(machine.getHwAddress()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 if (snapshot.getValue() != null) {
                     // check if Hw address exists
                 } else {
                     // if Hw address does not exist, add machine
-                    Log.d(TAG, "new machine added: " + machine.getHwAddress());
-                    routersRef.child(machine.getHwAddress()).setValue(machine);
+                    Log.d(TAG, "Machine added to Firebase: " + machine.getHwAddress());
+                    machinesRef.child(machine.getHwAddress()).setValue(machine);
                 }
             }
             @Override
             public void onCancelled(FirebaseError arg0) {
+                Log.d(TAG, "error adding new machine");
+
             }
         });
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
 
-        public CardView cardView;
-        public TextView tvDeviceName;
-        public TextView tvIpAddress;
-        public ImageView imDevice;
-        public ImageView imMenu;
+        private CardView cardView;
+        private TextView tvDeviceName;
+        private TextView tvIpAddress;
+        private ImageView imDevice;
+        private ImageView imMenu;
 
 
-        public ViewHolder(View rowView) {
+        private ViewHolder(View rowView) {
             super(rowView);
-            // store UI elements in a variable to be dynamically changed
+            // store UI elements
             cardView = (CardView) rowView.findViewById(R.id.cv_networking);
             tvDeviceName = (TextView) rowView.findViewById(R.id.tv_device_name);
             tvIpAddress = (TextView) rowView.findViewById(R.id.tv_ip_address);

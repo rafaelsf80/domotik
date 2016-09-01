@@ -61,7 +61,6 @@ public class RemoteBinder extends DataBinder<RemoteBinder.ViewHolder> {
             }
         });
 
-
         return new ViewHolder(view);
     }
 
@@ -150,11 +149,11 @@ public class RemoteBinder extends DataBinder<RemoteBinder.ViewHolder> {
     /**
      * Click listener for popup menu items
      */
-    class MyMenuItemClickListener implements PopupMenu.OnMenuItemClickListener {
+    private class MyMenuItemClickListener implements PopupMenu.OnMenuItemClickListener {
 
         Context mContext;
 
-        public MyMenuItemClickListener(Context ctx) {
+        private MyMenuItemClickListener(Context ctx) {
             mContext = ctx;
         }
 
@@ -187,9 +186,9 @@ public class RemoteBinder extends DataBinder<RemoteBinder.ViewHolder> {
         Switch swOnOff;
         ImageView imMenu;
 
-        public ViewHolder(View rowView) {
+        private ViewHolder(View rowView) {
             super(rowView);
-            // store UI elements in a variable to be dynamically changed
+            // store UI elements
             cardView = (CardView) rowView.findViewById(R.id.cv_remote);
             imIcon = (ImageView) rowView.findViewById(R.id.im_device_icon);
             tvTypeProvider = (TextView) rowView.findViewById(R.id.tv_type_provider);

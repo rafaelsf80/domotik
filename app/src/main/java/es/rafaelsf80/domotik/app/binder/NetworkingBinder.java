@@ -1,7 +1,17 @@
 package es.rafaelsf80.domotik.app.binder;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Resources;
+import android.media.RingtoneManager;
+import android.net.Uri;
+import android.preference.PreferenceManager;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +22,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RemoteViews;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -53,6 +64,10 @@ public class NetworkingBinder extends DataBinder<NetworkingBinder.ViewHolder> {
     private final String TAG = getClass().getSimpleName();
     private ArrayList<Machine> mMachines = new ArrayList<>();
     private ChildEventListener mListener;
+    private Context mContext;
+
+    private static final int NOTIFICATION_ID = 3004;
+
 
     public NetworkingBinder(DataBindAdapter dataBindAdapter) {
 
@@ -67,7 +82,7 @@ public class NetworkingBinder extends DataBinder<NetworkingBinder.ViewHolder> {
 
                 Machine machine = snapshot.getValue(Machine.class);
                 mMachines.add(machine);
-                Log.d(TAG, "onChildAdded:" + machine.getIpAddress());
+                Log.d(TAG, "Firebase onChildAdded():" + machine.getIpAddress());
                 notifyBinderDataSetChanged();
             }
 
@@ -132,6 +147,7 @@ public class NetworkingBinder extends DataBinder<NetworkingBinder.ViewHolder> {
 
     @Override
     public ViewHolder newViewHolder(ViewGroup parent) {
+        mContext = parent.getContext();
         View view = LayoutInflater.from(parent.getContext()).inflate(
                 R.layout.card_networking, parent, false);
         view.setOnClickListener(new View.OnClickListener() {
@@ -245,9 +261,10 @@ public class NetworkingBinder extends DataBinder<NetworkingBinder.ViewHolder> {
     @Override
     public int getItemCount() { return mMachines.size(); }
 
-    public void add(final Machine machine) {
+    public void add(Context ctx, final Machine machine) {
 
         final Firebase machinesRef = Main.myFirebaseRef.child("machines");
+        final Context context = ctx;
         machinesRef.child(machine.getHwAddress()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
@@ -255,16 +272,102 @@ public class NetworkingBinder extends DataBinder<NetworkingBinder.ViewHolder> {
                     // check if Hw address exists
                 } else {
                     // if Hw address does not exist, add machine
-                    Log.d(TAG, "Machine added to Firebase: " + machine.getHwAddress());
+                    Log.d(TAG, "Firebase New machine added: " + machine.getHwAddress());
                     machinesRef.child(machine.getHwAddress()).setValue(machine);
+                    showNotification(context, "New machine: " + machine.getHwAddress());
                 }
             }
             @Override
             public void onCancelled(FirebaseError arg0) {
                 Log.d(TAG, "error adding new machine");
-
             }
         });
+    }
+
+    public void showNotification(Context ctx, String notificationMessage) {
+
+        Context context = ctx;
+
+        //checking the last update and notify if it' the first of the day
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        String displayNotificationsKey = context.getString(R.string.pref_enable_notifications_key);
+        boolean displayNotifications = prefs.getBoolean(displayNotificationsKey,
+                Boolean.parseBoolean(context.getString(R.string.pref_enable_notifications_default)));
+
+        displayNotifications = true;
+
+        if ( displayNotifications ) {
+
+            String lastNotificationKey = context.getString(R.string.pref_last_notification);
+            long lastSync = prefs.getLong(lastNotificationKey, 0);
+
+            if (System.currentTimeMillis() - lastSync >= 0) { //DAY_IN_MILLIS) {
+
+                Resources resources = context.getResources();
+                String title = context.getString(R.string.app_name);
+                Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+
+                // Define the text of the notification
+                //    String contentText = String.format(context.getString(R.string.format_notification),
+                //            String.valueOf(mAdapter.getItemCount()),
+                //            desc,
+                //            Utility.formatTemperature(context, high),
+                //            Utility.formatTemperature(context, low));
+
+                //ImageView imNotificationPhoto = (ImageView) resources.findViewById(R.id.im_notification_end);
+
+                RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.notification);
+                remoteViews.setImageViewResource(R.id.im_notification, R.drawable.ic_home_black_24dp);
+                remoteViews.setTextViewText(R.id.tv_notification_title, title);
+                remoteViews.setTextViewText(R.id.tv_notification_text_message, notificationMessage);
+                remoteViews.setImageViewResource(R.id.im_notification_end, R.drawable.ic_home_icon);
+
+                //Picasso.with(context)
+                //        .load(urlPhoto)
+                //        .into(imNotificationPhoto);
+
+                // NotificationCompatBuilder is a very convenient way to build backward-compatible
+                // notifications.  Just throw in some data.
+                NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context)
+                        .setSmallIcon(R.drawable.ic_home_black_24dp)
+                        .setColor(resources.getColor(R.color.colorAccent))
+                        .setSound(defaultSoundUri)
+                        .setAutoCancel(true)
+                        .setCustomContentView(remoteViews)
+                        //.setStyle(new Notification.DecoratedCustomViewStyle())
+                        .setPriority(Notification.PRIORITY_HIGH)
+                        .setVibrate(new long[0]);
+
+                // Make something interesting happen when the user clicks on the notification.
+                // In this case, opening the app is sufficient.
+                Intent resultIntent = new Intent(context, Main.class);
+
+                // The stack builder object will contain an artificial back stack for the
+                // started Activity.
+                // This ensures that navigating backward from the Activity leads out of
+                // your application to the Home screen.
+                TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
+                stackBuilder.addNextIntent(resultIntent);
+                PendingIntent resultPendingIntent =
+                        stackBuilder.getPendingIntent(
+                                0,
+                                PendingIntent.FLAG_UPDATE_CURRENT
+                        );
+                mBuilder.setContentIntent(resultPendingIntent);
+
+                NotificationManager mNotificationManager =
+                        (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
+
+                // NOTIFICATION_ID allows you to update the notification later on.
+                Log.d(TAG, "Showing NOTIFICATION_ID" + String.valueOf(NOTIFICATION_ID));
+                mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());
+
+                //refreshing last sync
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putLong(lastNotificationKey, System.currentTimeMillis());
+                editor.commit();
+            }
+        }
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {

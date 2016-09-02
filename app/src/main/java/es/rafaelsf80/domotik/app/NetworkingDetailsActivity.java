@@ -40,7 +40,6 @@ public class NetworkingDetailsActivity extends AppCompatActivity {
 
         setSupportActionBar((Toolbar) findViewById(R.id.tb_networking));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        setTitle("Networking Details");
 
         // Set Collapsing Toolbar layout to the screen
         CollapsingToolbarLayout collapsingToolbar =
@@ -59,7 +58,10 @@ public class NetworkingDetailsActivity extends AppCompatActivity {
             final String ipAddress = fromListItem.getStringExtra("ipAddress");
             final String port = fromListItem.getStringExtra("port");
 
-            // TODO: PROVISIONAL DATABASE, CHECK WHERE TO PUT THIS EFFICIENTLY
+            tvIpHwAddress.setText("IP address: " + ipAddress + "\n" + "MAC address: " + hwAddress +
+                                    "Flags: " + flags + "\n" + "Port: " + port);
+
+            // TODO: PROVISIONAL DEVICE DATABASE, USE CLOUD SQL INSTEAD
             // Get device details
             Database deviceDetails = new Database(hwAddress);
             String model = deviceDetails.getModel();
@@ -70,18 +72,19 @@ public class NetworkingDetailsActivity extends AppCompatActivity {
             final String hardDisk = deviceDetails.getHardDisk();
             String urlPhoto = deviceDetails.getUrlPhoto();
 
-            collapsingToolbar.setTitle(name);
-            tvIpHwAddress.setText(ipAddress + " " + hwAddress);
-            tvDeviceFeatures.setText(flags + " " + port);
-
             if (urlPhoto != null) {
-                String composed = processor + " " + ram + " " + screen + " " + hardDisk;
+                collapsingToolbar.setTitle( model );
+                String composed = "Processor: " + processor + "\n" + "RAM: " + ram + "\n" +
+                        "Screen size: " + screen + "\n" + "Hard disk: " + hardDisk;
                 // download device image
                 Picasso.with(getApplicationContext())
                         .load(urlPhoto)
                         .into(imDevicePhoto);
 
                 tvDeviceFeatures.setText(composed);
+            }
+            else {
+                collapsingToolbar.setTitle( "Unknown" );
             }
             // set UI information to the data which has been parsed through
             //setTitle(itemName + getResources().getString(R.string.details_title_by_) + brand);

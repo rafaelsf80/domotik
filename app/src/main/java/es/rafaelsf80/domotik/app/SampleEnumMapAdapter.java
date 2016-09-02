@@ -1,5 +1,6 @@
 package es.rafaelsf80.domotik.app;
 
+import android.content.Context;
 import android.util.Log;
 
 import es.rafaelsf80.domotik.app.binder.CameraBinder;
@@ -44,8 +45,8 @@ public class SampleEnumMapAdapter extends EnumMapBindAdapter<SampleEnumMapAdapte
         putBinder(SampleViewType.REMOTE, new RemoteBinder(this));
     }
 
-    public void add(Machine machine) {
-        ((NetworkingBinder) getDataBinder(SampleViewType.MACHINE)).add(machine);
+    public void add(Context context, Machine machine) {
+        ((NetworkingBinder) getDataBinder(SampleViewType.MACHINE)).add(context, machine);
     }
 
 

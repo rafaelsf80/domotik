@@ -217,6 +217,8 @@ public class Main extends AppCompatActivity {
         getContentResolver().registerContentObserver(Uri.parse("content://rafa"), true, mObserver);
     }
 
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

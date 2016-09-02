@@ -37,7 +37,6 @@ public class CameraDetailsActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle("Camera details");
 
-
         if (savedInstanceState == null) {
             // Create the detail fragment and add it to the activity
             // using a fragment transaction.
@@ -45,7 +44,6 @@ public class CameraDetailsActivity extends AppCompatActivity {
             Bundle arguments = new Bundle();
 
         }
-
     }
 
     @Override

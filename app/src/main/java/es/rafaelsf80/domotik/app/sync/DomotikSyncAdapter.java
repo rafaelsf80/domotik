@@ -2,6 +2,7 @@ package es.rafaelsf80.domotik.app.sync;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
+import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.AbstractThreadedSyncAdapter;
@@ -27,6 +28,7 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.text.format.Time;
 import android.util.Log;
+import android.widget.RemoteViews;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -110,8 +112,9 @@ public class DomotikSyncAdapter extends AbstractThreadedSyncAdapter {
                     machine.setPort(splitted[5]);
                     machine.setType("samsung_s5");
 
-                    mAdapter.add(machine);  // will call mAdapter.notifyDataSetChanged()
+                    mAdapter.add(getContext(), machine);  // will call mAdapter.notifyDataSetChanged()
                     Log.d(TAG, "Seen in ARP response: " + machine.getIpAddress() + " " + machine.getFlags() + " " + machine.getHwAddress() + " " + machine.getPort());
+                    //showNotification();
                 }
             }
         } catch (Exception e) {
@@ -370,7 +373,7 @@ public class DomotikSyncAdapter extends AbstractThreadedSyncAdapter {
                         WeatherContract.WeatherEntry.COLUMN_DATE + " <= ?",
                         new String[] {Long.toString(dayTime.setJulianDay(julianStartDay-1))});
 
-                showNotification();
+                //showNotification();
             }
 
             Log.d(TAG, "Sync Complete. " + cVVector.size() + " Inserted");
@@ -382,6 +385,7 @@ public class DomotikSyncAdapter extends AbstractThreadedSyncAdapter {
     }
 
     private void showNotification() {
+
         Context context = getContext();
         //checking the last update and notify if it' the first of the day
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
@@ -394,23 +398,23 @@ public class DomotikSyncAdapter extends AbstractThreadedSyncAdapter {
             String lastNotificationKey = context.getString(R.string.pref_last_notification);
             long lastSync = prefs.getLong(lastNotificationKey, 0);
 
-            if (System.currentTimeMillis() - lastSync >= DAY_IN_MILLIS) {
+            if (System.currentTimeMillis() - lastSync >= 5000) { //DAY_IN_MILLIS) {
                 // Last sync was more than 1 day ago, let's send a notification with the weather.
-                String locationQuery = Utility.getPreferredLocation(context);
+                //String locationQuery = Utility.getPreferredLocation(context);
 
-                Uri weatherUri = WeatherContract.WeatherEntry.buildWeatherLocationWithDate(locationQuery, System.currentTimeMillis());
-                Log.d(TAG, weatherUri.toString());
+                //Uri weatherUri = WeatherContract.WeatherEntry.buildWeatherLocationWithDate(locationQuery, System.currentTimeMillis());
+                //Log.d(TAG, weatherUri.toString());
 
                 // we'll query our contentProvider, as always
-                Cursor cursor = context.getContentResolver().query(weatherUri, NOTIFY_WEATHER_PROJECTION, null, null, null);
+                //Cursor cursor = context.getContentResolver().query(weatherUri, NOTIFY_WEATHER_PROJECTION, null, null, null);
 
-                if (cursor.moveToFirst()) {
-                    int weatherId = cursor.getInt(INDEX_WEATHER_ID);
-                    double high = cursor.getDouble(INDEX_MAX_TEMP);
-                    double low = cursor.getDouble(INDEX_MIN_TEMP);
-                    String desc = cursor.getString(INDEX_SHORT_DESC);
+                //if (cursor.moveToFirst()) {
+                //    int weatherId = cursor.getInt(INDEX_WEATHER_ID);
+                //    double high = cursor.getDouble(INDEX_MAX_TEMP);
+                //    double low = cursor.getDouble(INDEX_MIN_TEMP);
+                //    String desc = cursor.getString(INDEX_SHORT_DESC);
 
-                    int iconId = Utility.getIconResourceForWeatherCondition(weatherId);
+                //    int iconId = Utility.getIconResourceForWeatherCondition(weatherId);
                     Resources resources = context.getResources();
                     String title = context.getString(R.string.app_name);
                     //Bitmap largeIcon = BitmapFactory.decodeResource(resources,
@@ -420,24 +424,35 @@ public class DomotikSyncAdapter extends AbstractThreadedSyncAdapter {
                     Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
                     // Define the text of the notification
-                        String contentText = String.format(context.getString(R.string.format_notification),
-                                String.valueOf(mAdapter.getItemCount()),
-                                desc,
-                                Utility.formatTemperature(context, high),
-                                Utility.formatTemperature(context, low));
+                    //    String contentText = String.format(context.getString(R.string.format_notification),
+                    //            String.valueOf(mAdapter.getItemCount()),
+                    //            desc,
+                    //            Utility.formatTemperature(context, high),
+                    //            Utility.formatTemperature(context, low));
+
+                RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.notification);
+                remoteViews.setImageViewResource(R.id.im_notification, R.drawable.ic_home_black_24dp);
+                remoteViews.setTextViewText(R.id.tv_notification_title, "Hola");
+                remoteViews.setTextViewText(R.id.tv_notification_text_message, "Esto es una notification custom");
+                remoteViews.setImageViewResource(R.id.im_notification_end, R.drawable.ic_home_black_24dp);
+
+                // NotificationCompatBuilder is a very convenient way to build backward-compatible
+                // notifications.  Just throw in some data.
+
+                NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context)
+                        .setSmallIcon(R.drawable.ic_home_black_24dp)
+                        .setColor(resources.getColor(R.color.colorAccent))
+                        .setSound(defaultSoundUri)
+                        .setAutoCancel(true)
+                        .setCustomContentView(remoteViews)
+                        //.setStyle(new Notification.DecoratedCustomViewStyle())
+                        .setPriority(Notification.PRIORITY_HIGH)
+                        .setVibrate(new long[0]);
 
 
 
-                    // NotificationCompatBuilder is a very convenient way to build backward-compatible
-                    // notifications.  Just throw in some data.
-                    NotificationCompat.Builder mBuilder =
-                            new NotificationCompat.Builder(getContext())
-                                    .setColor(resources.getColor(R.color.colorAccent))
-                                    .setSmallIcon(iconId)
-                                    .setLargeIcon(largeIcon)
-                                    .setContentTitle(title)
-                                    .setSound(defaultSoundUri)
-                                    .setContentText(contentText);
+
+
 
                     // Make something interesting happen when the user clicks on the notification.
                     // In this case, opening the app is sufficient.
@@ -465,8 +480,8 @@ public class DomotikSyncAdapter extends AbstractThreadedSyncAdapter {
                     SharedPreferences.Editor editor = prefs.edit();
                     editor.putLong(lastNotificationKey, System.currentTimeMillis());
                     editor.commit();
-                }
-                cursor.close();
+                //}
+                //cursor.close();
             }
         }
     }

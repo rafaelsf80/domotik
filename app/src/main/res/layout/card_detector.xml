@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/cv_camera"
+    android:id="@+id/cv_detector"
     android:clickable="true"
     android:onClick="show"
     android:layout_margin="10dp"
@@ -25,12 +25,12 @@
             android:orientation="horizontal"
             >
             <TextView
-                android:id="@+id/tv_camera_title"
+                android:id="@+id/tv_detector_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/TextAppearance.AppCompat.Title"
                 android:textColor="@color/secondary_text"
-                android:text="@string/camera_title" />
+                android:text="@string/hall" />
             <ImageView
                 android:id="@+id/im_dots"
                 android:layout_width="30dp"
@@ -41,21 +41,23 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/tv_camera_message"
+            android:id="@+id/tv_detector_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="@string/camera_message"
-            android:textSize="25sp" />
+            android:layout_gravity="center"
+            android:text="@string/no_presence"
+            android:textStyle="bold"
+            android:textSize="32sp" />
 
-        <Button
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/tv_detector_since"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:id="@+id/bt_camera"
-            android:background="@color/colorAccent"
-            android:textColor="@color/text_icons"
-            android:text="@string/camera_button" />
+            android:layout_gravity="center"
+            android:text="@string/since"
+            android:textSize="12sp" />
     </LinearLayout>
 
 </android.support.v7.widget.CardView>

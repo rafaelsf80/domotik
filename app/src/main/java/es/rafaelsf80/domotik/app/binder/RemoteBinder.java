@@ -83,7 +83,7 @@ public class RemoteBinder extends DataBinder<RemoteBinder.ViewHolder> {
                 rowView.imIcon.setImageResource(R.drawable.ic_heating_black_24dp);
                 break;
             case ELECTRICITY:
-                rowView.tvTypeProvider.setText(resources.getString(R.string.electricity_provider) + " - " + resources.getString(R.string.electrivity_type));
+                rowView.tvTypeProvider.setText(resources.getString(R.string.electricity_provider) + " - " + resources.getString(R.string.electricity_type));
                 rowView.swOnOff.setText(resources.getString(R.string.off));
                 rowView.imIcon.setImageResource(R.drawable.ic_light_on_icon);
                 break;

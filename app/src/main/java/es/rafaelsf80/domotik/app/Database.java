@@ -19,8 +19,6 @@ package es.rafaelsf80.domotik.app;
  */
 class Database {
 
-    String TAG = getClass().getSimpleName();
-
     private String model;
     private String type;
     private String ram;
@@ -88,9 +86,7 @@ class Database {
     public Database(String hwAddress) {
 
         //iPad2 70:DE:E2:03:49:B2
-        if (hwAddress.contains("0a:00:27:00:00:00")) {
-        //    if (hwAddress.contains("70:DE:E2:03:49:B2")) {
-
+        if (hwAddress.contains("70:DE:E2:03:49:B2")) {
             setModel("Apple iPad2");
             setType("Tablet");
             setRam("1 GB");

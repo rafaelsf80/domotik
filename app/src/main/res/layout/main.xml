@@ -34,7 +34,7 @@
                     android:layout_marginTop="8dp"
                     android:drawableLeft="@drawable/ic_home_icon"
                     android:gravity="center"
-                    android:text=" DomoClick"
+                    android:text="@string/app_name"
                     android:textColor="@color/primary_text"
                     android:textSize="26sp"
                     android:textStyle="bold"

@@ -34,7 +34,6 @@ public class WeatherBinder extends DataBinder<WeatherBinder.ViewHolder> {
             }
         });
 
-
         return new ViewHolder(view);
 
     }

@@ -77,12 +77,9 @@ public class Main extends AppCompatActivity {
 
         setContentView(R.layout.main);
 
-
         Toolbar toolBar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolBar);
-
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         TextView tvToolbarTitle = (TextView) findViewById(R.id.tv_toolbar_title);
@@ -152,14 +149,16 @@ public class Main extends AppCompatActivity {
                     }
                 });
         // Adding Floating Action Button to bottom right of main view
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Snackbar.make(v, "Alarm locked!",
                         Snackbar.LENGTH_LONG).show();
+                fab.setImageResource(R.drawable.ic_heating_black_24dp);
             }
         });
+
 
         // Get Data
         //Comtrend comtrend = new Comtrend(this, adapter);
@@ -170,7 +169,7 @@ public class Main extends AppCompatActivity {
         //mainFragment.setUseTodayLayout(!mTwoPane);
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
-        final SampleEnumMapAdapter adapter = new SampleEnumMapAdapter();
+        final EnumMapAdapter adapter = new EnumMapAdapter();
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(Main.this));
         DomotikSyncAdapter.mAdapter = adapter;

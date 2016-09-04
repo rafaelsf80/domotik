@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import es.rafaelsf80.domotik.app.binder.CameraBinder;
+import es.rafaelsf80.domotik.app.binder.DetectorBinder;
 import es.rafaelsf80.domotik.app.binder.NetworkingBinder;
 import es.rafaelsf80.domotik.app.binder.RemoteBinder;
 import es.rafaelsf80.domotik.app.binder.WeatherBinder;
@@ -27,22 +28,21 @@ import es.rafaelsf80.domotik.app.multipleviewtypesabstractadapter.EnumMapBindAda
  * Author: Rafael Sanchez Fuentes rafaelsf80 at gmail dot com
  */
 
-public class SampleEnumMapAdapter extends EnumMapBindAdapter<SampleEnumMapAdapter.SampleViewType> {
+public class EnumMapAdapter extends EnumMapBindAdapter<EnumMapAdapter.SampleViewType> {
 
     private final String TAG = getClass().getSimpleName();
 
-
     enum SampleViewType {
-        MACHINE, CAMERA, WEATHER, REMOTE
+        MACHINE, CAMERA, WEATHER, REMOTE, DETECTOR
     }
 
-    public SampleEnumMapAdapter() {
+    public EnumMapAdapter() {
 
-        //putBinder(SampleViewType.SAMPLE1, new Sample1Binder(this));
         putBinder(SampleViewType.MACHINE, new NetworkingBinder(this));
         putBinder(SampleViewType.CAMERA, new CameraBinder(this));
         putBinder(SampleViewType.WEATHER, new WeatherBinder(this));
         putBinder(SampleViewType.REMOTE, new RemoteBinder(this));
+        putBinder(SampleViewType.DETECTOR, new DetectorBinder(this));
     }
 
     public void add(Context context, Machine machine) {
@@ -65,7 +65,8 @@ public class SampleEnumMapAdapter extends EnumMapBindAdapter<SampleEnumMapAdapte
         ((NetworkingBinder) getDataBinder(SampleViewType.MACHINE)).getItemCount() +
                 ((WeatherBinder) getDataBinder(SampleViewType.WEATHER)).getItemCount() +
                 ((CameraBinder) getDataBinder(SampleViewType.CAMERA)).getItemCount() +
-                ((RemoteBinder) getDataBinder(SampleViewType.REMOTE)).getItemCount();
+                ((RemoteBinder) getDataBinder(SampleViewType.REMOTE)).getItemCount() +
+                ((DetectorBinder) getDataBinder(SampleViewType.DETECTOR)).getItemCount();
 
 
         Log.d(TAG, "position****: " + Integer.toString(position) + "total" + Integer.toString(total));
@@ -76,9 +77,13 @@ public class SampleEnumMapAdapter extends EnumMapBindAdapter<SampleEnumMapAdapte
         if (position == 2) return SampleViewType.REMOTE;
         if (position == 3) return SampleViewType.CAMERA;
         if (position == 4) return SampleViewType.MACHINE;
-        if (position == 5) return SampleViewType.REMOTE;
-        if (position == 6) return SampleViewType.REMOTE;
-        if (position == 7) return SampleViewType.WEATHER;
+        if (position == 5) return SampleViewType.DETECTOR;
+        if (position == 6) return SampleViewType.DETECTOR;
+        if (position == 7) return SampleViewType.DETECTOR;
+        if (position == 8) return SampleViewType.DETECTOR;
+        if (position == 9) return SampleViewType.REMOTE;
+        if (position == 10) return SampleViewType.REMOTE;
+        if (position == 11) return SampleViewType.WEATHER;
         return SampleViewType.MACHINE;
     }
 

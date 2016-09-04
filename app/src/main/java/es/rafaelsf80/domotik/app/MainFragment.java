@@ -32,6 +32,11 @@ import es.rafaelsf80.domotik.R;
  * Author: Rafael Sanchez Fuentes rafaelsf80 at gmail dot com
  */
 public class MainFragment extends Fragment {
+
+    //
+    //  TODO: FOR TABLET LAYOUT !!!!
+    //
+
     public static final String TAG = Main.class.getSimpleName();
 
     final static String urlGoogleChart
@@ -57,7 +62,6 @@ public class MainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-
         View rootView = inflater.inflate(R.layout.detail_camera, container, false);
 
         // Get a reference to the ListView, and attach this adapter to it.
@@ -71,7 +75,6 @@ public class MainFragment extends Fragment {
         String urlRqs3DPie = urlGoogleChart
                 + urlp3Api
                 + A + "," + B + "," + C;
-
 
         // download thumbnail
         Picasso.with(getActivity())
@@ -100,7 +103,6 @@ public class MainFragment extends Fragment {
             }
         });
 
-
         return rootView;
     }
 
@@ -108,7 +110,4 @@ public class MainFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
     }
-
-
-
 }

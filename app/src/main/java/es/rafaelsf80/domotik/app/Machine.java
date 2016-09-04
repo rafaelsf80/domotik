@@ -17,6 +17,7 @@ package es.rafaelsf80.domotik.app;
  * <p/>
  * Author: Rafael Sanchez Fuentes rafaelsf80 at gmail dot com
  */
+
 public class Machine {
 
     String ipAddress;

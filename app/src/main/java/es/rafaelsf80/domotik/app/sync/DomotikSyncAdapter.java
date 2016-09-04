@@ -46,7 +46,7 @@ import java.util.Vector;
 import es.rafaelsf80.domotik.R;
 import es.rafaelsf80.domotik.app.Machine;
 import es.rafaelsf80.domotik.app.Main;
-import es.rafaelsf80.domotik.app.SampleEnumMapAdapter;
+import es.rafaelsf80.domotik.app.EnumMapAdapter;
 import es.rafaelsf80.domotik.app.Utility;
 import es.rafaelsf80.domotik.app.weather.WeatherContract;
 
@@ -73,7 +73,7 @@ public class DomotikSyncAdapter extends AbstractThreadedSyncAdapter {
     private static final int INDEX_MIN_TEMP = 2;
     private static final int INDEX_SHORT_DESC = 3;
 
-    public static SampleEnumMapAdapter mAdapter;
+    public static EnumMapAdapter mAdapter;
 
     public DomotikSyncAdapter(Context context, boolean autoInitialize) {
         super(context, autoInitialize);

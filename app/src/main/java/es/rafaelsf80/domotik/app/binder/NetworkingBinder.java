@@ -68,7 +68,6 @@ public class NetworkingBinder extends DataBinder<NetworkingBinder.ViewHolder> {
 
     private static final int NOTIFICATION_ID = 3004;
 
-
     public NetworkingBinder(DataBindAdapter dataBindAdapter) {
 
         super(dataBindAdapter);
@@ -239,7 +238,7 @@ public class NetworkingBinder extends DataBinder<NetworkingBinder.ViewHolder> {
 
         Context mContext;
 
-        public MyMenuItemClickListener(Context ctx) {
+        private MyMenuItemClickListener(Context ctx) {
             mContext = ctx;
         }
 
@@ -284,9 +283,7 @@ public class NetworkingBinder extends DataBinder<NetworkingBinder.ViewHolder> {
         });
     }
 
-    public void showNotification(Context ctx, String notificationMessage) {
-
-        Context context = ctx;
+    public void showNotification(Context context, String notificationMessage) {
 
         //checking the last update and notify if it' the first of the day
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
@@ -377,7 +374,6 @@ public class NetworkingBinder extends DataBinder<NetworkingBinder.ViewHolder> {
         private TextView tvIpAddress;
         private ImageView imDevice;
         private ImageView imMenu;
-
 
         private ViewHolder(View rowView) {
             super(rowView);

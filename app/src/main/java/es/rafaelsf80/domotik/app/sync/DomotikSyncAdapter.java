@@ -101,6 +101,7 @@ public class DomotikSyncAdapter extends AbstractThreadedSyncAdapter {
         try {
             br = new BufferedReader(new FileReader("/proc/net/arp"));
             String line;
+            Log.d(TAG, br.toString());
             while ((line = br.readLine()) != null) {
                 String[] splitted = line.split(" +");
                 // First line of ARP answer must not be stored
@@ -112,8 +113,17 @@ public class DomotikSyncAdapter extends AbstractThreadedSyncAdapter {
                     machine.setPort(splitted[5]);
                     machine.setType("samsung_s5");
 
-                    mAdapter.add(getContext(), machine);  // will call mAdapter.notifyDataSetChanged()
-                    Log.d(TAG, "Seen in ARP response: " + machine.getIpAddress() + " " + machine.getFlags() + " " + machine.getHwAddress() + " " + machine.getPort());
+                    // Discard ARO entries with flags other than 0x2. ARP flag values as per if_arp.h
+                    // #define ATF_COM		0x02		/* completed entry (ha valid)	*/
+                    // #define	ATF_PERM	0x04		/* permanent entry		*/
+                    // #define	ATF_PUBL	0x08		/* publish entry		*/
+                    // #define	ATF_USETRAILERS	0x10	/* has requested trailers	*/
+                    // #define ATF_NETMASK     0x20     /* want to use a netmask (only for proxy entries) */
+                    // #define ATF_DONTPUB	0x40		/* don't answer this addresses	*/
+                    if (machine.getFlags().compareToIgnoreCase("0x2") == 0) {
+                        mAdapter.add(getContext(), machine);  // will call mAdapter.notifyDataSetChanged()
+                        Log.d(TAG, "Seen in ARP response: " + machine.getIpAddress() + " " + machine.getFlags() + " " + machine.getHwAddress() + " " + machine.getPort());
+                    }
                     //showNotification();
                 }
             }
@@ -592,7 +602,7 @@ public class DomotikSyncAdapter extends AbstractThreadedSyncAdapter {
                 context.getString(R.string.app_name), context.getString(R.string.sync_account_type));
 
         // If the password doesn't exist, the account doesn't exist
-        if ( null == accountManager.getPassword(newAccount) ) {
+        if (null == accountManager.getPassword(newAccount)) {
 
         /*
          * Add the account and account type, no password or user data
@@ -610,8 +620,9 @@ public class DomotikSyncAdapter extends AbstractThreadedSyncAdapter {
 
             onAccountCreated(newAccount, context);
         }
-        return newAccount;
+            return newAccount;
     }
+
 
     private static void onAccountCreated(Account newAccount, Context context) {
         /*

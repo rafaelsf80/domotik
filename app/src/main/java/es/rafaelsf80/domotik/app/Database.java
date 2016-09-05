@@ -86,7 +86,7 @@ class Database {
     public Database(String hwAddress) {
 
         //iPad2 70:DE:E2:03:49:B2
-        if (hwAddress.contains("70:DE:E2:03:49:B2")) {
+        if (hwAddress.compareToIgnoreCase("70:DE:E2:03:49:B2") == 0) {
             setModel("Apple iPad2");
             setType("Tablet");
             setRam("1 GB");
@@ -97,7 +97,7 @@ class Database {
         }
 
         // MacBook Pro A4:5E:60:DB:CF:15
-        if (hwAddress.contains("A4:5E:60:DB:CF:15")) {
+        if (hwAddress.compareToIgnoreCase("A4:5E:60:DB:CF:15") == 0) {
             setModel("MacBook Pro 13''");
             setType("Laptop");
             setRam("16 GB");
@@ -108,7 +108,7 @@ class Database {
         }
 
         // iPhone4
-        if (hwAddress.contains("XX:XX:XX:XX:XX:XX")) {
+        if (hwAddress.compareToIgnoreCase("XX:XX:XX:XX:XX:XX") == 0) {
             setModel("iPhone4");
             setType("Smartphone");
             setRam("16 GB");
@@ -119,7 +119,7 @@ class Database {
         }
 
         // iPad3
-        if (hwAddress.contains("74:E1:B6:85:98:69")) {
+        if (hwAddress.compareToIgnoreCase("74:E1:B6:85:98:69") == 0) {
             setModel("Apple iPAD 3");
             setType("Tablet");
             setRam("1 GB");
@@ -130,7 +130,7 @@ class Database {
         }
 
         // Nexus 6
-        if (hwAddress.contains("44:80:EB:67:E8:14")) {
+        if (hwAddress.compareToIgnoreCase("44:80:EB:67:E8:14") == 0) {
             setModel("Motorola Nexus 6");
             setType("Smartphone");
             setRam("2 GB");
@@ -140,8 +140,21 @@ class Database {
             setUrlPhoto("http://motogeros.com/wp-content/uploads/2015/03/Nexus-6.png");
         }
 
+        // Nexus 5X
+        if (hwAddress.compareToIgnoreCase("64:bc:0c:7f:41:9f") == 0) {
+            setModel("LG Nexus 5X");
+            setType("Smartphone");
+            setRam("2 GB LPDDR3");
+            setProcessor("Qualcomm Snapdragon 808 Processor, 1.8GHz hexa-core 64-bit\n" +
+                    "Adreno 418 GPU");
+            setScreen("FHD (1920x1080) LCD at 423 ppi\n" +
+                    "Corning Gorilla Glass 3");
+            setHardDisk("32 GB");
+            setUrlPhoto("https://upload.wikimedia.org/wikipedia/commons/4/40/Nexus_5X_(White).jpg");
+        }
+
         // Samsung TV 14:49:E0:14:CC:C7
-        if (hwAddress.contains("14:49:E0:14:CC:C7")) {
+        if (hwAddress.compareToIgnoreCase("14:49:E0:14:CC:C7") == 0) {
             setModel("Samsung UE22H5610A LED 22 HD");
             setType("TV");
             setRam("? GB");
@@ -152,7 +165,7 @@ class Database {
         }
 
         // Huawei
-        if (hwAddress.contains("08:19:A6:CA:3C:B0")) {
+        if (hwAddress.compareToIgnoreCase("08:19:A6:CA:3C:B0") == 0) {
             setModel("Huawei ONT");
             setType("Fiber Terminal Unit (ONT)");
             setRam("? GB");
@@ -160,6 +173,19 @@ class Database {
             setScreen("1920x1200??");
             setHardDisk("?? GB");
             setUrlPhoto("http://g01.s.alicdn.com/kf/HTB1N_cRJFXXXXaBXpXXq6xXFXXXD/202167021/HTB1N_cRJFXXXXaBXpXXq6xXFXXXD.jpg");
+        }
+
+        // Comtrend Router WLAN 38:72:c0:ce:bd:4f
+        if (hwAddress.compareToIgnoreCase("38:72:c0:ce:bd:4f") == 0) {
+            setModel("Comtrend WAP-5813n");
+            setType("Router");
+            setRam("Up to 300Mbps");
+            setProcessor("Management: SNMP, Telnet, Web-based management, Configuration backup and restoration\n" +
+                    "Software upgrade via HTTP, TFTP server, or FTP server");
+            setScreen("Security: PAP, CHAP, Port triggering/Forwarding,\n" +
+                    "Packet filtering, Access control, SSH");
+            setHardDisk("Routing: PPPoE, IPoA, Static route, NAT/PAT, DHCP Server/Client, DNS Relay, ARP");
+            setUrlPhoto("http://www.comtrend.com/int/dbase/upload-img/169-product.jpg");
         }
     }
 }

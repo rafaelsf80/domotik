@@ -53,6 +53,7 @@ public class Main extends AppCompatActivity {
 
         Firebase.setAndroidContext(this);
         myFirebaseRef = new Firebase("https://domoclick.firebaseio.com/");
+        Log.d(TAG, myFirebaseRef.toString());
 
         // Init sync adapter: 1) weather updates; 2) router updates
         DomotikSyncAdapter.initializeSyncAdapter(this);

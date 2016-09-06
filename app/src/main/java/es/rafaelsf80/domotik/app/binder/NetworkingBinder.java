@@ -31,10 +31,12 @@ import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 import es.rafaelsf80.domotik.R;
+import es.rafaelsf80.domotik.app.Database;
 import es.rafaelsf80.domotik.app.Machine;
 import es.rafaelsf80.domotik.app.Main;
 import es.rafaelsf80.domotik.app.NetworkingDetailsActivity;
@@ -74,15 +76,16 @@ public class NetworkingBinder extends DataBinder<NetworkingBinder.ViewHolder> {
 
         Firebase fRef = new Firebase("https://domoclick.firebaseio.com/machines");
 
-        // Look for all child events. We will then map them to our own internal ArrayList, which backs ListView
+        // Look for all child events. We will then map them to our own internal ArrayList mMachines, which backs ListView
         mListener = fRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot snapshot, String previousChildName) {
 
                 Machine machine = snapshot.getValue(Machine.class);
+                notifyBinderDataSetChanged();
                 mMachines.add(machine);
                 Log.d(TAG, "Firebase onChildAdded():" + machine.getIpAddress());
-                notifyBinderDataSetChanged();
+
             }
 
             @Override
@@ -180,22 +183,30 @@ public class NetworkingBinder extends DataBinder<NetworkingBinder.ViewHolder> {
         if ((mMachines != null) && (mMachines.size()>0)) {
             Machine i = mMachines.get(position);
 
-            // set list menu content to variables
-            rowView.tvDeviceName.setText(i.getHwAddress());
-            rowView.tvIpAddress.setText(i.getIpAddress());
-
+            // TODO: CREATE CLOUD SQL FOR DEVICE DETAILS
+            Database deviceDetails = new Database(i.getHwAddress());
+            // Details coming from ARP response
             final String name = i.getName();
             final String flags = i.getFlags();
-
             final String hwAddress = i.getHwAddress();
             final String ipAddress = i.getIpAddress();
             final String port = i.getPort();
-            final String type = i.getType();
+            // Details from database
+            final String model = deviceDetails.getModel();
+            final String processor = deviceDetails.getProcessor();
+            final String ram = deviceDetails.getRam();
+            final String screen = deviceDetails.getScreen();
+            final String type = deviceDetails.getType();
+            final String hardDisk = deviceDetails.getHardDisk();
+            final String urlPhoto = deviceDetails.getUrlPhoto();
 
-            // download thumbnail
-            // Picasso.with(context)
-            //        .load(i.getUrlPhoto())
-            //        .into(rowView.imDevice);
+            // Show UI card
+            rowView.tvDeviceName.setText( model );
+            rowView.tvIpAddress.setText(i.getIpAddress());
+            // Download thumbnail
+            Picasso.with(rowView.itemView.getContext())
+                    .load(urlPhoto)
+                    .into(rowView.imDevicePhoto);
 
             rowView.cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -203,13 +214,19 @@ public class NetworkingBinder extends DataBinder<NetworkingBinder.ViewHolder> {
                     Log.d(TAG, "onClick Networking card number: " + String.valueOf(item_number));
                     Intent intent = new Intent(v.getContext(), NetworkingDetailsActivity.class);
 
-                    // when a list item has been pressed move to the item details screen,  passing the following data
+                    // when a list item has been pressed move to the iNetworkingDetailsActivity class, passing the following data
                     intent.putExtra("name", name);
                     intent.putExtra("flags", flags);
                     intent.putExtra("hwAddress", hwAddress);
                     intent.putExtra("ipAddress", ipAddress);
                     intent.putExtra("port", port);
                     intent.putExtra("type", type);
+                    intent.putExtra("model", model);
+                    intent.putExtra("processor", processor);
+                    intent.putExtra("ram", ram);
+                    intent.putExtra("screen", screen);
+                    intent.putExtra("hardDisk", hardDisk);
+                    intent.putExtra("urlPhoto", urlPhoto);
 
                     // move to the details screen
                     //v.getContext().startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(((Activity) v.getContext())).toBundle());
@@ -372,7 +389,7 @@ public class NetworkingBinder extends DataBinder<NetworkingBinder.ViewHolder> {
         private CardView cardView;
         private TextView tvDeviceName;
         private TextView tvIpAddress;
-        private ImageView imDevice;
+        private ImageView imDevicePhoto;
         private ImageView imMenu;
 
         private ViewHolder(View rowView) {
@@ -381,7 +398,7 @@ public class NetworkingBinder extends DataBinder<NetworkingBinder.ViewHolder> {
             cardView = (CardView) rowView.findViewById(R.id.cv_networking);
             tvDeviceName = (TextView) rowView.findViewById(R.id.tv_device_name);
             tvIpAddress = (TextView) rowView.findViewById(R.id.tv_ip_address);
-            imDevice = (ImageView) rowView.findViewById(R.id.im_device);
+            imDevicePhoto = (ImageView) rowView.findViewById(R.id.im_device);
             imMenu = (ImageView) rowView.findViewById(R.id.im_card_networking_menu);
         }
     }

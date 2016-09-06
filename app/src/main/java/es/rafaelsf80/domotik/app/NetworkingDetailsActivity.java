@@ -58,19 +58,16 @@ public class NetworkingDetailsActivity extends AppCompatActivity {
             final String ipAddress = fromListItem.getStringExtra("ipAddress");
             final String port = fromListItem.getStringExtra("port");
 
+            String type = fromListItem.getStringExtra("type");
+            final String model = fromListItem.getStringExtra("model");
+            final String processor = fromListItem.getStringExtra("processor");
+            final String ram = fromListItem.getStringExtra("ram");
+            final String screen = fromListItem.getStringExtra("screen");
+            final String hardDisk = fromListItem.getStringExtra("hardDisk");
+            final String urlPhoto = fromListItem.getStringExtra("urlPhoto");
+
             tvIpHwAddress.setText("IP address: " + ipAddress + "\n" + "MAC address: " + hwAddress +
                                     "Flags: " + flags + "\n" + "Port: " + port);
-
-            // TODO: PROVISIONAL DEVICE DATABASE, USE CLOUD SQL INSTEAD
-            // Get device details
-            Database deviceDetails = new Database(hwAddress);
-            String model = deviceDetails.getModel();
-            final String processor = deviceDetails.getProcessor();
-            final String ram = deviceDetails.getRam();
-            String screen = deviceDetails.getScreen();
-            String type = deviceDetails.getType();
-            final String hardDisk = deviceDetails.getHardDisk();
-            String urlPhoto = deviceDetails.getUrlPhoto();
 
             if (urlPhoto != null) {
                 collapsingToolbar.setTitle( model );

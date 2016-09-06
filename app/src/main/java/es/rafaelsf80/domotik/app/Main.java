@@ -54,7 +54,7 @@ public class Main extends AppCompatActivity {
         Firebase.setAndroidContext(this);
         myFirebaseRef = new Firebase("https://domoclick.firebaseio.com/");
 
-        // Init sync adapter: 1) weather updates; 2) router updates
+        // Init sync adapter: 1) weather updates; 2) ARP updates
         DomotikSyncAdapter.initializeSyncAdapter(this);
         Bundle bundle = new Bundle();
         bundle.putBoolean(ContentResolver.SYNC_EXTRAS_EXPEDITED, true);
@@ -170,7 +170,7 @@ public class Main extends AppCompatActivity {
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
         final EnumMapAdapter adapter = new EnumMapAdapter();
-        recyclerView.setAdapter(adapter);
+        recyclerView.setAdapter( adapter );
         recyclerView.setLayoutManager(new LinearLayoutManager(Main.this));
         DomotikSyncAdapter.mAdapter = adapter;
 

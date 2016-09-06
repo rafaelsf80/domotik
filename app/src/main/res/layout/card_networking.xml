@@ -44,6 +44,9 @@
         <ImageView
             android:id="@+id/im_device"
             android:layout_marginTop="10dp"
+            android:layout_height="64dp"
+            android:layout_width="64dp"
+
             app:layout_columnWeight="1"
             android:src="@drawable/common_google_signin_btn_icon_dark_normal" />
 

@@ -17,7 +17,7 @@ package es.rafaelsf80.domotik.app;
  * <p/>
  * Author: Rafael Sanchez Fuentes rafaelsf80 at gmail dot com
  */
-class Database {
+public class Database {
 
     private String model;
     private String type;

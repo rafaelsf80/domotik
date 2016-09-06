@@ -53,8 +53,8 @@ import es.rafaelsf80.domotik.app.weather.WeatherContract;
 public class DomotikSyncAdapter extends AbstractThreadedSyncAdapter {
     private final String TAG = getClass().getSimpleName();
     // Interval at which to sync with the weather, in seconds.
-    // 60 seconds (1 minute) * 180 = 3 hours
-    public static final int SYNC_INTERVAL = 60 * 180;
+    // 60 seconds (1 minute) * 60 = 1 hour
+    public static final int SYNC_INTERVAL = 60;
     public static final int SYNC_FLEXTIME = SYNC_INTERVAL/3;
     private static final long DAY_IN_MILLIS = 1000 * 60 * 60 * 24;
     private static final int WEATHER_NOTIFICATION_ID = 3004;
@@ -101,7 +101,6 @@ public class DomotikSyncAdapter extends AbstractThreadedSyncAdapter {
         try {
             br = new BufferedReader(new FileReader("/proc/net/arp"));
             String line;
-            Log.d(TAG, br.toString());
             while ((line = br.readLine()) != null) {
                 String[] splitted = line.split(" +");
                 // First line of ARP answer must not be stored

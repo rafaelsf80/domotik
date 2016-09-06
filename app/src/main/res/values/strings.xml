@@ -105,9 +105,9 @@
     <string name="no_presence">NO PRESENCE</string>
 
     <!-- REMOTE card -->
-    <string name="gas_provider">Iberdrola</string>
-    <string name="electricity_provider">Endesa</string>
-    <string name="air_conditioning_provider">Endesa</string>
+    <string name="gas_provider">Endesa</string>
+    <string name="electricity_provider">Iberdrola 4.6 kW</string>
+    <string name="air_conditioning_provider">Iberdrola</string>
     <string name="water_provider">CYII</string>
     <string name="gas_type">Gas</string>
     <string name="electricity_type">Electricity</string>

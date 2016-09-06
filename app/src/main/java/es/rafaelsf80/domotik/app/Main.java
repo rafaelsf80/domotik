@@ -53,7 +53,6 @@ public class Main extends AppCompatActivity {
 
         Firebase.setAndroidContext(this);
         myFirebaseRef = new Firebase("https://domoclick.firebaseio.com/");
-        Log.d(TAG, myFirebaseRef.toString());
 
         // Init sync adapter: 1) weather updates; 2) router updates
         DomotikSyncAdapter.initializeSyncAdapter(this);
@@ -174,8 +173,6 @@ public class Main extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(Main.this));
         DomotikSyncAdapter.mAdapter = adapter;
-
-
 
         // Even if we use a stub (dummy) content provider, we declare an observer
         // to talk to our sync adapter and receive updates

@@ -175,6 +175,17 @@ class Database {
             setUrlPhoto("http://g01.s.alicdn.com/kf/HTB1N_cRJFXXXXaBXpXXq6xXFXXXD/202167021/HTB1N_cRJFXXXXaBXpXXq6xXFXXXD.jpg");
         }
 
+        // Chromecast 6C:AD:F8:16:22:62
+        if (hwAddress.compareToIgnoreCase("6C:AD:F8:16:22:62") == 0) {
+            setModel("Chromecast 1st-gen");
+            setType("Video");
+            setRam("512 MB RAM DDR3L");
+            setProcessor("Marvell Armada 1500 Mini 88DE3005-A1");
+            setScreen("1080p");
+            setHardDisk("2 GB");
+            setUrlPhoto("https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Chromecast_dongle.jpg/1600px-Chromecast_dongle.jpg");
+        }
+
         // Comtrend Router WLAN 38:72:c0:ce:bd:4f
         if (hwAddress.compareToIgnoreCase("38:72:c0:ce:bd:4f") == 0) {
             setModel("Comtrend WAP-5813n");

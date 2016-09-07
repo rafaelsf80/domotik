@@ -183,7 +183,7 @@ public class NetworkingBinder extends DataBinder<NetworkingBinder.ViewHolder> {
         if ((mMachines != null) && (mMachines.size()>0)) {
             Machine i = mMachines.get(position);
 
-            // TODO: CREATE CLOUD SQL FOR DEVICE DETAILS
+            // TODO: CREATE CLOUD SQL TO STORE DEVICE DETAILS
             Database deviceDetails = new Database(i.getHwAddress());
             // Details coming from ARP response
             final String name = i.getName();
@@ -214,7 +214,7 @@ public class NetworkingBinder extends DataBinder<NetworkingBinder.ViewHolder> {
                     Log.d(TAG, "onClick Networking card number: " + String.valueOf(item_number));
                     Intent intent = new Intent(v.getContext(), NetworkingDetailsActivity.class);
 
-                    // when a list item has been pressed move to the iNetworkingDetailsActivity class, passing the following data
+                    // when a list item has been pressed move to the NetworkingDetailsActivity class, passing the following data
                     intent.putExtra("name", name);
                     intent.putExtra("flags", flags);
                     intent.putExtra("hwAddress", hwAddress);
@@ -251,7 +251,7 @@ public class NetworkingBinder extends DataBinder<NetworkingBinder.ViewHolder> {
     /**
      * Click listener for popup menu items
      */
-    class MyMenuItemClickListener implements PopupMenu.OnMenuItemClickListener {
+    private class MyMenuItemClickListener implements PopupMenu.OnMenuItemClickListener {
 
         Context mContext;
 
@@ -290,7 +290,8 @@ public class NetworkingBinder extends DataBinder<NetworkingBinder.ViewHolder> {
                     // if Hw address does not exist, add machine
                     Log.d(TAG, "Firebase New machine added: " + machine.getHwAddress());
                     machinesRef.child(machine.getHwAddress()).setValue(machine);
-                    showNotification(context, "New machine: " + machine.getHwAddress());
+                    // TODO: NOTIFICATIONS SHOULD SHOW DEVICE IMAGE, WHICH IS REQUESTED LATER. FIX THIS WHEN MOVING TO CLOUD SQL
+                    showNotification(context, "New machine: " + machine.getIpAddress());
                 }
             }
             @Override

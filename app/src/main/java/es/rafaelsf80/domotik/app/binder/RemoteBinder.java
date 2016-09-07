@@ -42,7 +42,7 @@ public class RemoteBinder extends DataBinder<RemoteBinder.ViewHolder> {
 
     private final String TAG = getClass().getSimpleName();
 
-    enum RemoteType {
+    private enum RemoteType {
         NATURAL_GAS, ELECTRICITY, WATER, AIR_CONDITIONING
     }
 
@@ -117,11 +117,11 @@ public class RemoteBinder extends DataBinder<RemoteBinder.ViewHolder> {
                     if (rowView.swOnOff.isChecked()) {
                         rowView.swOnOff.setText(resources.getString(R.string.on));
                         rowView.swOnOff.setTextColor(resources.getColor(R.color.colorAccent));
-                        Toast.makeText(view.getContext(), toast_string + " is On", Toast.LENGTH_LONG).show();
+                        Toast.makeText(view.getContext(), toast_string + " is On", Toast.LENGTH_SHORT).show();
                     } else {
                         rowView.swOnOff.setText(resources.getString(R.string.off));
                         rowView.swOnOff.setTextColor(resources.getColor(R.color.secondary_text));
-                        Toast.makeText(view.getContext(), toast_string + " is Off", Toast.LENGTH_LONG).show();
+                        Toast.makeText(view.getContext(), toast_string + " is Off", Toast.LENGTH_SHORT).show();
                     }
                 }
 

@@ -201,6 +201,7 @@ public class NetworkingBinder extends DataBinder<NetworkingBinder.ViewHolder> {
             final String urlPhoto = deviceDetails.getUrlPhoto();
 
             // Show UI card
+            rowView.tvDeviceType.setText( type );
             rowView.tvDeviceName.setText( model );
             rowView.tvIpAddress.setText(i.getIpAddress());
             // Download thumbnail
@@ -388,6 +389,7 @@ public class NetworkingBinder extends DataBinder<NetworkingBinder.ViewHolder> {
     static class ViewHolder extends RecyclerView.ViewHolder {
 
         private CardView cardView;
+        private TextView tvDeviceType;
         private TextView tvDeviceName;
         private TextView tvIpAddress;
         private ImageView imDevicePhoto;
@@ -397,6 +399,7 @@ public class NetworkingBinder extends DataBinder<NetworkingBinder.ViewHolder> {
             super(rowView);
             // store UI elements
             cardView = (CardView) rowView.findViewById(R.id.cv_networking);
+            tvDeviceType = (TextView) rowView.findViewById(R.id.tv_networking_type);
             tvDeviceName = (TextView) rowView.findViewById(R.id.tv_device_name);
             tvIpAddress = (TextView) rowView.findViewById(R.id.tv_ip_address);
             imDevicePhoto = (ImageView) rowView.findViewById(R.id.im_device);

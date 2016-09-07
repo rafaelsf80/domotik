@@ -20,7 +20,7 @@
         app:columnCount="3">
 
         <TextView
-            android:id="@+id/tv_networking"
+            android:id="@+id/tv_networking_type"
             android:gravity="left"
             android:textAppearance="@style/TextAppearance.AppCompat.Caption"
             android:textColor="@color/secondary_text"

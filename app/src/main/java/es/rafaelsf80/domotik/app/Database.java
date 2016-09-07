@@ -129,6 +129,39 @@ public class Database {
             setUrlPhoto("http://www.mobileworldni.com/wp-content/uploads/2016/03/ipad-3.jpg");
         }
 
+        // Moto 360 v2
+        if (hwAddress.compareToIgnoreCase("24:da:9b:40:53:2b") == 0) {
+            setModel("Moto 360 v2");
+            setType("Watch");
+            setRam("512 MB RAM");
+            setProcessor("Qualcomm MSM8926 Snapdragon 400; Quad-core 1.2 GHz Cortex-A7");
+            setScreen("360 x 325 pixels (~263 ppi pixel density");
+            setHardDisk("4 GB");
+            setUrlPhoto("https://d3nevzfk7ii3be.cloudfront.net/igi/OKMqTmOvNkAhVNBs.standard");
+        }
+
+        // Dragonboard 410c
+        if (hwAddress.compareToIgnoreCase("00:0A:F5:28:88:A0") == 0) {
+            setModel("Dragonboard 410c");
+            setType("Board");
+            setRam("1 GB RAM LPDDR3 533 MHZ");
+            setProcessor("Qualcomm  Snapdragon 400 Quad-core A53 ARM");
+            setScreen("??");
+            setHardDisk("8 GB");
+            setUrlPhoto("https://developer.qualcomm.com/sites/default/files/attachments/db410c-top1.png");
+        }
+
+        // Arris decoder
+        if (hwAddress.compareToIgnoreCase("d4:0a:a9:92:e0:82") == 0) {
+            setModel("Arris VIP1113 STB");
+            setType("STB");
+            setRam("256 MB DDR3");
+            setProcessor("650 MHz/1200 DMIPS");
+            setScreen("720p, 1080i, 1080p60");
+            setHardDisk("N/A");
+            setUrlPhoto("https://dl.dropboxusercontent.com/u/108811279/20150531_081350.jpg");
+        }
+
         // Nexus 6
         if (hwAddress.compareToIgnoreCase("44:80:EB:67:E8:14") == 0) {
             setModel("Motorola Nexus 6");

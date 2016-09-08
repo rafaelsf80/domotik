@@ -191,7 +191,7 @@ public class NetworkingBinder extends DataBinder<NetworkingBinder.ViewHolder> {
             final String hwAddress = i.getHwAddress();
             final String ipAddress = i.getIpAddress();
             final String port = i.getPort();
-            // Details from database
+            // Details from private database
             final String model = deviceDetails.getModel();
             final String processor = deviceDetails.getProcessor();
             final String ram = deviceDetails.getRam();
@@ -278,10 +278,15 @@ public class NetworkingBinder extends DataBinder<NetworkingBinder.ViewHolder> {
     @Override
     public int getItemCount() { return mMachines.size(); }
 
+    /**
+     * Add machine to Firebase database
+     */
     public void add(Context ctx, final Machine machine) {
 
-        final Firebase machinesRef = Main.myFirebaseRef.child("machines");
         final Context context = ctx;
+        final Firebase machinesRef = Main.myFirebaseRef.child("machines");
+
+        // Before adding, check if machine exists
         machinesRef.child(machine.getHwAddress()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {

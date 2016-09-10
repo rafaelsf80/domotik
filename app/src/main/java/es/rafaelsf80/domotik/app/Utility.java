@@ -20,6 +20,8 @@ package es.rafaelsf80.domotik.app;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.DhcpInfo;
+import android.net.wifi.WifiManager;
 import android.preference.PreferenceManager;
 import android.text.format.Time;
 
@@ -29,7 +31,29 @@ import java.util.Date;
 
 import es.rafaelsf80.domotik.R;
 
+import static java.security.AccessController.getContext;
+
 public class Utility {
+
+
+    public static String getLocalRouter(Context ctx) {
+
+        WifiManager wifii= (WifiManager) ctx.getSystemService(Context.WIFI_SERVICE);
+        DhcpInfo d=wifii.getDhcpInfo();
+
+        String s_dns1="DNS 1: "+String.valueOf(d.dns1);
+        String s_dns2="DNS 2: "+String.valueOf(d.dns2);
+        String s_gateway="Default Gateway: "+String.valueOf(d.gateway);
+        String s_ipAddress="IP Address: "+String.valueOf(d.ipAddress);
+        String s_leaseDuration="Lease Time: "+String.valueOf(d.leaseDuration);
+        String s_netmask="Subnet Mask: "+String.valueOf(d.netmask);
+        String s_serverAddress="Server IP: "+String.valueOf(d.serverAddress);
+
+        return "38:72:c0:ce:bd:4f";
+
+    }
+
+
     public static String getPreferredLocation(Context context) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         return prefs.getString(context.getString(R.string.pref_location_key),

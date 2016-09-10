@@ -44,9 +44,9 @@ import java.net.URL;
 import java.util.Vector;
 
 import es.rafaelsf80.domotik.R;
+import es.rafaelsf80.domotik.app.EnumMapAdapter;
 import es.rafaelsf80.domotik.app.Machine;
 import es.rafaelsf80.domotik.app.Main;
-import es.rafaelsf80.domotik.app.EnumMapAdapter;
 import es.rafaelsf80.domotik.app.Utility;
 import es.rafaelsf80.domotik.app.weather.WeatherContract;
 
@@ -98,19 +98,22 @@ public class DomotikSyncAdapter extends AbstractThreadedSyncAdapter {
 
         BufferedReader br = null;
 
+
         try {
             br = new BufferedReader(new FileReader("/proc/net/arp"));
             String line;
             while ((line = br.readLine()) != null) {
                 String[] splitted = line.split(" +");
-                // First line of ARP answer must not be stored
+                // First line of /proc/net/arp must not be stored
                 if (!splitted[0].contains("IP")) {
+
                     Machine machine = new Machine();
                     machine.setIpAddress(splitted[0]);
                     machine.setFlags(splitted[2]);
                     machine.setHwAddress(splitted[3]);
                     machine.setPort(splitted[5]);
                     machine.setType("samsung_s5");
+                    machine.setLocalRouter( Utility.getLocalRouter(getContext()) );
 
                     // Discard ARO entries with flags other than 0x2. ARP flag values as per if_arp.h
                     // #define ATF_COM		0x02		/* completed entry (ha valid)	*/

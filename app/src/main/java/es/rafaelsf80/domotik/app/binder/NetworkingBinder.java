@@ -65,7 +65,7 @@ public class NetworkingBinder extends DataBinder<NetworkingBinder.ViewHolder> {
 
     private final String TAG = getClass().getSimpleName();
     private ArrayList<Machine> mMachines = new ArrayList<>();
-    private ChildEventListener mListener;
+    private ChildEventListener mListener = null;
     private Context mContext;
 
     private static final int NOTIFICATION_ID = 3004;
@@ -77,14 +77,18 @@ public class NetworkingBinder extends DataBinder<NetworkingBinder.ViewHolder> {
         Firebase fRef = new Firebase("https://domoclick.firebaseio.com/machines");
 
         // Look for all child events. We will then map them to our own internal ArrayList mMachines, which backs ListView
+        // Note it's going to be called every time the activity is started, even if no additions.
         mListener = fRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot snapshot, String previousChildName) {
 
+
                 Machine machine = snapshot.getValue(Machine.class);
                 notifyBinderDataSetChanged();
+
                 mMachines.add(machine);
                 Log.d(TAG, "Firebase onChildAdded():" + machine.getIpAddress());
+                Log.d(TAG, "mMachines size: "+String.valueOf(mMachines.size()));
 
             }
 
@@ -169,6 +173,7 @@ public class NetworkingBinder extends DataBinder<NetworkingBinder.ViewHolder> {
         //        .load(R.drawable.bird)
         //        .into(holder.mImageView);
 
+        Log.d(TAG, "position networking: " + String.valueOf(position));
         if (rowView.imMenu != null)
             rowView.imMenu.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -191,6 +196,7 @@ public class NetworkingBinder extends DataBinder<NetworkingBinder.ViewHolder> {
             final String hwAddress = i.getHwAddress();
             final String ipAddress = i.getIpAddress();
             final String port = i.getPort();
+
             // Details from private database
             final String model = deviceDetails.getModel();
             final String processor = deviceDetails.getProcessor();
@@ -296,6 +302,7 @@ public class NetworkingBinder extends DataBinder<NetworkingBinder.ViewHolder> {
                     // if Hw address does not exist, add machine
                     Log.d(TAG, "Firebase New machine added: " + machine.getHwAddress());
                     machinesRef.child(machine.getHwAddress()).setValue(machine);
+
                     // TODO: NOTIFICATIONS SHOULD SHOW DEVICE IMAGE, WHICH IS REQUESTED LATER. FIX THIS WHEN MOVING TO CLOUD SQL
                     showNotification(context, "New machine: " + machine.getIpAddress());
                 }

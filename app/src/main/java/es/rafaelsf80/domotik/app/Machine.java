@@ -27,6 +27,12 @@ public class Machine {
     String name;
     String type;
 
+
+
+
+
+    String localRouter;
+
     public String getIpAddress() {
         return ipAddress;
     }
@@ -46,6 +52,8 @@ public class Machine {
     public String getName() { return name; }
 
     public String getType() { return type; }
+
+    public String getLocalRouter() { return localRouter; }
 
     public void setIpAddress(String ipAddress) {
         this.ipAddress = ipAddress;
@@ -69,5 +77,9 @@ public class Machine {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public void setLocalRouter(String localRouter) {
+        this.localRouter = localRouter;
     }
 }

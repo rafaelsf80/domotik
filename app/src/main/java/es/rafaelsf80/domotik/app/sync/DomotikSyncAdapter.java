@@ -562,6 +562,7 @@ public class DomotikSyncAdapter extends AbstractThreadedSyncAdapter {
         Account account = getSyncAccount(context);
         String authority = context.getString(R.string.content_authority);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            Log.d("SYNC", "Adding PeriodicSync (greater than KitKat): " + String.valueOf(syncInterval));
             // we can enable inexact timers in our periodic sync
             SyncRequest request = new SyncRequest.Builder().
                     syncPeriodic(syncInterval, flexTime).
@@ -569,6 +570,7 @@ public class DomotikSyncAdapter extends AbstractThreadedSyncAdapter {
                     setExtras(new Bundle()).build();
             ContentResolver.requestSync(request);
         } else {
+            Log.d("SYNC", "Adding PeriodicSync: " + String.valueOf(syncInterval));
             ContentResolver.addPeriodicSync(account,
                     authority, new Bundle(), syncInterval);
         }
@@ -619,10 +621,11 @@ public class DomotikSyncAdapter extends AbstractThreadedSyncAdapter {
              * then call ContentResolver.setIsSyncable(account, AUTHORITY, 1)
              * here.
              */
-
+            /* This method is only called once at account creation */
             onAccountCreated(newAccount, context);
+
         }
-            return newAccount;
+        return newAccount;
     }
 
 

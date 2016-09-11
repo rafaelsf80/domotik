@@ -59,8 +59,11 @@ public class Main extends AppCompatActivity {
         Bundle bundle = new Bundle();
         bundle.putBoolean(ContentResolver.SYNC_EXTRAS_EXPEDITED, true);
         bundle.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, true);
-        ContentResolver.requestSync(DomotikSyncAdapter.getSyncAccount(this),
-                getString(R.string.content_authority), bundle);
+        DomotikSyncAdapter.initializeSyncAdapter(this);
+
+
+        //ContentResolver.requestSync(DomotikSyncAdapter.getSyncAccount(this),
+        //        getString(R.string.content_authority), bundle);
 
 
         // enable window content transition

@@ -76,7 +76,7 @@ public class NetworkingBinder extends DataBinder<NetworkingBinder.ViewHolder> {
 
         Firebase fRef = new Firebase("https://domoclick.firebaseio.com/machines");
 
-        // Look for all child events. We will then map them to our own internal ArrayList mMachines, which backs ListView
+        // Look for all child events. We will then map them to our own internal ArrayList 'mMachines', which backs ListView
         // Note it's going to be called every time the activity is started, even if no additions.
         mListener = fRef.addChildEventListener(new ChildEventListener() {
             @Override

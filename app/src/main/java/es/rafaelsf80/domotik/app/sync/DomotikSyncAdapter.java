@@ -593,6 +593,8 @@ public class DomotikSyncAdapter extends AbstractThreadedSyncAdapter {
      * if the fake account doesn't exist yet.  If we make a new account, we call the
      * onAccountCreated method so we can initialize things.
      *
+     *  *** This method is only called once at account creation, and then calls onAccountCreated to set peridic sync ....
+     *
      * @param context The context used to access the account service
      * @return a fake account.
      */
@@ -621,7 +623,7 @@ public class DomotikSyncAdapter extends AbstractThreadedSyncAdapter {
              * then call ContentResolver.setIsSyncable(account, AUTHORITY, 1)
              * here.
              */
-            /* This method is only called once at account creation */
+
             onAccountCreated(newAccount, context);
 
         }

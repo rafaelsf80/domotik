@@ -61,6 +61,8 @@ public class Main extends AppCompatActivity {
         bundle.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, true);
         DomotikSyncAdapter.initializeSyncAdapter(this);
 
+        DomotikSyncAdapter.syncImmediately(this);
+
 
         //ContentResolver.requestSync(DomotikSyncAdapter.getSyncAccount(this),
         //        getString(R.string.content_authority), bundle);

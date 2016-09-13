@@ -82,8 +82,11 @@ public class DomotikSyncAdapter extends AbstractThreadedSyncAdapter {
     @Override
     public void onPerformSync(Account account, Bundle extras, String authority, ContentProviderClient provider, SyncResult syncResult) {
 
-        Log.d(TAG, "Starting sync");
 
+        Log.d(TAG, "Starting Network Scanning");
+        Utility.PerformNetworkScanning( Utility.getLocalSubnet(getContext()));
+
+        Log.d(TAG, "Starting Sync");
         //* ***********************
         //*
         //*     ARP SYNC
@@ -96,8 +99,9 @@ public class DomotikSyncAdapter extends AbstractThreadedSyncAdapter {
         //* 192.168.18.11    0x1         0x2         00:04:20:06:55:1a     *        eth0
         //* 192.168.18.36    0x1         0x2         00:22:43:ab:2a:5b     *        eth0
 
-        BufferedReader br = null;
 
+
+        BufferedReader br = null;
 
         try {
             br = new BufferedReader(new FileReader("/proc/net/arp"));
@@ -125,6 +129,8 @@ public class DomotikSyncAdapter extends AbstractThreadedSyncAdapter {
                     if (machine.getFlags().compareToIgnoreCase("0x2") == 0) {
                         mAdapter.add(getContext(), machine);  // will call mAdapter.notifyDataSetChanged()
                         Log.d(TAG, "Seen in ARP response: " + machine.getIpAddress() + " " + machine.getFlags() + " " + machine.getHwAddress() + " " + machine.getPort());
+                    } else {
+                        mAdapter.remove(getContext(), machine);
                     }
                     //showNotification();
                 }

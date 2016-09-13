@@ -49,6 +49,10 @@ public class EnumMapAdapter extends EnumMapBindAdapter<EnumMapAdapter.SampleView
         ((NetworkingBinder) getDataBinder(SampleViewType.MACHINE)).add(context, machine);
     }
 
+    public void remove(Context context, Machine machine) {
+        ((NetworkingBinder) getDataBinder(SampleViewType.MACHINE)).remove(context, machine);
+    }
+
 
     //public void setSample2Data(List<SampleData> dataSet) {
     //    //((Sample2Binder) getDataBinder(SampleViewType.SAMPLE2)).addAll(dataSet);

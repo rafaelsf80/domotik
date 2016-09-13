@@ -25,6 +25,7 @@ import android.net.wifi.WifiManager;
 import android.preference.PreferenceManager;
 import android.text.format.Time;
 
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -51,6 +52,22 @@ public class Utility {
 
         return "38:72:c0:ce:bd:4f";
 
+    }
+
+    public static String getLocalSubnet(Context ctx) {
+        return "192.168.1";
+    }
+
+    public static void PerformNetworkScanning(String subnet) {
+
+        try {
+            for (int dest = 0; dest < 255; dest++) {
+                String host = subnet + "." + dest;
+                Runtime.getRuntime().exec("/system/bin/ping -c 1 " + host);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 

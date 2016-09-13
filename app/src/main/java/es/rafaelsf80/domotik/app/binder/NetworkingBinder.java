@@ -314,6 +314,31 @@ public class NetworkingBinder extends DataBinder<NetworkingBinder.ViewHolder> {
         });
     }
 
+    public void remove(Context ctx, final Machine machine) {
+
+        final Context context = ctx;
+        final Firebase machinesRef = Main.myFirebaseRef.child("machines");
+
+        // Before adding, check if machine exists
+        machinesRef.child(machine.getHwAddress()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                if (snapshot.getValue() != null) {
+                    // check if Hw address exists
+                } else {
+                    // if Hw address does not exist, add machine
+                    Log.d(TAG, "Firebase Removing machine: " + machine.getHwAddress());
+                    machinesRef.child(machine.getHwAddress()).removeValue();
+                }
+            }
+            @Override
+            public void onCancelled(FirebaseError arg0) {
+                Log.d(TAG, "error removing new machine");
+            }
+        });
+    }
+
+
     public void showNotification(Context context, String notificationMessage) {
 
         //checking the last update and notify if it' the first of the day

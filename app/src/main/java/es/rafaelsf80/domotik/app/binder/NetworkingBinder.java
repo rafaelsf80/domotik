@@ -319,7 +319,7 @@ public class NetworkingBinder extends DataBinder<NetworkingBinder.ViewHolder> {
         final Context context = ctx;
         final Firebase machinesRef = Main.myFirebaseRef.child("machines");
 
-        // Before adding, check if machine exists
+        // TODO: check if this is needed to remove a machine
         machinesRef.child(machine.getHwAddress()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {

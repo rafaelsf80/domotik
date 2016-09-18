@@ -96,10 +96,8 @@ public class DomotikSyncAdapter extends AbstractThreadedSyncAdapter {
         //* We assume that the ARP answer has this structure:<br>
         //* <br>
         //* IP address       HW type     Flags       HW address            Mask     Device
-        //* 192.168.18.11    0x1         0x2         00:04:20:06:55:1a     *        eth0
-        //* 192.168.18.36    0x1         0x2         00:22:43:ab:2a:5b     *        eth0
-
-
+        //* 192.168.1.11    0x1         0x2         00:04:20:06:55:1a     *        eth0
+        //* 192.168.1.36    0x1         0x2         00:22:43:ab:2a:5b     *        eth0
 
         BufferedReader br = null;
 

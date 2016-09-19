@@ -19,6 +19,7 @@ import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
@@ -117,11 +118,11 @@ public class DomotikSyncAdapter extends AbstractThreadedSyncAdapter {
                     machine.setType("samsung_s5");
                     machine.setLocalRouter( Utility.getLocalRouter(getContext()) );
 
-                    // Discard ARO entries with flags other than 0x2. ARP flag values as per if_arp.h
+                    // Discard ARP entries with flags other than 0x2. As per 'if_arp.h':
                     // #define ATF_COM		0x02		/* completed entry (ha valid)	*/
-                    // #define	ATF_PERM	0x04		/* permanent entry		*/
-                    // #define	ATF_PUBL	0x08		/* publish entry		*/
-                    // #define	ATF_USETRAILERS	0x10	/* has requested trailers	*/
+                    // #define ATF_PERM	0x04		/* permanent entry		*/
+                    // #define ATF_PUBL	0x08		/* publish entry		*/
+                    // #define ATF_USETRAILERS	0x10	/* has requested trailers	*/
                     // #define ATF_NETMASK     0x20     /* want to use a netmask (only for proxy entries) */
                     // #define ATF_DONTPUB	0x40		/* don't answer this addresses	*/
                     if (machine.getFlags().compareToIgnoreCase("0x2") == 0) {
@@ -459,13 +460,14 @@ public class DomotikSyncAdapter extends AbstractThreadedSyncAdapter {
                         .setSmallIcon(R.drawable.ic_home_black_24dp)
                         .setColor(resources.getColor(R.color.colorAccent))
                         .setSound(defaultSoundUri)
+                        .setWhen(System.currentTimeMillis())
                         .setAutoCancel(true)
                         .setCustomContentView(remoteViews)
                         //.setStyle(new Notification.DecoratedCustomViewStyle())
-                        .setPriority(Notification.PRIORITY_HIGH)
-                        .setVibrate(new long[0]);
-
-
+                        .setPriority(Notification.PRIORITY_MAX)
+                        //.setVibrate(new long[0])
+                        .setDefaults(Notification.DEFAULT_VIBRATE)
+                        .setLights(Color.RED, 1000, 500);
 
 
 

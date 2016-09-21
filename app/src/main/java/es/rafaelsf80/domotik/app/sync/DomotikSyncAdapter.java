@@ -19,13 +19,11 @@ import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.text.format.Time;
 import android.util.Log;
@@ -50,6 +48,8 @@ import es.rafaelsf80.domotik.app.Machine;
 import es.rafaelsf80.domotik.app.Main;
 import es.rafaelsf80.domotik.app.Utility;
 import es.rafaelsf80.domotik.app.weather.WeatherContract;
+
+import static android.content.Context.NOTIFICATION_SERVICE;
 
 public class DomotikSyncAdapter extends AbstractThreadedSyncAdapter {
     private final String TAG = getClass().getSimpleName();
@@ -456,18 +456,24 @@ public class DomotikSyncAdapter extends AbstractThreadedSyncAdapter {
                 // NotificationCompatBuilder is a very convenient way to build backward-compatible
                 // notifications.  Just throw in some data.
 
-                NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context)
-                        .setSmallIcon(R.drawable.ic_home_black_24dp)
-                        .setColor(resources.getColor(R.color.colorAccent))
-                        .setSound(defaultSoundUri)
-                        .setWhen(System.currentTimeMillis())
-                        .setAutoCancel(true)
-                        .setCustomContentView(remoteViews)
-                        //.setStyle(new Notification.DecoratedCustomViewStyle())
-                        .setPriority(Notification.PRIORITY_MAX)
-                        //.setVibrate(new long[0])
-                        .setDefaults(Notification.DEFAULT_VIBRATE)
-                        .setLights(Color.RED, 1000, 500);
+//                NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context)
+//                        .setSmallIcon(R.drawable.ic_home_black_24dp)
+//                        .setColor(resources.getColor(R.color.colorAccent))
+//                        .setSound(defaultSoundUri)
+//                        .setWhen(System.currentTimeMillis())
+//                        .setAutoCancel(true)
+//                        .setCustomContentView(remoteViews)
+//                        //.setStyle(new Notification.DecoratedCustomViewStyle())
+//                        .setPriority(Notification.PRIORITY_MAX)
+//                        //.setVibrate(new long[0])
+//                        .setDefaults(Notification.DEFAULT_VIBRATE)
+//                        .setLights(0xff00ff00, 300, 100);
+
+                Notification.Builder mBuilder = new Notification.Builder(context);
+                mBuilder.setSmallIcon(R.drawable.ic_launcher)
+                        .setPriority(Notification.PRIORITY_HIGH)
+                        .setOngoing(true);
+                mBuilder.setLights(0xff00ff00, 300, 100);
 
 
 
@@ -490,11 +496,9 @@ public class DomotikSyncAdapter extends AbstractThreadedSyncAdapter {
                     mBuilder.setContentIntent(resultPendingIntent);
 
                     NotificationManager mNotificationManager =
-                            (NotificationManager) getContext().getSystemService(Context.NOTIFICATION_SERVICE);
+                            (NotificationManager) getContext().getSystemService(NOTIFICATION_SERVICE);
                     // WEATHER_NOTIFICATION_ID allows you to update the notification later on.
-                    mNotificationManager.notify(WEATHER_NOTIFICATION_ID, mBuilder.build());
-
-                    //refreshing last sync
+                       //refreshing last sync
                     SharedPreferences.Editor editor = prefs.edit();
                     editor.putLong(lastNotificationKey, System.currentTimeMillis());
                     editor.commit();

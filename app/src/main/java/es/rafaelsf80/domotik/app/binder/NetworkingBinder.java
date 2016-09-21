@@ -299,7 +299,7 @@ public class NetworkingBinder extends DataBinder<NetworkingBinder.ViewHolder> {
                 if (snapshot.getValue() != null) {
                     // check if Hw address exists
                 } else {
-                    // if Hw address does not exist, add machine
+                    // if Hw address does not exist, add machine to Firebase
                     Log.d(TAG, "Firebase New machine added: " + machine.getHwAddress());
                     machinesRef.child(machine.getHwAddress()).setValue(machine);
 

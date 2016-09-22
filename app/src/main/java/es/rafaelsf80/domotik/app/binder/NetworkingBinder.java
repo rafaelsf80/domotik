@@ -370,10 +370,10 @@ public class NetworkingBinder extends DataBinder<NetworkingBinder.ViewHolder> {
                 //ImageView imNotificationPhoto = (ImageView) resources.findViewById(R.id.im_notification_end);
 
                 RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.notification);
-                remoteViews.setImageViewResource(R.id.im_notification, R.drawable.ic_home_icon);
+                remoteViews.setImageViewResource(R.id.im_notification, R.drawable.ic_home_icon_color_24dp);
                 remoteViews.setTextViewText(R.id.tv_notification_title, title);
                 remoteViews.setTextViewText(R.id.tv_notification_text_message, notificationMessage);
-                remoteViews.setImageViewResource(R.id.im_notification_end, R.drawable.ic_home_icon);
+                remoteViews.setImageViewResource(R.id.im_notification_end, R.drawable.ic_home_icon_color_24dp);
 
                 //Picasso.with(context)
                 //        .load(urlPhoto)

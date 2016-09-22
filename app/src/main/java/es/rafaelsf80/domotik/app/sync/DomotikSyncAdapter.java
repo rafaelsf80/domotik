@@ -437,7 +437,7 @@ public class DomotikSyncAdapter extends AbstractThreadedSyncAdapter {
                     //Bitmap largeIcon = BitmapFactory.decodeResource(resources,
                     //        Utility.getArtResourceForWeatherCondition(weatherId));
                     Bitmap largeIcon = BitmapFactory.decodeResource(resources,
-                            R.drawable.estar);
+                            R.drawable.ic_home_icon_color_24dp);
                     Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
                     // Define the text of the notification
@@ -470,7 +470,7 @@ public class DomotikSyncAdapter extends AbstractThreadedSyncAdapter {
 //                        .setLights(0xff00ff00, 300, 100);
 
                 Notification.Builder mBuilder = new Notification.Builder(context);
-                mBuilder.setSmallIcon(R.drawable.ic_launcher)
+                mBuilder.setSmallIcon(R.drawable.ic_home_icon_color_24dp)
                         .setPriority(Notification.PRIORITY_HIGH)
                         .setOngoing(true);
                 mBuilder.setLights(0xff00ff00, 300, 100);

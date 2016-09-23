@@ -32,8 +32,6 @@ import java.util.Date;
 
 import es.rafaelsf80.domotik.R;
 
-import static java.security.AccessController.getContext;
-
 public class Utility {
 
 

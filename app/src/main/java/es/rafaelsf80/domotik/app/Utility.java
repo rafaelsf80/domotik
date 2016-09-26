@@ -24,8 +24,12 @@ import android.net.DhcpInfo;
 import android.net.wifi.WifiManager;
 import android.preference.PreferenceManager;
 import android.text.format.Time;
+import android.util.Log;
 
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -38,17 +42,17 @@ public class Utility {
     public static String getLocalRouter(Context ctx) {
 
         WifiManager wifii= (WifiManager) ctx.getSystemService(Context.WIFI_SERVICE);
-        DhcpInfo d=wifii.getDhcpInfo();
+        DhcpInfo dhcp = wifii.getDhcpInfo();
 
-        String s_dns1="DNS 1: "+String.valueOf(d.dns1);
-        String s_dns2="DNS 2: "+String.valueOf(d.dns2);
-        String s_gateway="Default Gateway: "+String.valueOf(d.gateway);
-        String s_ipAddress="IP Address: "+String.valueOf(d.ipAddress);
-        String s_leaseDuration="Lease Time: "+String.valueOf(d.leaseDuration);
-        String s_netmask="Subnet Mask: "+String.valueOf(d.netmask);
-        String s_serverAddress="Server IP: "+String.valueOf(d.serverAddress);
+        String s_dns1="DNS 1: "+String.valueOf(dhcp.dns1);
+        String s_dns2="DNS 2: "+String.valueOf(dhcp.dns2);
+        String s_gateway="Default Gateway: "+String.valueOf(dhcp.gateway);
+        String s_ipAddress="IP Address: "+String.valueOf(dhcp.ipAddress);
+        String s_leaseDuration="Lease Time: "+String.valueOf(dhcp.leaseDuration);
+        String s_netmask="Subnet Mask: "+String.valueOf(dhcp.netmask);
+        String s_serverAddress="Server IP: "+String.valueOf(dhcp.serverAddress);
 
-        return "38:72:c0:ce:bd:4f";
+        return String.valueOf(dhcp.gateway);
 
     }
 
@@ -61,11 +65,41 @@ public class Utility {
         try {
             for (int dest = 0; dest < 255; dest++) {
                 String host = subnet + "." + dest;
-                Runtime.getRuntime().exec("/system/bin/ping -c 1 " + host);
+                Process p = Runtime.getRuntime().exec("/system/bin/ping -c 1 " + host);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Helper method to check if a host is available by sending a ping message
+     *
+     * @param host IP address of host
+     * @return true/false
+     */
+    public static boolean isHostAvailable(String host) {
+
+        try {
+            Process p = Runtime.getRuntime().exec("/system/bin/ping -c 1 " + host);
+            String output;
+            final BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            //dos is a field (a class attribute)
+            DataOutputStream dos = new DataOutputStream(p.getOutputStream());
+            // Check if line of type: "From 192.168.1.35: icmp_seq=1 Destination Host Unreachable"
+            while ((output = br.readLine()) != null) {
+                Log.v("ping response", output);
+                if (output.contains("Unreachable")) {
+                    return false;
+                }
+                if (output.contains("100% packet loss")) {
+                    return false;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return true;
     }
 
 

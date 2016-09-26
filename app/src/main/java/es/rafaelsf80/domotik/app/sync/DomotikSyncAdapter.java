@@ -29,6 +29,11 @@ import android.text.format.Time;
 import android.util.Log;
 import android.widget.RemoteViews;
 
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -129,7 +134,8 @@ public class DomotikSyncAdapter extends AbstractThreadedSyncAdapter {
                         mAdapter.add(getContext(), machine);  // will call mAdapter.notifyDataSetChanged()
                         Log.d(TAG, "Seen in ARP response: " + machine.getIpAddress() + " " + machine.getFlags() + " " + machine.getHwAddress() + " " + machine.getPort());
                     } else {
-                        mAdapter.remove(getContext(), machine);
+                        if (!machine.getHwAddress().contains("00:00:00:00:00:00"))
+                            mAdapter.remove(getContext(), machine);
                     }
                     //showNotification();
                 }
@@ -143,6 +149,34 @@ public class DomotikSyncAdapter extends AbstractThreadedSyncAdapter {
                 e.printStackTrace();
             }
         }
+
+        //* ***********************
+        //*
+        //*     CLEANING FIREBASE DATABASE BY REMOVING NON-RESPONDING HOSTS
+        //*
+        //* ************************
+
+        final Firebase machinesRef = Main.myFirebaseRef.child("machines");
+        final Context context = getContext();
+        machinesRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+
+                for (DataSnapshot machineSnapshot : snapshot.getChildren()) {
+
+                    Machine machine = machineSnapshot.getValue(Machine.class);
+                    if (!Utility.isHostAvailable( machine.getIpAddress() ))
+                        machinesRef.child(machine.getHwAddress()).removeValue();
+                        mAdapter.remove(context, machine);
+
+
+                }
+            }
+            @Override
+            public void onCancelled(FirebaseError arg0) {
+                Log.d(TAG, "error adding new machine");
+            }
+        });
 
         //* ***********************
         //*

@@ -86,6 +86,10 @@ public class NetworkingBinder extends DataBinder<NetworkingBinder.ViewHolder> {
                 Machine machine = snapshot.getValue(Machine.class);
                 notifyBinderDataSetChanged();
 
+                // check if exists
+                // if not, it's new and must notify
+                // if yes, remote local entry and add this new one
+
                 mMachines.add(machine);
                 Log.d(TAG, "Firebase onChildAdded():" + machine.getIpAddress());
                 Log.d(TAG, "mMachines size: "+String.valueOf(mMachines.size()));
@@ -285,7 +289,8 @@ public class NetworkingBinder extends DataBinder<NetworkingBinder.ViewHolder> {
     public int getItemCount() { return mMachines.size(); }
 
     /**
-     * Add machine to Firebase database
+     * Add machine found in ARP local entries to Firebase database
+     * Can be new machine or existing machine
      */
     public void add(Context ctx, final Machine machine) {
 
@@ -313,6 +318,8 @@ public class NetworkingBinder extends DataBinder<NetworkingBinder.ViewHolder> {
             }
         });
     }
+
+
 
     public void remove(Context ctx, final Machine machine) {
 

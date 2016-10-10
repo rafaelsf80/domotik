@@ -80,6 +80,50 @@
           "status": 2
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:238390394119:android:8834bda48b5d5f68",
+        "android_client_info": {
+          "package_name": "es.rafaelsf80.domotik"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "238390394119-rlfrvnqgu10n4uf0uva04k5rc19u3sui.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "es.rafaelsf80.domotik",
+            "certificate_hash": "5D2A66F7AF4FE658022A537F8C4767ED04361A93"
+          }
+        },
+        {
+          "client_id": "238390394119-sch7fdamh59jpouu3deuovn8csuhdfm9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCr99ofD5sVFJugJQHWyp-gBlAc-tUzJwY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "238390394119-sch7fdamh59jpouu3deuovn8csuhdfm9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
     }
   ],
   "configuration_version": "1"

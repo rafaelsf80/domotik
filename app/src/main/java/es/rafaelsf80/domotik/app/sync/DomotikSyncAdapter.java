@@ -150,7 +150,7 @@ public class DomotikSyncAdapter extends AbstractThreadedSyncAdapter {
             }
         }
 
-        //* ***********************
+        //* **7*********************
         //*
         //*     CLEANING FIREBASE DATABASE BY REMOVING NON-RESPONDING HOSTS
         //*

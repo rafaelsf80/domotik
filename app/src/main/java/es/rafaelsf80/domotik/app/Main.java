@@ -51,6 +51,11 @@ public class Main extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // Run SafetyNet check
+        Attest attest = new Attest(this);
+        attest.runCheck();
+
+        // Connect to Firebase
         Firebase.setAndroidContext(this);
         myFirebaseRef = new Firebase("https://domoclick.firebaseio.com/");
 

@@ -231,6 +231,28 @@ public class Database {
             setHardDisk("Routing: PPPoE, IPoA, Static route, NAT/PAT, DHCP Server/Client, DNS Relay, ARP");
             setUrlPhoto("http://www.comtrend.com/int/dbase/upload-img/169-product.jpg");
         }
+
+        //NestCam 18:b4:30:52:20:20
+        if (hwAddress.compareToIgnoreCase("18:B4:30:52:20:20") == 0) {
+            setModel("Nest Cam Indoor");
+            setType("WebCam");
+            setRam("N/A");
+            setProcessor("N/A");
+            setScreen("full 1080p HD");
+            setHardDisk("N/A");
+            setUrlPhoto("https://nest.com/blog/images/2015-06-17/say-hello-to-nest-cam/cam_a-dabe34e246.jpg");
+        }
+
+        //NestCam 18:b4:30:81:5C:2E
+        if (hwAddress.compareToIgnoreCase("18:B4:30:81:5C:2E") == 0) {
+            setModel("Nest Thermostat");
+            setType("Thermostat");
+            setRam("N/A");
+            setProcessor("N/A");
+            setScreen("N/A");
+            setHardDisk("N/A");
+            setUrlPhoto("https://store.nest.com/assets/images/social/open-graph/thermostat_a2_en_c.jpg");
+        }
     }
 }
 //                Document doc = Jsoup.parse(s);

@@ -53,7 +53,6 @@ public class Utility {
         String s_serverAddress="Server IP: "+String.valueOf(dhcp.serverAddress);
 
         return String.valueOf(dhcp.gateway);
-
     }
 
     public static String getLocalSubnet(Context ctx) {

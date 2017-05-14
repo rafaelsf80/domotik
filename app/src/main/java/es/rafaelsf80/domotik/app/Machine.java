@@ -26,11 +26,6 @@ public class Machine {
     String port;
     String name;
     String type;
-
-
-
-
-
     String localRouter;
 
     public String getIpAddress() {

@@ -96,6 +96,7 @@ public class Main extends AppCompatActivity {
         String coloredText = "<font color='#B3E5FC'>domo</font><font color='#ffffff '>Click</font>";
         tvToolbarTitle.setText(Html.fromHtml(coloredText));
 
+
         //TODO: CREATE LAYOUT FOR TABLETS
 //        if (findViewById(R.id.weather_detail_container) != null) {
 //            // The detail container view will be present only in the large-screen layouts

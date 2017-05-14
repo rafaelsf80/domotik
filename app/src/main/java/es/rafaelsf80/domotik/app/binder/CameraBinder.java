@@ -101,6 +101,7 @@ public class CameraBinder extends DataBinder<CameraBinder.ViewHolder> {
             super(rowView);
             // store UI elements
             cardView = (CardView) rowView.findViewById(R.id.cv_camera);
+
         }
     }
 }

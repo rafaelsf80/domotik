@@ -1,5 +1,6 @@
 package es.rafaelsf80.domotik.app;
 
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -7,7 +8,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -65,6 +68,13 @@ public class NetworkingDetailsActivity extends AppCompatActivity {
             final String screen = fromListItem.getStringExtra("screen");
             final String hardDisk = fromListItem.getStringExtra("hardDisk");
             final String urlPhoto = fromListItem.getStringExtra("urlPhoto");
+
+            ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
+
+            ObjectAnimator animation = ObjectAnimator.ofInt (progressBar, "progress", 0, 500); // see this max value coming back here, we animale towards that value
+            animation.setDuration (5000); //in milliseconds
+            animation.setInterpolator (new DecelerateInterpolator());
+            animation.start ();
 
             tvIpHwAddress.setText("IP address: " + ipAddress + "\n" + "MAC address: " + hwAddress +
                                     "Flags: " + flags + "\n" + "Port: " + port);

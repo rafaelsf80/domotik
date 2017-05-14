@@ -1,10 +1,13 @@
 package es.rafaelsf80.domotik.app;
 
+import android.animation.ObjectAnimator;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.animation.DecelerateInterpolator;
+import android.widget.ProgressBar;
 
 import es.rafaelsf80.domotik.R;
 
@@ -36,6 +39,13 @@ public class CameraDetailsActivity extends AppCompatActivity {
         setSupportActionBar((Toolbar) findViewById(R.id.tb_camera));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle("Camera details");
+
+        ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
+
+        ObjectAnimator animation = ObjectAnimator.ofInt (progressBar, "progress", 0, 500); // see this max value coming back here, we animale towards that value
+        animation.setDuration (5000); //in milliseconds
+        animation.setInterpolator (new DecelerateInterpolator());
+        animation.start ();
 
         if (savedInstanceState == null) {
             // Create the detail fragment and add it to the activity
